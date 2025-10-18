@@ -1,0 +1,5 @@
+# Ejecuta:
+# ya pkg add yazi-rs/flavors:catppuccin-mocha
+# Luego descomenta todo y elimina las líneas de arriba
+# [flavor]
+# dark = "catppuccin-mocha"

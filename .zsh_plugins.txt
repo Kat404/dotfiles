@@ -1,0 +1,28 @@
+# Lista de Plugins para Antidote
+# ~/.zsh_plugins.txt
+
+# ---> Tema <---
+# Powerlevel10k
+romkatv/powerlevel10k
+
+# ---> Autocompletado <---
+mattmc3/ez-compinit
+zsh-users/zsh-completions
+belak/zsh-utils path:completion/functions kind:autoload post:compstyle_zshzoo_setup
+
+# ---> Historial <---
+belak/zsh-utils path:history
+
+# ---> Utilidades con fzf <---
+Aloxaf/fzf-tab
+lincheney/fzf-tab-completion
+
+# ---> Plugins de Funcionalidad <---
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+
+# ---> Oh My Zsh (OMZ) Plugins <---
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/wd
