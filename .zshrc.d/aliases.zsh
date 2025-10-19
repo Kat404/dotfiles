@@ -7,6 +7,8 @@
 # Actualización del sistema y utilidades básicas
 alias update='yay'                              # <-- Actualizar todo el sistema
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # <-- Limpia paquetes huérfanos
+alias mirrors='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
+# ↳ Selecciona los 20 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
 alias fsh='fastfetch'                           # <-- Yo Angelo 
 alias salir='exit'                              # <-- Sácame de aquí
 alias cls='clear'                               # <-- Limpia, limpia 
