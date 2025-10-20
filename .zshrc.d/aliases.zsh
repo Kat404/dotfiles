@@ -30,10 +30,10 @@ alias ......='cd ../../../../..'          # <-- Subir cinco niveles de directori
 # 3.           COMANDOS LS
 # =============================================
 # eza >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ls 
-alias l='eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons' # <-- Listar archivos con eza (formato básico)
-alias la='eza -a --color=always --group-directories-first --icons' # <-- Listar archivos incluyendo ocultos con eza
-alias ll='eza -l --color=always --group-directories-first --icons' # <-- Listado detallado con eza
-alias l.="eza -a | grep -e '^\.'" # <-- Mostrar solo archivos ocultos con eza
+alias l='eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons'  # <-- Listar archivos con eza (formato básico)
+alias la='eza -a --color=always --group-directories-first --icons'                                  # <-- Listar archivos incluyendo ocultos con eza
+alias ll='eza -l --color=always --group-directories-first --icons'                                  # <-- Listado detallado con eza
+alias l.="eza -a | grep -e '^\.'"                                                                   # <-- Mostrar solo archivos ocultos con eza
 
 # =============================================
 # 4.     HERRAMIENTAS Y ACCESOS DIRECTOS
