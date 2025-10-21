@@ -12,6 +12,8 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 [![Fresh Install](https://img.shields.io/badge/🔄-Fresh_Install_(Arch)-89DCEB?style=for-the-badge&logo=arch-linux&logoColor=white&labelColor=0B6EA8)](fresh-install.md)
 
+[![Antidote](https://img.shields.io/badge/🧪-Antidote_Zsh_Plugins-9c27b0?style=for-the-badge&logo=magic&logoColor=white&labelColor=2e7d32)](.zshrc.d/antidote.md)
+
 [![Betterfox](https://img.shields.io/badge/Betterfox-4A2E1A?style=for-the-badge&logo=firefox&logoColor=white&labelColor=D84315)](firefox/user.js)
 
 [![LazyVim Personal](https://img.shields.io/badge/LazyVim_Personal-78A8F8?style=for-the-badge&logo=neovim&logoColor=white&labelColor=1B5E20)](nvim)

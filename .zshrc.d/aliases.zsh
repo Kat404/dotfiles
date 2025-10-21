@@ -6,7 +6,7 @@
 # =============================================
 # Actualización del sistema y utilidades básicas
 alias update='yay'                              # <-- Actualizar todo el sistema
-# alias update='yay && flatpak update'            # <-- Actualizar todo el sistema y Flatpaks
+# alias update='yay && flatpak update'          # <-- Actualizar todo el sistema y Flatpaks
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # <-- Limpia paquetes huérfanos
 alias mirrors='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
 # ↳ Selecciona los 20 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
