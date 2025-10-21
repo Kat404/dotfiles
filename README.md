@@ -24,4 +24,4 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 [![Fastfetch Config](https://img.shields.io/badge/Fastfetch_Config-313244?style=for-the-badge&logo=gnubash&logoColor=A6ADC8&labelColor=1E1E2E)](fastfetch/config.jsonc)
 
-[![Seguridad de Red](https://img.shields.io/badge/Seguridad_(sysctl)-CBA6F7?style=for-the-badge&logo=bitwarden&logoColor=white&labelColor=8839EF)](https://github.com/Kat404/linux_network.conf/blob/main/99-network-security-es.conf)
+[![Seguridad de Red](https://img.shields.io/badge/Seguridad_(sysctl)-CBA6F7?style=for-the-badge&logo=bitwarden&logoColor=white&labelColor=8839EF)](https://github.com/Kat404/linux_network.conf/blob/main/99-linux-security-es.conf)

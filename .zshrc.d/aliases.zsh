@@ -6,6 +6,7 @@
 # =============================================
 # Actualización del sistema y utilidades básicas
 alias update='yay'                              # <-- Actualizar todo el sistema
+# alias update='yay && flatpak update'            # <-- Actualizar todo el sistema y Flatpaks
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # <-- Limpia paquetes huérfanos
 alias mirrors='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
 # ↳ Selecciona los 20 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
@@ -41,7 +42,8 @@ alias l.="eza -a | grep -e '^\.'"                                               
 # Accesos rápidos a herramientas externas
 alias icat='kitten icat' # <-- Visor rápida y nativo de imágenes usando la terminal de Kitty
 alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
-alias lg='lazygit'       # <-- Uso 'lazy' de git
+alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
+alias py='python3'       # <-- Uso rápido de 'python3'
 
 # =============================================
 # 5.          MANEJO DE ARCHIVOS
