@@ -5,14 +5,15 @@
 # 1.          COMANDOS DEL SISTEMA
 # =============================================
 # Actualización del sistema y utilidades básicas
-alias update='yay'                              # <-- Actualizar todo el sistema
-# alias update='yay && flatpak update'          # <-- Actualizar todo el sistema y Flatpaks
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # <-- Limpia paquetes huérfanos
-alias mirrors='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
-# ↳ Selecciona los 20 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
-alias fsh='fastfetch'                           # <-- Yo Angelo 
-alias salir='exit'                              # <-- Sácame de aquí
-alias cls='clear'                               # <-- Limpia, limpia 
+alias update='yay'                                       # <-- Actualizar todo el sistema
+# alias update='yay && flatpak update'                   # <-- Actualizar todo el sistema y Flatpaks
+alias cleanup='sudo pacman -Rns (pacman -Qtdq)'          # <-- Limpia paquetes huérfanos
+alias mirrors='sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
+# ↳ Selecciona los 30 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
+alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg' # <-- Actualiza las configuraciones del GRUB
+alias fsh='fastfetch'                                    # <-- Yo Angelo 
+alias salir='exit'                                       # <-- Sácame de aquí
+alias cls='clear'                                        # <-- Limpia, limpia 
 
 # =============================================
 # 2.        NAVEGACIÓN DE DIRECTORIOS
@@ -76,11 +77,12 @@ alias gp='git push'                # <-- Subir cambios al repositorio remoto
 
 # --- Creación y Comprobación ---
 alias cn='cargo new'        # <-- Crear un nuevo proyecto (binario)
+alias ci='cargo init'       # <-- Crear un Cargo.toml de un src/ ya existente
 alias cnl='cargo new --lib' # <-- Crear un nuevo proyecto (biblioteca)
-alias cc='cargo check'      # <-- Comprobar el código (rápido, sin compilar)
+alias cc='cargo check'      # <-- Compilar el código sin producir un ejecutable (muy rápido) 
 
 # --- Compilación (Build) ---
-alias cb='cargo build'            # <-- Compilar el proyecto (modo debug)
+alias cb='cargo build'            # <-- Compilar el proyecto (modo debug, más lento que 'check')
 alias cbr='cargo build --release' # <-- Compilar el proyecto (modo release, optimizado)
 
 # --- Ejecución (Run) ---

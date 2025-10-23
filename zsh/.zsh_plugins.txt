@@ -8,10 +8,10 @@ romkatv/powerlevel10k
 # ---> Autocompletado <---
 mattmc3/ez-compinit
 zsh-users/zsh-completions
-belak/zsh-utils path:completion/functions kind:autoload post:compstyle_zshzoo_setup
+mattmc3/zephyr path:plugins/completion
 
 # ---> Historial <---
-belak/zsh-utils path:history
+mattmc3/zephyr path:plugins/history
 
 # ---> Utilidades con fzf <---
 Aloxaf/fzf-tab
