@@ -18,6 +18,8 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 [![LazyVim Personal](https://img.shields.io/badge/LazyVim_Personal-78A8F8?style=for-the-badge&logo=neovim&logoColor=white&labelColor=1B5E20)](nvim)
 
+[![Windsurf Shortcuts](https://img.shields.io/badge/Windsurf_Shortcuts-1E1E2E?style=for-the-badge&logo=windsurf&logoColor=1E1E2E&labelColor=BAC2DE)](vscode-shortcuts.md)
+
 [![Rust Setup](https://img.shields.io/badge/🦀-Rust_Setup_(Unix--like)-orange?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000)](rust-setup.md)
 
 [![Configuración de Teclado](https://img.shields.io/badge/⌨️-Configuración_de_Teclado_Latinoamericano-BDBDBD?style=for-the-badge&logo=keyboard&logoColor=white&labelColor=424242)](latam.md)

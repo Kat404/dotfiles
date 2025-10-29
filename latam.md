@@ -8,7 +8,7 @@
 localectl list-x11-keymap-layouts
 ```
 
-### Cambiar al layot 'latam'
+### Cambiar al layout 'latam'
 
 ```zsh
 sudo localectl set-x11-keymap latam
