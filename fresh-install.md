@@ -3,7 +3,7 @@
 # Fresh Install
 
 ```zsh
-sudo pacman -S kitty zsh git node gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator gnome-shell-extension-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib && yay -S cryptomator windsurf
+sudo pacman -S firefox kitty zsh git node gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator gnome-shell-extension-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib && yay -S cryptomator windsurf phoenix-arch
 ```
 
 - Elimina el `gnome-shell-extension-appindicator` si no usas GNOME
