@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.navigationControl.enabled": false,
+    "workbench.layoutControl.enabled": false,
+    "editor.fontFamily": "'JetBrainsMono NF'",
+    "editor.mouseWheelScrollSensitivity": 3,
+    "workbench.list.mouseWheelScrollSensitivity": 3,
+    "telemetry.telemetryLevel": "off",
+    "telemetry.feedback.enabled": false,
+    "window.menuBarVisibility": "compact",
+    "editor.minimap.enabled": false,
+    "telemetry.editStats.enabled": false,
+
+    // Ajustes para Wrap
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "same",
+    "editor.glyphMargin": true,
+    "editor.renderWhitespace": "none",
+    "editor.renderLineHighlight": "line",
+    "editor.renderControlCharacters": false
+}
