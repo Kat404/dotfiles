@@ -1,0 +1,23 @@
+no-csp-reports: * true
+no-large-media: behind-the-scene false
+no-strict-blocking: sourceforge.net true
+* * 3p-frame block
+* cloudflare.com * noop
+behind-the-scene * * noop
+behind-the-scene * 1p-script noop
+behind-the-scene * 3p noop
+behind-the-scene * 3p-frame noop
+behind-the-scene * 3p-script noop
+behind-the-scene * image noop
+behind-the-scene * inline-script noop
+docs.google.com * 3p-frame noop
+drive.google.com * 3p-frame noop
+studio.firebase.google.com * 3p-frame noop
+studio.firebase.google.com cloudworkstations.dev * noop
+www.linuxmint.com * 3p-frame noop
+teams.microsoft.com * 3p-frame noop
+robosats.org youtube.com * noop
+app.santanderopenacademy.com * 3p-frame noop
+lms.santanderopenacademy.com * 3p-frame noop
+www.santanderopenacademy.com * 3p-frame noop
+www.virustotal.com * 3p-frame noop

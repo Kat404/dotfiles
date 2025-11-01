@@ -2,7 +2,7 @@
 
 ## Configuración de Shortcuts
 
-- Instalar extensión de Vim
+- Instalar extensión de Neovim/Vim
 - `Terminal: Focus on Terminal View`: Shift + Tab Down Arrow
 - `View: Focus Active Editor Group`: Shift + Tab UpArrow
 - `View: Close Editor`: Shift + Backspace W

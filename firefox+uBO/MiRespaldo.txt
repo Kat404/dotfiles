@@ -1,0 +1,63 @@
+{
+  "timeStamp": 1761766692528,
+  "version": "1.67.0",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "uiAccentCustom": true,
+    "uiAccentCustom0": "#1a5fb4",
+    "externalLists": "https://badblock.celenity.dev/abp/badblock_plus.txt\nhttps://badblock.celenity.dev/hardened/block-svg.txt\nhttps://badblock.celenity.dev/hardened/block-webgpu.txt\nhttps://badblock.celenity.dev/hardened/unbreak-svg.txt\nhttps://badblock.celenity.dev/hardened/unbreak-webgpu.txt\nhttps://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt\nhttps://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/block-webgl.txt\nhttps://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/unbreak-webgl.txt\nhttps://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+    "importedLists": [
+      "https://badblock.celenity.dev/abp/badblock_plus.txt",
+      "https://badblock.celenity.dev/hardened/block-svg.txt",
+      "https://badblock.celenity.dev/hardened/block-webgpu.txt",
+      "https://badblock.celenity.dev/hardened/unbreak-svg.txt",
+      "https://badblock.celenity.dev/hardened/unbreak-webgpu.txt",
+      "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt",
+      "https://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/block-webgl.txt",
+      "https://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/unbreak-webgl.txt",
+      "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
+    ],
+    "popupPanelSections": 31
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "ublock-experimental",
+    "easylist",
+    "easyprivacy",
+    "adguard-spyware-url",
+    "block-lan",
+    "urlhaus-1",
+    "curben-phishing",
+    "fanboy-cookiemonster",
+    "ublock-cookies-easylist",
+    "adguard-mobile-app-banners",
+    "adguard-other-annoyances",
+    "adguard-popup-overlays",
+    "adguard-widgets",
+    "ublock-annoyances",
+    "spa-0",
+    "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+    "https://badblock.celenity.dev/abp/badblock_plus.txt",
+    "https://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/block-webgl.txt",
+    "https://gitlab.com/celenityy/BadBlock/-/raw/pages/hardened/unbreak-webgl.txt",
+    "https://badblock.celenity.dev/hardened/block-webgpu.txt",
+    "https://badblock.celenity.dev/hardened/unbreak-webgpu.txt",
+    "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt"
+  ],
+  "hiddenSettings": {
+    "autoUpdateDelayAfterLaunch": 10
+  },
+  "whitelist": [
+    "chrome-extension-scheme",
+    "moz-extension-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop\n* * 3p-frame block\ndocs.google.com * 3p-frame noop\ndrive.google.com * 3p-frame noop\nwww.linuxmint.com * 3p-frame noop\nrobosats.org youtube.com * noop\n* cloudflare.com * noop\nteams.microsoft.com * 3p-frame noop\nstudio.firebase.google.com cloudworkstations.dev * noop\nwww.virustotal.com * 3p-frame noop\nstudio.firebase.google.com * 3p-frame noop\napp.santanderopenacademy.com * 3p-frame noop\nlms.santanderopenacademy.com * 3p-frame noop\nwww.santanderopenacademy.com * 3p-frame noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false\nno-csp-reports: * true\nno-strict-blocking: sourceforge.net true",
+  "userFilters": "! Permite Google reCAPTCHA\n@@||google.com/recaptcha^$frame\n@@||gstatic.com/recaptcha^$frame\n\n! Tubi\ntubitv.com#@#+js(set, blockAdBlock, noopFunc)\n.mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com\n\n! https://www.megacable.com.mx\nwww.megacable.com.mx###d-cookies"
+}

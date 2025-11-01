@@ -1,0 +1,16 @@
+! Permite Google reCAPTCHA
+@@||google.com/recaptcha^$frame
+@@||gstatic.com/recaptcha^$frame
+
+! Tubi
+tubitv.com#@#+js(set, blockAdBlock, noopFunc)
+.mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com
+
+! Mensaje de Cookies
+www.megacable.com.mx###d-cookies
+
+! Barra innecesaria y molesta de publicidad/anuncio
+www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
+
+! Evitar que 'img.shields.io' se vea bloqueado en Codeberg
+@@||img.shields.io^$image,domain=codeberg.org
