@@ -1,5 +1,7 @@
 # Configuración & Shortcuts para Windsurf/VSCode
 
+[![Volver al Inicio](https://img.shields.io/badge/-Volver_al_Inicio-6e5494?style=for-the-badge&logo=home-assistant&logoColor=white&labelColor=1a1a1a)](../README.md)
+
 ## Configuración de Shortcuts
 
 - Instalar extensión de Neovim/Vim

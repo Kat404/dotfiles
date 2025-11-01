@@ -1,6 +1,6 @@
-[![Volver al Inicio](https://img.shields.io/badge/-Volver_al_Inicio-6e5494?style=for-the-badge&logo=home-assistant&logoColor=white&labelColor=1a1a1a)](README.md)
-
 # Paso esencial (con o sin GNOME)
+
+[![Volver al Inicio](https://img.shields.io/badge/-Volver_al_Inicio-6e5494?style=for-the-badge&logo=home-assistant&logoColor=white&labelColor=1a1a1a)](README.md)
 
 ### Ver todos los layouts disponibles
 
