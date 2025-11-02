@@ -10,9 +10,11 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 ## Guías de Configuración y Más
 
-[![Fresh Install](https://img.shields.io/badge/🔄-Fresh_Install_(Arch)-89DCEB?style=for-the-badge&logo=arch-linux&logoColor=white&labelColor=0B6EA8)](fresh-install.md)
+[![Fresh Install](https://img.shields.io/badge/Fresh_Install_(Arch)-89DCEB?style=for-the-badge&logo=arch-linux&logoColor=white&labelColor=0B6EA8)](fresh-install.md)
 
-[![Antidote](https://img.shields.io/badge/🧪-Antidote_Zsh_Plugins-9c27b0?style=for-the-badge&logo=magic&logoColor=white&labelColor=2e7d32)](.zshrc.d/antidote.md)
+[![Zsh](https://img.shields.io/badge/Zsh-F5BDE6?style=for-the-badge&logo=zsh&logoColor=1E1E2E&labelColor=8839EF)](zsh/antidote.md)
+
+[![Fish](https://img.shields.io/badge/Fish-00BCD4?style=for-the-badge&logo=fishshell&logoColor=white&labelColor=006064)](fish/fish.md)
 
 [![Firefox Setup](https://img.shields.io/badge/Firefox_Setup-4A2E1A?style=for-the-badge&logo=firefox&logoColor=white&labelColor=D84315)](firefox+uBO/firefox-setup.md)
 
