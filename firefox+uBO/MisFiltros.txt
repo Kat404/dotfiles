@@ -14,3 +14,6 @@ www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 
 ! Evitar que 'img.shields.io' se vea bloqueado en Codeberg
 @@||img.shields.io^$image,domain=codeberg.org
+
+! Anuncio molesto en Souceforge
+||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image

@@ -7,7 +7,7 @@
 - Copiar y pegar el archivo [`user.js`](user.js) en la carpeta `~/.mozilla/firefox/*.default-release/`
 
 ```zsh
-cp ~/.dotfiles/firefox+uBO/user.js ~/.mozilla/firefox/*.default-release/
+cp ~/.dotfiles/firefox+uBO/user.js ~/.mozilla/firefox/*.default-release/user.js
 ```
 
 ## uBlockOrigin
@@ -26,3 +26,9 @@ cp ~/.dotfiles/firefox+uBO/user.js ~/.mozilla/firefox/*.default-release/
 
 - Ir a Configuración de _uBlockOrigin_
 - Sección `Configuración` --> `Restaurar desde archivo` --> Seleccionar el archivo de [`Mi respaldo`](MiRespaldo.txt)
+
+### Extras (Renewed Tab)
+
+- Instalar Renewed Tab en la [Tienda de Extensiones de Firefox](https://addons.mozilla.org/es-MX/firefox/addon/renewed-tab/)
+- Permitir que la extensión se ejecute por encima de Firefox (New Tab nativa)
+- Lápiz --> Ajustes --> Importar/Exportar --> *Importar* (usar el archivo [.json](renewedtab.json))
