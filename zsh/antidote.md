@@ -21,3 +21,7 @@ cp ~/.dotfiles/zsh/.zsh_plugins.txt ~/.zsh_plugins.txt
 ```zsh
 cp ~/.dotfiles/zsh/.zshrc ~/.zshrc
 ```
+
+```zsh
+cp ~/.dotfiles/zsh/starship.toml ~/.config/starship.toml
+```
