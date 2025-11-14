@@ -11,3 +11,8 @@ function irq {
 function ira {
   cd +1 > /dev/null
 }
+
+# Descomprime el archivo .tar y lo borra solo si "tar" no dio ningún error
+function untar {
+  tar -xf "$1" && rm "$1"
+}

@@ -45,15 +45,18 @@ alias icat='kitten icat' # <-- Visor rápida y nativo de imágenes usando la ter
 alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
 alias py='python3'       # <-- Uso rápido de 'python3'
+alias postgrestart='sudo systemctl start postgresql.service'  # <-- Inicializar PostgreSQL
 
 # =============================================
 # 5.          MANEJO DE ARCHIVOS
 # =============================================
 # Comandos para manipulación de archivos
-alias untar='tar -xf'    # <-- Descomprimir .tar's 
-alias tarnow='tar -acf ' # <-- Crear archivo .tar comprimido
-alias ungz="gunzip -k"   # <-- Descomprimir archivos .gz manteniendo el original
-alias wget='wget -c '    # <-- Continuar descargas interrumpidas automáticamente
+alias tarnow='tar -acvf '  # <-- Crear un archivo .tar usando comprensión automática
+alias targnow='tar -czvf ' # <-- Crear un archivo .tar usando gzip como comprensión
+alias ungz="gunzip"        # <-- Descomprimir archivos .gz
+alias wget='wget -c '      # <-- Continuar descargas interrumpidas automáticamente
+alias zipnow='7z a '       # <-- Crear un archivo .7z usando 7zip
+alias unzip='7z x'         # <-- Descomprimir .zip usando la heramienta de 7zip
 
 # =============================================
 # 6.                 GIT
