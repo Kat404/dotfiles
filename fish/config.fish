@@ -8,3 +8,13 @@
 
 # Carga la configuración personal
 source $__fish_config_dir/mi-config.fish
+
+# Colores
+set fish_color_command blue
+set fish_color_param cyan
+set fish_color_quote yellow
+set fish_color_redirection red
+set fish_color_end black
+
+# Inicialización del prompt Starship
+starship init fish | source

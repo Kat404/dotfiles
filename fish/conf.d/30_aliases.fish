@@ -17,13 +17,13 @@ alias l\.="eza -a | grep -e '^\.'"                                              
 # 2.          SISTEMA Y PAQUETES
 # =============================================
 # Aliases/shortcuts para tareas comunes del sistema
-alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg"                                                # <-- Regenerar configuración de GRUB
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"                                                        # <-- Eliminar bloqueo de pacman
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)'                                                         # <-- Limpiar dependencias huérfanas
-alias jctl="journalctl -p 3 -xb"                                                                        # <-- Ver logs importantes del sistema
-alias update='yay && flatpak update'                                                                    # <-- Actualizar todos los paquetes
-alias mirrors='sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # <-- Actualizar mirrors con reflector 
-# ↳ Selecciona los 30 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist
+alias grubup="sudo grub-mkconfig -o /boot/grub/grub.cfg" # <-- Regenerar configuración de GRUB
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"         # <-- Eliminar bloqueo de pacman
+alias cleanup='sudo pacman -Rns (pacman -Qtdq)'          # <-- Limpiar dependencias huérfanas
+alias jctl="journalctl -p 3 -xb"                         # <-- Ver logs importantes del sistema
+alias update='yay && flatpak update'                     # <-- Actualizar todos los paquetes
+alias mirrors='sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist' # ↴
+# ↳ Selecciona los 30 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
 
 # =============================================
 # 3.                NAVEGACIÓN
@@ -45,10 +45,13 @@ alias salir='exit'               # <-- Salir de la shell
 # 4.                 ARCHIVOS
 # =============================================
 # Comandos para manipulación de archivos
-alias tarnow='tar -acf ' # <-- Crear archivo tar comprimido
-alias untar='tar -xf '   # <-- Extraer archivo tar.gz
-alias ungz="gunzip -k"   # <-- Descomprimir .gz manteniendo el original
-alias wget='wget -c '    # <-- Reanudar descargas
+alias untar='tar -xf'      # <-- Descomprimir un archivo .tar, sin eliminar el .tar original
+alias tarnow='tar -acvf '  # <-- Crear un archivo .tar usando comprensión automática
+alias targnow='tar -czvf ' # <-- Crear un archivo .tar usando gzip como comprensión
+alias ungz="gunzip"        # <-- Descomprimir archivos .gz
+alias wget='wget -c '      # <-- Continuar descargas interrumpidas automáticamente
+alias zipnow='7z a '       # <-- Crear un archivo .7z usando 7zip
+alias unzip='7z x'         # <-- Descomprimir .zip usando la heramienta de 7zip
 
 # =============================================
 # 5.     HERRAMIENTAS Y ACCESOS DIRECTOS
@@ -58,6 +61,7 @@ alias icat='kitten icat' # <-- Visor rápida y nativo de imágenes usando la ter
 alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
 alias py='python3'       # <-- Uso rápido de 'python3'
+alias postgrestart='sudo systemctl start postgresql.service'  # <-- Inicializar PostgreSQL
 
 # =============================================
 # 6.      INFORMACIÓN DEL SISTEMA
