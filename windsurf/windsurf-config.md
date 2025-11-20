@@ -11,7 +11,7 @@
 - `View: Show Explorer`: Ctrl + Shift + E
 - `View: Toggle Primary Side Bar Visibility`: Ctrl + Alt + B
 - `View: Toggle Panel Visibility`: Ctrl + Alt + J
-- `Markdown: Open Preview to the Side`: Ctrl + Alt + V Backspace
+- `Markdown: Open Preview`: Shift + Backspace V
 
 ## Configuración Personal (.json)
 

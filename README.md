@@ -16,6 +16,8 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 [![Fish](https://img.shields.io/badge/Fish-00BCD4?style=for-the-badge&logo=fishshell&logoColor=white&labelColor=006064)](fish/fish.md)
 
+[![Kitty Terminal](https://img.shields.io/badge/💻🐱-Kitty_Terminal-90A4AE?style=for-the-badge&labelColor=455A64)](kitty/kitty.conf)
+
 [![Firefox Setup](https://img.shields.io/badge/Firefox_Setup-4A2E1A?style=for-the-badge&logo=firefox&logoColor=white&labelColor=D84315)](firefox+uBO/firefox-setup.md)
 
 [![LazyVim Personal](https://img.shields.io/badge/LazyVim_Personal-78A8F8?style=for-the-badge&logo=neovim&logoColor=white&labelColor=1B5E20)](nvim)

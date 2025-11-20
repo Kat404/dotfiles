@@ -13,6 +13,7 @@ behind-the-scene * inline-script noop
 chat.deepseek.com * 3p-script noop
 account.ely.by * 3p-frame noop
 account.ely.by * 3p-script noop
+flathub.org * 3p-script noop
 github.com * 3p-script noop
 accounts.google.com * 3p-script noop
 classroom.google.com * 3p-script noop
@@ -20,6 +21,7 @@ studio.firebase.google.com * 3p-script noop
 gemini.google.com * 3p-script noop
 mail.google.com * 3p-script noop
 notebooklm.google.com * 3p-script noop
+www.kimi.com * 3p-script noop
 teams.microsoft.com * 3p-frame noop
 teams.microsoft.com * 3p-script noop
 login.microsoftonline.com * 3p-script noop
