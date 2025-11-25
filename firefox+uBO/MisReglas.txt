@@ -1,5 +1,6 @@
 no-csp-reports: * true
 no-large-media: behind-the-scene false
+no-strict-blocking: sourceforge.net true
 * * 3p-frame block
 * * 3p-script block
 * cloudflare.com * noop
@@ -17,20 +18,27 @@ flathub.org * 3p-script noop
 github.com * 3p-script noop
 accounts.google.com * 3p-script noop
 classroom.google.com * 3p-script noop
+docs.google.com * 3p-script noop
 studio.firebase.google.com * 3p-script noop
 gemini.google.com * 3p-script noop
 mail.google.com * 3p-script noop
+myactivity.google.com * 3p-script noop
 notebooklm.google.com * 3p-script noop
 www.kimi.com * 3p-script noop
+www.linkedin.com * 3p-script noop
 teams.microsoft.com * 3p-frame noop
 teams.microsoft.com * 3p-script noop
 login.microsoftonline.com * 3p-script noop
+forms.office.com * 3p-script noop
 www.privacyguides.org * 3p-script noop
 www.quora.com * 3p-script noop
 www.reddit.com * 3p-script noop
 app.santanderopenacademy.com * 3p-frame noop
 lms.santanderopenacademy.com * 3p-frame noop
 www.santanderopenacademy.com * 3p-frame noop
+sourceforge.net * 3p-script noop
+tryhackme.com * 3p-frame noop
+tryhackme.com * 3p-script noop
 web.whatsapp.com * 3p-script noop
 yadio.io * 3p-script noop
 www.youtube.com * 3p-script noop

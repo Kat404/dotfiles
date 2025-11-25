@@ -15,11 +15,15 @@ www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 ! Evitar que 'img.shields.io' se vea bloqueado en Codeberg
 @@||img.shields.io^$image,domain=codeberg.org
 
-! Anuncio molesto en Souceforge
+! Anuncios molesto en Souceforge
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
+||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-m-b16*.png$image
 
 ! "Galería" innecesaria dentro de Kimi (IA) 
 www.kimi.com##.temp-gallery-list
 
 ! Anuncio del nuevo agente de IA de DeepL
 www.deepl.com##.max-w-\[1440px\].mx-auto.w-full.px-\[2rem\]
+
+! Permitir funcionalidad core en tryhackme.com (provocado por BadBlock) 
+@@||vnc.tryhackme.tech/core/util/logging.js$script,domain=vnc.tryhackme.tech
