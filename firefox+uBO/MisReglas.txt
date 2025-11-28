@@ -19,6 +19,7 @@ github.com * 3p-script noop
 accounts.google.com * 3p-script noop
 classroom.google.com * 3p-script noop
 docs.google.com * 3p-script noop
+drive.google.com * 3p-script noop
 studio.firebase.google.com * 3p-script noop
 gemini.google.com * 3p-script noop
 mail.google.com * 3p-script noop
@@ -26,6 +27,8 @@ myactivity.google.com * 3p-script noop
 notebooklm.google.com * 3p-script noop
 www.kimi.com * 3p-script noop
 www.linkedin.com * 3p-script noop
+www.llave.gob.mx * 3p-scrpt noop
+www.llave.gob.mx * 3p-frame noop
 teams.microsoft.com * 3p-frame noop
 teams.microsoft.com * 3p-script noop
 login.microsoftonline.com * 3p-script noop
@@ -37,6 +40,7 @@ app.santanderopenacademy.com * 3p-frame noop
 lms.santanderopenacademy.com * 3p-frame noop
 www.santanderopenacademy.com * 3p-frame noop
 sourceforge.net * 3p-script noop
+es.stackoverflow.com * 3p-script noop
 tryhackme.com * 3p-frame noop
 tryhackme.com * 3p-script noop
 web.whatsapp.com * 3p-script noop

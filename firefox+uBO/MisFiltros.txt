@@ -19,8 +19,10 @@ www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-m-b16*.png$image
 
-! "Galería" innecesaria dentro de Kimi (IA) 
+! Limpiar annoyances dentro de Kimi (IA)
 www.kimi.com##.temp-gallery-list
+www.kimi.com##.show-case
+www.kimi.com##.header-center > .membership-upgrade
 
 ! Anuncio del nuevo agente de IA de DeepL
 www.deepl.com##.max-w-\[1440px\].mx-auto.w-full.px-\[2rem\]

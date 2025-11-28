@@ -1,4 +1,4 @@
-# Configuración & Shortcuts para Windsurf/VSCode
+# Configuración & Shortcuts para VSCode/Windsurf/Antigravity 
 
 [![Volver al Inicio](https://img.shields.io/badge/-Volver_al_Inicio-6e5494?style=for-the-badge&logo=home-assistant&logoColor=white&labelColor=1a1a1a)](../README.md)
 
@@ -8,10 +8,16 @@
 - `Terminal: Focus on Terminal View`: Shift + Tab Down Arrow
 - `View: Focus Active Editor Group`: Shift + Tab UpArrow
 - `View: Close Editor`: Shift + Backspace W
-- `View: Show Explorer`: Ctrl + Shift + E
+- `View: Show Explorer`: Shift + Tab LeftArrow 
 - `View: Toggle Primary Side Bar Visibility`: Ctrl + Alt + B
 - `View: Toggle Panel Visibility`: Ctrl + Alt + J
 - `Markdown: Open Preview`: Shift + Backspace V
+
+## Configuración Personalizada
+
+- `Editor › Bracket Pair Colorization`: Enabled
+- `Editor › Guides: Bracket Pairs`: True
+- `Editor › Minimap: Enabled`: [ ]
 
 ## Configuración Personal (.json)
 
