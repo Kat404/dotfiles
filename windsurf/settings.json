@@ -6,7 +6,7 @@
     "workbench.productIconTheme": "fluent-icons",
     "workbench.navigationControl.enabled": false,
     "workbench.layoutControl.enabled": false,
-    "editor.fontFamily": "'JetBrainsMono NF'",
+    "editor.fontFamily": "JetBrainsMono NF",
     "editor.mouseWheelScrollSensitivity": 3,
     "workbench.list.mouseWheelScrollSensitivity": 3,
     "telemetry.telemetryLevel": "off",
@@ -25,6 +25,13 @@
     "window.menuBarVisibility": "compact",
     "extensions.ignoreRecommendations": true,
     "editor.guides.bracketPairs": true,
-    "editor.guides.bracketPairsHorizontal": true
+    "editor.guides.bracketPairsHorizontal": true,
+    "editor.cursorBlinking": "phase",
+    "vim.cursorStylePerMode.insert": "underline",
+    "vim.cursorStylePerMode.normal": "block-outline",
+    "editor.linkedEditing": true,
+    "editor.fontSize": 16,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "catppuccin.extraBordersEnabled": true
     // --------------------------------------------
 }

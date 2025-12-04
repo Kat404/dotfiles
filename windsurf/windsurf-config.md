@@ -4,7 +4,7 @@
 
 ## Configuración de Shortcuts
 
-- Instalar extensión de Neovim/Vim
+- Instalar extensión de Neovim/Vim, Live Preview y Project Manager
 - `Terminal: Focus on Terminal View`: Shift + Tab Down Arrow
 - `View: Focus Active Editor Group`: Shift + Tab UpArrow
 - `View: Close Editor`: Shift + Backspace W
@@ -12,6 +12,8 @@
 - `View: Toggle Primary Side Bar Visibility`: Ctrl + Alt + B
 - `View: Toggle Panel Visibility`: Ctrl + Alt + J
 - `Markdown: Open Preview`: Shift + Backspace V
+- `Live Preview: Show Preview`: Shift + Backspace H
+- `View: Show Project Manager`: Ctrl + Shift + ñ
 
 ## Configuración Personalizada
 

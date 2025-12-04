@@ -28,12 +28,12 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 ## Instalar Paquetes
 
 ```zsh
-sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox kitty zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib starship xclip wl-clipboard fastfetch eza bat && yay -S cryptomator windsurf visual-studio-code-bin antigravity-bin phoenix-arch
+sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox kitty zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib starship xclip wl-clipboard fastfetch eza bat && yay -S cryptomator windsurf visual-studio-code-bin antigravity phoenix-arch
 ```
 
 - Elimina `gnome-keyring` si ya tienes un agente de autenticación
 - Elimina `gnome-shell-extension-appindicator` si no usas GNOME
 - Elimina `xclip` si estás en un DE/WM con Wayland
 - Elimina `wl-clipboard` si estás en un DE/WM con X11
-- Elige tu IDE favorito: `windsurf`,`visual-studio-code-bin` o `antigravity-bin`
+- Elige tu IDE favorito: `windsurf`,`visual-studio-code-bin` o `antigravity`
 - Elimina `phoenix-arch` si prefieres un Firefox limpio o prefieres usar [Betterfox](firefox+uBO/user.js)

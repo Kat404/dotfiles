@@ -12,7 +12,9 @@ behind-the-scene * image noop
 behind-the-scene * inline-script noop
 docs.google.com * 3p-frame noop
 drive.google.com * 3p-frame noop
+www.ieee.org * 3p-frame noop
 www.linuxmint.com * 3p-frame noop
+www.llave.gob.mx * 3p-frame noop
 teams.microsoft.com * 3p-frame noop
 robosats.org youtube.com * noop
 app.santanderopenacademy.com * 3p-frame noop
