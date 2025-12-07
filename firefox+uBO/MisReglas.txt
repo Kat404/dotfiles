@@ -17,6 +17,7 @@ account.ely.by * 3p-script noop
 flathub.org * 3p-script noop
 github.com * 3p-script noop
 accounts.google.com * 3p-script noop
+aistudio.google.com * 3p-script noop
 classroom.google.com * 3p-script noop
 docs.google.com * 3p-script noop
 drive.google.com * 3p-script noop
@@ -48,6 +49,8 @@ sourceforge.net * 3p-script noop
 es.stackoverflow.com * 3p-script noop
 tryhackme.com * 3p-frame noop
 tryhackme.com * 3p-script noop
+www.virustotal.com * 3p-script noop
+www.virustotal.com * 3p-frame noop
 web.whatsapp.com * 3p-script noop
 www.gob.mx * 3p-script noop
 yadio.io * 3p-script noop

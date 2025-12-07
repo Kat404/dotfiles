@@ -13,7 +13,7 @@
 - `View: Toggle Panel Visibility`: Ctrl + Alt + J
 - `Markdown: Open Preview`: Shift + Backspace V
 - `Live Preview: Show Preview`: Shift + Backspace H
-- `View: Show Project Manager`: Ctrl + Shift + ñ
+- `Project Manager: Focus on Favorites View`: Shift + Backspace ñ 
 
 ## Configuración Personalizada
 
@@ -24,5 +24,5 @@
 ## Configuración Personal (.json)
 
 - Ctrl + Shift + P --> Preferences: Open User Settings (JSON)
-- Copiar y pegar el archivo [settings.json](settings.json) del repositorio a la carpeta de configuración de Windsurf
+- Copiar y pegar el archivo [settings.json](settings.json) del repositorio a la carpeta de configuración de VSCode
   - Es necesario tener instalada la extensión de `Catppucin for VSCode`, `Catppuccin Icons for VSCode` y `Fluent Icons`

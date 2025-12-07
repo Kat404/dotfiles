@@ -5,10 +5,9 @@
     "workbench.iconTheme": "catppuccin-mocha",
     "workbench.productIconTheme": "fluent-icons",
     "workbench.navigationControl.enabled": false,
-    "workbench.layoutControl.enabled": false,
     "editor.fontFamily": "JetBrainsMono NF",
-    "editor.mouseWheelScrollSensitivity": 3,
-    "workbench.list.mouseWheelScrollSensitivity": 3,
+    "editor.mouseWheelScrollSensitivity": 5,
+    "workbench.list.mouseWheelScrollSensitivity": 5,
     "telemetry.telemetryLevel": "off",
     "telemetry.feedback.enabled": false,
     "telemetry.editStats.enabled": false,
@@ -32,6 +31,12 @@
     "editor.linkedEditing": true,
     "editor.fontSize": 16,
     "editor.cursorSmoothCaretAnimation": "on",
-    "catppuccin.extraBordersEnabled": true
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontLigatures.enabled": true,
+    // Configuraciones para Catppuccin
+    "catppuccin.extraBordersEnabled": true,
+    "editor.semanticHighlighting.enabled": true,
+    "terminal.integrated.minimumContrastRatio": 1,
+    "workbench.layoutControl.enabled": false
     // --------------------------------------------
 }

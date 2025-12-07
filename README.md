@@ -22,7 +22,7 @@ git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
 
 [![LazyVim Personal](https://img.shields.io/badge/LazyVim_Personal-78A8F8?style=for-the-badge&logo=neovim&logoColor=white&labelColor=1B5E20)](nvim)
 
-[![Windsurf Config](https://img.shields.io/badge/Windsurf_Config-1E1E2E?style=for-the-badge&logo=windsurf&logoColor=1E1E2E&labelColor=BAC2DE)](windsurf/windsurf-config.md)
+[![IDE Config](https://img.shields.io/badge/IDE_Config-007ACC?style=for-the-badge&logo=vscodium&logoColor=white&labelColor=1E1E2E)](vscode/vscode-like-config.md)
 
 [![Rust Setup](https://img.shields.io/badge/🦀-Rust_Setup_(Unix--like)-orange?style=for-the-badge&logo=rust&logoColor=white&labelColor=000000)](rust-setup.md)
 
