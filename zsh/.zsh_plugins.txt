@@ -2,7 +2,9 @@
 # ~/.zsh_plugins.txt
 
 # ---> Tema <---
-# Starship 
+# Starship / Powerlevel10k
+# Descomentar si se va a hacer uso de Powerlevel10k
+# romkatv/powerlevel10k 
 
 # ---> Autocompletado <---
 mattmc3/ez-compinit

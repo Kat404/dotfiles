@@ -26,4 +26,5 @@ done
 unset _rc
 
 # Inicialización de Starship
-eval "$(starship init zsh)"
+# Descomentar si se va a hacer uso de Starship
+# eval "$(starship init zsh)"

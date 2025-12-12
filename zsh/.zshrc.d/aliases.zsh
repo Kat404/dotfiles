@@ -46,6 +46,9 @@ alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías 
 alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
 alias py='python3'       # <-- Uso rápido de 'python3'
 alias postgrestart='sudo systemctl start postgresql.service'  # <-- Inicializar PostgreSQL
+alias mariastart='sudo systemctl start mariadb'               # <-- Inicializar MariaDB
+alias mariaenter='mariadb -u root -p'                         # <-- Entrar a la base de datos MariaDB como root
+alias mariadeventer='mariadb -u dev -p'                       # <-- Entrar a la base de datos MariaDB como dev
 
 # =============================================
 # 5.          MANEJO DE ARCHIVOS
