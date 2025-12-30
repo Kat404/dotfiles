@@ -59,7 +59,7 @@ alias targnow='tar -czvf ' # <-- Crear un archivo .tar usando gzip como comprens
 alias ungz="gunzip"        # <-- Descomprimir archivos .gz
 alias wget='wget -c '      # <-- Continuar descargas interrumpidas automáticamente
 alias zipnow='7z a '       # <-- Crear un archivo .7z usando 7zip
-alias unzip='7z x'         # <-- Descomprimir .zip usando la heramienta de 7zip
+# alias unzip='7z x'       # <-- Descomprimir .zip usando la heramienta de 7zip
 
 # =============================================
 # 6.                 GIT
@@ -111,3 +111,40 @@ alias cdoo='cargo doc --open' # <-- Generar y abrir la documentación
 
 # --- Ecosistema (Rustup) ---
 alias ru='rustup update' # <-- Actualizar el toolchain de Rust
+
+# =============================================
+# 8.                  BUN
+# =============================================
+# Comandos rápidos e intuitivos para Bun: un runtime, gestor de paquetes y test runner extremadamente veloz.
+
+# --- Ejecución y Scripts ---
+alias bur='bun run'           # <-- Ejecuta scripts del package.json o archivos JS/TS
+alias bundev='bun run dev'    # <-- Inicia el entorno de desarrollo (alias común)
+alias bunst='bun start'       # <-- Ejecuta el script de inicio del proyecto
+alias bunex='bun exec'        # <-- Ejecuta comandos en el contexto del entorno Bun
+alias bx='bunx'               # <-- Ejecuta binarios de paquetes (equivalente a npx)
+alias bunx='bunx'             # <-- Ejecuta paquetes remotos sin instalarlos localmente
+
+# --- Gestión de Dependencias ---
+alias buni='bun install'      # <-- Instala todas las dependencias del package.json
+alias buna='bun add'          # <-- Añade una dependencia de producción
+alias bunad='bun add -d'      # <-- Añade una dependencia de desarrollo (--dev)
+alias bunrm='bun remove'      # <-- Elimina una dependencia del proyecto
+alias bunup='bun update'      # <-- Actualiza las dependencias a la última versión permitida
+alias bunou='bun pm outdated' # <-- Muestra los paquetes que tienen versiones más recientes
+alias buncl='bun pm cache rm' # <-- Limpia la caché de paquetes de Bun
+
+# --- Testing y Calidad ---
+alias bunt='bun test'          # <-- Ejecuta la suite de pruebas unitarias
+alias buntw='bun test --watch' # <-- Ejecuta los tests en modo observación (watch mode)
+alias bunsec='bun pm audit'    # <-- Analiza el proyecto en busca de vulnerabilidades de seguridad
+
+# --- Proyecto y Construcción ---
+alias bunit='bun init'        # <-- Inicializa un nuevo proyecto Bun interactivo
+alias bunild='bun build'      # <-- Empaqueta (bundle) el proyecto para producción
+alias bunrepl='bun'           # <-- Abre el REPL interactivo de Bun
+
+# --- Mantenimiento de Bun ---
+alias bunew='bun upgrade'     # <-- Actualiza Bun a su última versión oficial
+alias bunv='bun --version'    # <-- Muestra la versión instalada de Bun
+alias bunh='bun --help'       # <-- Muestra la ayuda general de comandos
