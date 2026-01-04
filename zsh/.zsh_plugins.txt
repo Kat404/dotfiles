@@ -21,9 +21,9 @@ lincheney/fzf-tab-completion
 # ---> Plugins de Funcionalidad <---
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-history-substring-search
+zsh-users/zsh-history-substring-search kind:defer
 
 # ---> Oh My Zsh (OMZ) Plugins <---
-getantidote/use-omz
+getantidote/use-omz kind:defer
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/wd
