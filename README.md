@@ -3,10 +3,28 @@
 ## Instalación
 
 ```zsh
-git clone https://github.com/Kat404/dotfiles.git ~/.dotfiles
+git clone https://github.com/Kat404/dotfiles.git && cd dotfiles && chmod +x install.sh && ./install.sh
 ```
 
-- Agrega y configura lo que quieras
+- Disfruta de mis dotfiles con un solo comando :)
+
+---
+
+>
+> ### ✏️ **Notas**
+> 
+> #### ⚠️ El [install.sh](install.sh) no es perfecto por lo que podrías experimentar algún error o incompatibilidad
+>
+> #### Recomendaciones:
+> 
+> - Si encuentras algún error, por favor, abre un issue en el repositorio.
+> - Se recomienda instalar estos dotfiles en una instalación limpia de Arch Linux ([archinstall](https://archlinux.org/packages/extra/any/archinstall/) o tradicional)
+> - Otras distribuciones GNU/Linux & macOS (Homebrew) son compatibles 
+>   - Algunas funcionalidades pueden no estar disponibles
+>
+> ### 📜 **Licencia**
+>
+> Todo el contenido de este repositorio está bajo una (des)licencia llamada [The Unlicense](https://unlicense.org/) la cual es totalmente libre y permisiva para cualquier propósito, para más información visita su página web
 
 ## Guías de Configuración y Más
 

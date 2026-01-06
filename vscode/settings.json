@@ -5,7 +5,7 @@
     "workbench.iconTheme": "catppuccin-mocha",
     "workbench.productIconTheme": "fluent-icons",
     "workbench.navigationControl.enabled": false,
-    "editor.fontFamily": "JetBrainsMono NF",
+    "editor.fontFamily": "Maple Mono NF",
     "editor.mouseWheelScrollSensitivity": 5,
     "workbench.list.mouseWheelScrollSensitivity": 5,
     "telemetry.telemetryLevel": "off",
