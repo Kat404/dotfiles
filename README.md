@@ -3,7 +3,7 @@
 ## Instalación
 
 ```zsh
-git clone https://github.com/Kat404/dotfiles.git && cd dotfiles && chmod +x install.sh && ./install.sh
+git clone --depth 1 https://github.com/Kat404/dotfiles.git && cd dotfiles && chmod +x install.sh && ./install.sh
 ```
 
 - Disfruta de mis dotfiles con un solo comando :)
