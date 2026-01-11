@@ -108,6 +108,12 @@ declare -a FISH_LINKS=(
     "fish/conf.d:.config/fish/conf.d"
 )
 
+declare -a NUSHELL_LINKS=(
+    "nushell/config.nu:.config/nushell/config.nu"
+    "nushell/env.nu:.config/nushell/env.nu"
+    "nushell/aliases.nu:.config/nushell/aliases.nu"
+)
+
 # --- FUNCIONES ---
 
 choose_shell() {
@@ -115,14 +121,28 @@ choose_shell() {
     echo -e "${Y}🤔 ¿Qué shell deseas configurar y usar por defecto?${NC}"
     echo -e "   ${G}1)${NC} zsh ${C}(Recomendado - Antidote + Plugins)${NC}"
     echo -e "   ${G}2)${NC} fish ${C}(Rápido y amigable)${NC}"
+    
+    local pm=$(get_pkg_manager)
+    if [[ "$pm" == "pacman" ]]; then
+         echo -e "   ${G}3)${NC} nushell ${C}(Experimental - Arch Only)${NC}"
+    fi
+
     echo -e "${B}--------------------------------------------------${NC}"
-    read -r -p "$(echo -e "${M}Select (1/2): ${NC}")" shell_choice
+    read -r -p "$(echo -e "${M}Select: ${NC}")" shell_choice
     case $shell_choice in
         1|zsh|Zsh|ZSH)
             SHELL_TO_INSTALL="zsh"
             ;;
         2|fish|Fish|FISH)
             SHELL_TO_INSTALL="fish"
+            ;;
+        3|nushell|nu|NU)
+            if [[ "$pm" == "pacman" ]]; then
+                SHELL_TO_INSTALL="nushell"
+            else
+                print_error "Nushell solo está soportado en Arch Linux por ahora."
+                SHELL_TO_INSTALL="zsh"
+            fi
             ;;
         *)
             print_error "Opción no válida. Usando zsh por defecto."
@@ -139,6 +159,36 @@ install_antidote() {
         git clone --depth=1 https://github.com/mattmc3/antidote.git "$antidote_dir"
     else
         echo "✅ Antidote ya está instalado."
+    fi
+}
+
+setup_zoxide_for_nushell() {
+    print_step "Configurando Zoxide para Nushell..." "1" "1"
+    
+    local default_init="$HOME/.cache/zoxide/init.nu"
+    echo -e "${Y}📍 Zoxide necesita generar un archivo init.nu.${NC}"
+    echo -e "   Ruta por defecto sugerida en config.nu: ${C}$default_init${NC}"
+    read -r -p "   ¿Dónde deseas guardarlo? (Enter para usar default): " custom_path
+    
+    local target_path="$default_init"
+    if [[ -n "$custom_path" ]]; then
+        target_path="$custom_path"
+    fi
+    
+    # Expandir ~ si es necesario (el shell lo hace, pero si está entre comillas...)
+    # Simplemente nos aseguramos que el directorio padre exista.
+    local parent_dir=$(dirname "$target_path")
+    if [[ ! -d "$parent_dir" ]]; then
+        echo "📂 Creando directorio: $parent_dir"
+        mkdir -p "$parent_dir"
+    fi
+    
+    if command -v zoxide &> /dev/null; then
+         echo "⚡ Generando init.nu..."
+         zoxide init nushell --cmd cd | save -f "$target_path"
+         print_success "Zoxide configurado en $target_path"
+    else
+         print_error "Zoxide no encontrado. Asegúrate de que se instaló correctamente."
     fi
 }
 
@@ -795,6 +845,13 @@ declare -a FILES_TO_LINK
 if [[ "$SHELL_TO_INSTALL" == "zsh" ]]; then
     install_antidote
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${ZSH_LINKS[@]}")
+elif [[ "$SHELL_TO_INSTALL" == "nushell" ]]; then
+    FILES_TO_LINK=("${COMMON_LINKS[@]}" "${NUSHELL_LINKS[@]}")
+    # Zoxide setup se debe hacer (idealmente) DESPUÉS de linking, 
+    # pero como es solo generar un archivo, podemos hacerlo aquí o al final.
+    # Lo haremos aquí para mantener la lógica agrupada, aunque el output
+    # quedará antes del linking final.
+    setup_zoxide_for_nushell
 else
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${FISH_LINKS[@]}")
 fi

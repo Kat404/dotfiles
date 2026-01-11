@@ -1,101 +1,152 @@
-# Print a new line at the start of the prompt
+format = """\
+[╭╴](fg:arrow)\
+$username\
+$directory\
+$time\
+(\
+    $git_branch\
+    $git_status\
+)\
+(\
+    $python\
+    $rust\
+    $nodejs\
+)\
+$cmd_duration
+[╰─](fg:arrow)$character\
+"""
+# Add the modules you need
+
+# Disables the blank line at the start of the prompt
 add_newline = true
-# Pipes ╰─ ╭─
-# Powerline symbols                                     
-# Wedges 🭧🭒 🭣🭧🭓
-# Random noise 🬖🬥🬔🬗
-# Cool stuff 󰜥   
 
-# format = """
-# $cmd_duration$username$hostname $directory $git_branch
-# $character
-# """
+palette = "normal"
 
-format = """
-$cmd_duration 󰜥 $directory $git_branch
-$character"""
-
-# Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-success_symbol = "[   ](bold fg:blue)"
-error_symbol = "[   ](bold fg:red)"
-
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-
-[git_branch]
-style = "bg: cyan"
-symbol = "󰘬"
-truncation_length = 12
-truncation_symbol = ""
-format = "󰜥 [](bold fg:cyan)[$symbol $branch(:$remote_branch)](fg:black bg:cyan)[ ](bold fg:cyan)"
-
-[git_commit]
-commit_hash_length = 4
-tag_symbol = " "
-
-[git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = "[🍒 PICKING](bold red)"
-
-[git_status]
-conflicted = " 🏳 "
-ahead = " 🏎💨 "
-behind = " 😰 "
-diverged = " 😵 "
-untracked = " 🤷 ‍"
-stashed = " 📦 "
-modified = " 📝 "
-staged = '[++\($count\)](green)'
-renamed = " ✍️ "
-deleted = " 🗑 "
-
-[hostname]
-ssh_only = false
-format =  "[•$hostname](bg:cyan bold fg:black)[](bold fg:cyan)"
-trim_at = ".companyname.com"
-disabled = false
-
-[line_break]
-disabled = false
-
-[memory_usage]
-disabled = true
-threshold = -1
-symbol = " "
-style = "bold dimmed green"
-
-[time]
-disabled = true
-format = '🕙[\[ $time \]]($style) '
-time_format = "%T"
+[palettes.normal]
+arrow = "#7f849c"
+os = "#11111b"
+os_admin = "#f38ba8"
+directory = "#313244"
+time = "#45475a"
+node = "#F1DEA9"
+git = "#89b4fa"
+git_status = "#8aadf4"
+python = "#F5CB5C"
+conda = "#3EB049"
+rust = "#C33C00"
+clang = "#00599D"
+duration = "#b4befe"
+text_color = "#cdd6f4"
+text_light = "#313244"
 
 [username]
-style_user = "bold bg:cyan fg:black"
-style_root = "red bold"
-format = "[](bold fg:cyan)[$user]($style)"
+style_user = 'os'
+style_root = 'os_admin'
+format = '[]($style)[  josel](bg:$style fg:text_color)[]($style)'
 disabled = false
 show_always = true
 
+[character]
+success_symbol = "[󰍟](fg:arrow)"
+error_symbol = "[󰍟](fg:red)"
+
 [directory]
-home_symbol = "  "
-read_only = "  "
-style = "bg:blue fg:black"
-truncation_length = 6
-truncation_symbol = " ••/"
-format = '[](bold fg:blue)[󰉋 $path]($style)[](bold fg:blue)'
+format = " [](fg:directory)[  $path ]($style)[$read_only]($read_only_style)[](fg:directory)"
+truncation_length = 2
+style = "fg:text_color bg:directory"
+read_only_style = "fg:text_color bg:directory"
+before_repo_root_style = "fg:text_color bg:directory"
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only ="  "
 
-
-[directory.substitutions]
-"Escritorio" = "  "
-"Documentos" = "  "
-"Descargas" = "  "
-"Música" = " 󰎈 "
-"Imágenes" = "  "
-"Vídeos" = "  "
-"Proyectos" = " 󰊤 "
+[time]
+disabled = false
+format = " [](fg:time)[ $time]($style)[](fg:time)"
+time_format = "%H:%M"
+style = "fg:text_color bg:time"
 
 [cmd_duration]
-min_time = 0
-format = '[](bold fg:white)[󰪢 $duration](bold bg:white fg:black)[](bold fg:white)'
+format = " [](fg:duration)[ $duration]($style)[](fg:duration)"
+style = "fg:text_light bg:duration"
+min_time = 500
+
+[git_branch]
+format = " [](fg:git)[$symbol$branch](fg:text_light bg:git)[](fg:git)"
+symbol = " "
+
+[git_status]
+format = '([ ](fg:git_status)[ $all_status$ahead_behind ]($style)[](fg:git_status))'
+style = "fg:text_light bg:git_status"
+
+[docker_context]
+disabled=true
+symbol = " "
+
+[package]
+disabled=true
+
+[nodejs]
+format = "[ ](fg:node)[$symbol$version]($style)[](fg:node)"
+style = "bg:node fg:text_light"
+symbol = " "
+version_format = "${raw}"
+disabled=false
+
+[rust]
+format = "[ ](fg:rust)[$symbol$version](bg:rust fg:text_color)[](fg:rust)"
+symbol = " "
+version_format = "${raw}"
+disabled=false
+
+[python]
+disabled=false
+format = '[ ](fg:python)[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)[](fg:python)'
+symbol = " "
+version_format = "${raw}"
+style = "fg:text_light bg:python"
+
+[conda]
+format = "[ ](fg:conda)[$symbol$environment]($style)[](fg:conda)"
+style = "bg:conda fg:text_color"
+ignore_base = false
+disabled=false
+symbol = " "
+
+[c]
+format = "[ ](fg:clang)[$symbol($version(-$name) )](bg:clang fg:text_color)[](fg:clang)"
+symbol = " "
+version_format = "${raw}"
+disabled=true
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+openSUSE = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
