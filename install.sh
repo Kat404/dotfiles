@@ -87,7 +87,6 @@ print_info() {
 # --- DEFINICIÓN DE ENLACES ---
 
 declare -a COMMON_LINKS=(
-    "zsh/starship.toml:.config/starship.toml"
     "fastfetch/config.jsonc:.config/fastfetch/config.jsonc"
     "kitty/kitty.conf:.config/kitty/kitty.conf"
     "lazygit/config.yml:.config/lazygit/config.yml"
@@ -150,6 +149,24 @@ choose_shell() {
             ;;
     esac
     print_success "Has elegido: $SHELL_TO_INSTALL"
+}
+
+choose_starship() {
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🚀 Configuración de Starship Prompt${NC}"
+    echo -e "   ${G}1)${NC} Principal (Full/Pastel) - ${C}starship/starship.toml${NC}"
+    echo -e "   ${G}2)${NC} Secundario (TokyoNight/Minimal) - ${C}starship/starship_2.toml${NC}"
+    
+    local choice
+    read -r -p "$(echo -e "${M}Select (default 1): ${NC}")" choice
+    
+    if [[ "$choice" == "2" ]]; then
+        STARSHIP_CONFIG="starship/starship_2.toml"
+        print_success "Seleccionado Starship Secundario."
+    else
+        STARSHIP_CONFIG="starship/starship.toml"
+        print_success "Seleccionado Starship Principal."
+    fi
 }
 
 install_antidote() {
@@ -560,10 +577,11 @@ install_arch_full() {
             "imagemagick" "libayatana-appindicator" "keepassxc" "signal-desktop" 
             "proton-vpn-gtk-app" "neovim" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
+            "cmatrix" "cava"
         ) 
 
         
-        local yay_pkgs=()
+        local yay_pkgs=("carapace-bin")
         
         # 2. Detección Inteligente / Excepciones (L34-L39)
         
@@ -714,6 +732,16 @@ check_and_install_software() {
         fi
     done
     
+    # Starship (Gestión especial para fallback)
+    if ! command -v starship &> /dev/null; then
+        if ! install_pkg starship; then
+            print_error "No se pudo instalar Starship automáticamente con tu gestor de paquetes."
+            print_info "Se aplicará la configuración (.toml), pero necesitarás instalar 'starship' manualmente para ver el prompt."
+        fi
+    else
+        echo "✅ starship ya está instalado."
+    fi
+    
     # Configuración específica de Rust
     if command -v rustup &> /dev/null; then
          # Verificar si hay toolchain instalado, si no, instalar default stable
@@ -833,12 +861,16 @@ setup_unclutter_shortcut() {
 echo "🚀 Iniciando instalación de dotfiles..."
 print_banner
 choose_shell
+choose_starship
 
 echo "Repositiorio de dotfiles: $DOTFILES_DIR"
 echo "--------------------------------------------------"
 
 echo "🔧 Verificando dependencias..."
 check_and_install_software "$SHELL_TO_INSTALL"
+
+# Añadir configuración de Starship elegida
+COMMON_LINKS+=("$STARSHIP_CONFIG:.config/starship.toml")
 
 # Configuración condicional según el shell
 declare -a FILES_TO_LINK

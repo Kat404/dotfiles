@@ -7,11 +7,6 @@ $time\
     $git_branch\
     $git_status\
 )\
-(\
-    $python\
-    $rust\
-    $nodejs\
-)\
 $cmd_duration
 [╰─](fg:arrow)$character\
 """
@@ -86,38 +81,31 @@ symbol = " "
 [package]
 disabled=true
 
-[nodejs]
-format = "[ ](fg:node)[$symbol$version]($style)[](fg:node)"
-style = "bg:node fg:text_light"
-symbol = " "
-version_format = "${raw}"
-disabled=false
+# [nodejs]
+# format = "[ ](fg:node)[$symbol$version]($style)[](fg:node)"
+# style = "bg:node fg:text_light"
+# symbol = " "
+# version_format = "${raw}"
+# disabled=false
 
-[rust]
-format = "[ ](fg:rust)[$symbol$version](bg:rust fg:text_color)[](fg:rust)"
-symbol = " "
-version_format = "${raw}"
-disabled=false
+# [rust]
+# format = "[ ](fg:rust)[$symbol$version](bg:rust fg:text_color)[](fg:rust)"
+# symbol = " "
+# version_format = "${raw}"
+# disabled=false
 
-[python]
-disabled=false
-format = '[ ](fg:python)[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)[](fg:python)'
-symbol = " "
-version_format = "${raw}"
-style = "fg:text_light bg:python"
+# [python]
+# disabled=false
+# format = '[ ](fg:python)[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)[](fg:python)'
+# symbol = " "
+# version_format = "${raw}"
+# style = "fg:text_light bg:python"
 
-[conda]
-format = "[ ](fg:conda)[$symbol$environment]($style)[](fg:conda)"
-style = "bg:conda fg:text_color"
-ignore_base = false
-disabled=false
-symbol = " "
-
-[c]
-format = "[ ](fg:clang)[$symbol($version(-$name) )](bg:clang fg:text_color)[](fg:clang)"
-symbol = " "
-version_format = "${raw}"
-disabled=true
+# [c]
+# format = "[ ](fg:clang)[$symbol($version(-$name) )](bg:clang fg:text_color)[](fg:clang)"
+# symbol = " "
+# version_format = "${raw}"
+# disabled=true
 
 [os.symbols]
 Alpine = " "

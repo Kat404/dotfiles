@@ -17,6 +17,7 @@ alias grubup = sudo grub-mkconfig -o /boot/grub/grub.cfg  # <-- Actualiza las co
 alias fsh = fastfetch                                     # <-- Yo Angelo 
 alias salir = exit                                        # <-- Sácame de aquí
 alias cls = clear                                         # <-- Limpia, limpia
+alias bankai = rm -rf                                     # <-- Yokoso
 
 # =============================================
 # 2.        NAVEGACIÓN DE DIRECTORIOS

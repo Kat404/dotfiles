@@ -19,15 +19,32 @@
 #
 # ~/.config/nushell/config.nu
 
+# Importa Plugins Core (Únicamente si se quieren usar plugins)
+# const NU_PLUGIN_DIRS = [
+#   ($nu.current-exe | path dirname)
+#   ...$NU_PLUGIN_DIRS
+# ]
+
+# Inicializa Carapace (Necesario tener instalado Carapace)
+# source $"($nu.cache-dir)/carapace.nu"
+
 # Define a Neovim para editor de texto
 $env.config = {
     buffer_editor: "nvim" 
 }
 
+# Almacenamos todo el historial de comandos con SQLite
+$env.config.history = {
+  file_format: sqlite
+  max_size: 1_000_000
+  sync_on_enter: true
+  isolation: false
+}
+
 # Sourcea todos los aliases configurados
 source ~/.config/nushell/aliases.nu
 
-# Carga zoxide
+# Carga zoxide (Necesario tener instalado Zoxide)
 source ~/.cache/zoxide/init.nu
 
 # Evita que aparezca el banner de bienvenida al iniciar Nushell

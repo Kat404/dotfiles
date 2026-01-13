@@ -23,6 +23,13 @@
 $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
 
+# Configuración de binarios de Cargo
+$env.PATH = (
+    $env.PATH 
+    | split row (char esep) 
+    | prepend $"($env.HOME)/.cargo/bin"
+)
+
 # Configuración de Bun 
 $env.BUN_INSTALL = $"($env.HOME)/.bun"
 $env.PATH = ($env.PATH | split row (char esep) | prepend $"($env.BUN_INSTALL)/bin")
