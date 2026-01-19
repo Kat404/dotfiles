@@ -1,0 +1,9 @@
+# Configuración de LSPs
+# HTML
+# ¡Necesario tener 'superhtml' en el PATH
+# [[language]]
+# name = "html"
+# language-servers = [ "superhtml" ]
+# 
+# [language-server.superhtml]
+# command = "superhtml"

@@ -24,8 +24,8 @@ alias bankai = rm -rf                                     # <-- Yokoso
 # =============================================
 # Comandos para moverse entre directorios
 alias ir = cd                             # <-- Llévame a casa
-# def irc [] {                              # <-- Ir al home y limpiar consola
-#   cd; clear
+# def irc [] {                            # <-- Ir al home y limpiar consola
+#   cd | clear
 # }
 alias cds = yazi                          # <-- Me encanta yazi 
 alias .. = cd ..                          # <-- Subir un nivel de directorio
@@ -38,13 +38,10 @@ alias ...... = cd ../../../../..          # <-- Subir cinco niveles de directori
 # 3.           COMANDOS LS
 # =============================================
 # eza >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ls 
-alias l = ls
-alias x = eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons  # <-- Listar archivos con eza (formato básico)
-alias xa = eza -a --color=always --group-directories-first --icons  # <-- Listar archivos incluyendo ocultos con eza
-alias xl = eza -l --color=always --group-directories-first --icons  # <-- Listado detallado con eza
-def x. [] {                                                         # <-- Mostrar solo archivos ocultos
-    eza -a | lines | where $it =~ '^\.'
-}
+alias l = ls  # <-- Listar directorios y archivos
+alias x = eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons=always  # <-- Listar carpetas y archivos (contando ocultos) con eza
+alias xa = eza -a -f --color=always --icons=always                                                         # <-- Listar archivos ocultos con eza
+alias xl = eza -l --tree --level=2 --color=always --group-directories-first --icons=always                 # <-- Listado en tree (sin ocultos) con eza
 
 # =============================================
 # 4.     HERRAMIENTAS Y ACCESOS DIRECTOS
@@ -54,6 +51,7 @@ alias icat = kitten icat  # <-- Visor rápida y nativo de imágenes usando la te
 alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias lg = lazygit        # <-- Uso rápido de 'lazygit'
 alias py = python3        # <-- Uso rápido de 'python3'
+alias hx = helix          # <-- Uso rápido de 'helix'
 alias postgrestart = sudo systemctl start postgresql.service  # <-- Inicializar PostgreSQL
 alias mariastart = sudo systemctl start mariadb               # <-- Inicializar MariaDB
 alias mariastop = sudo systemctl stop mariadb                 # <-- Detener MariaDB
@@ -65,6 +63,7 @@ alias mariadeventer = mariadb -u dev -p                       # <-- Entrar a Mar
 # =============================================
 # Comandos para manipulación de archivos
 alias tarnow = tar -acvf   # <-- Crear un archivo .tar usando comprensión automática
+alias untar = tar -xf      # <-- Descomprimir un .tar 
 alias targnow = tar -czvf  # <-- Crear un archivo .tar usando gzip como comprensión
 alias ungz = gunzip        # <-- Descomprimir archivos .gz
 alias wget = wget -c       # <-- Continuar descargas interrumpidas automáticamente
@@ -76,6 +75,7 @@ alias zipnow = 7z a        # <-- Crear un archivo .7z usando 7zip
 # Aliases/shortcuts para un workflow más fluido usando git
 alias gi = git init                # <-- Inicializar un nuevo repositorio Git
 alias gs = git status              # <-- Ver el estado del repositorio
+# alias gsx = gstat                # <-- Git Status organizado por Nu (Necesario instalar)
 alias ga = git add                 # <-- Añadir archivos al staging
 alias gaa = git add --all          # <-- Añadir todos los archivos al staging
 alias gc = git commit -m           # <-- Hacer commit con mensaje
