@@ -13,7 +13,8 @@ alias mirrors='sudo reflector --latest 30 --protocol https --sort rate --save /e
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg' # <-- Actualiza las configuraciones del GRUB
 alias fsh='fastfetch'                                    # <-- Yo Angelo 
 alias salir='exit'                                       # <-- Sácame de aquí
-alias cls='clear'                                        # <-- Limpia, limpia 
+alias cls='clear'                                        # <-- Limpia, limpia
+alias bankai='rm -rf'                                    # <-- Yokoso
 
 # =============================================
 # 2.        NAVEGACIÓN DE DIRECTORIOS
@@ -32,10 +33,9 @@ alias ......='cd ../../../../..'          # <-- Subir cinco niveles de directori
 # 3.           COMANDOS LS
 # =============================================
 # eza >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ls 
-alias l='eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons'  # <-- Listar archivos con eza (formato básico)
-alias la='eza -a --color=always --group-directories-first --icons'                                  # <-- Listar archivos incluyendo ocultos con eza
-alias ll='eza -l --color=always --group-directories-first --icons'                                  # <-- Listado detallado con eza
-alias l.="eza -a | grep -e '^\.'"                                                                   # <-- Mostrar solo archivos ocultos con eza
+alias x='eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons=always'  # <-- Listar archivos con eza (formato básico)
+alias xa='eza -a -f --color=always --icons=always'                                                         # <-- Listar archivos incluyendo ocultos con eza
+alias xl='eza -l --tree --level=2 --color=always --group-directories-first --icons=always'                 # <-- Listado de archivos en tree (sin ocultos) con eza
 
 # =============================================
 # 4.     HERRAMIENTAS Y ACCESOS DIRECTOS
@@ -45,10 +45,13 @@ alias icat='kitten icat' # <-- Visor rápida y nativo de imágenes usando la ter
 alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
 alias py='python3'       # <-- Uso rápido de 'python3'
-alias postgrestart='sudo systemctl start postgresql.service'  # <-- Inicializar PostgreSQL
+alias hx='helix'         # <-- Uso rápido de 'helix'
+alias postgrestart='sudo systemctl start postgresql'          # <-- Inicializar PostgreSQL
+alias postgrestop='sudo systemctl stop postgresql'            # <-- Detener PostgreSQL
 alias mariastart='sudo systemctl start mariadb'               # <-- Inicializar MariaDB
-alias mariaenter='mariadb -u root -p'                         # <-- Entrar a la base de datos MariaDB como root
-alias mariadeventer='mariadb -u dev -p'                       # <-- Entrar a la base de datos MariaDB como dev
+alias mariastop='sudo systemctl stop mariadb'                 # <-- Detener MariaDB
+alias mariaenter='mariadb -u root -p'                         # <-- Entrar a MariaDB como root
+alias mariadeventer='mariadb -u dev -p'                       # <-- Entrar a MariaDB como dev
 
 # =============================================
 # 5.          MANEJO DE ARCHIVOS
@@ -64,7 +67,7 @@ alias zipnow='7z a '       # <-- Crear un archivo .7z usando 7zip
 # =============================================
 # 6.                 GIT
 # =============================================
-# Aliases/shortcuts para un workflow más fluido usando git 
+# Aliases/shortcuts para un workflow más fluido usando git
 alias gi='git init'                # <-- Inicializar un nuevo repositorio Git
 alias gs='git status'              # <-- Ver el estado del repositorio
 alias ga='git add'                 # <-- Añadir archivos al staging
@@ -100,9 +103,9 @@ alias ct='cargo test'            # <-- Ejecutar los tests (modo debug)
 alias ctr='cargo test --release' # <-- Ejecutar los tests (modo release)
 
 # --- Calidad y Formato ---
-alias cf='cargo fmt'                # <-- Formatear el código
-alias ccl='cargo clippy'            # <-- Ejecutar el linter (análisis de código)
-alias cclr='cargo clippy --release' # <-- Ejecutar el linter (modo release)
+# alias cf='cargo fmt'                # <-- Formatear el código
+# alias ccl='cargo clippy'            # <-- Ejecutar el linter (análisis de código)
+# alias cclr='cargo clippy --release' # <-- Ejecutar el linter (modo release)
 
 # --- Utilidades ---
 alias cu='cargo update'       # <-- Actualizar las dependencias (Cargo.lock)
@@ -113,38 +116,17 @@ alias cdoo='cargo doc --open' # <-- Generar y abrir la documentación
 alias ru='rustup update' # <-- Actualizar el toolchain de Rust
 
 # =============================================
-# 8.                  BUN
+# 8.                   V
 # =============================================
-# Comandos rápidos e intuitivos para Bun: un runtime, gestor de paquetes y test runner extremadamente veloz.
+# Aliases/shortcuts para un workflow más fluido usando V (vlang)
 
-# --- Ejecución y Scripts ---
-alias bur='bun run'           # <-- Ejecuta scripts del package.json o archivos JS/TS
-alias bundev='bun run dev'    # <-- Inicia el entorno de desarrollo (alias común)
-alias bunst='bun start'       # <-- Ejecuta el script de inicio del proyecto
-alias bunex='bun exec'        # <-- Ejecuta comandos en el contexto del entorno Bun
-alias bx='bunx'               # <-- Ejecuta binarios de paquetes (equivalente a npx)
-alias bunx='bunx'             # <-- Ejecuta paquetes remotos sin instalarlos localmente
-
-# --- Gestión de Dependencias ---
-alias buni='bun install'      # <-- Instala todas las dependencias del package.json
-alias buna='bun add'          # <-- Añade una dependencia de producción
-alias bunad='bun add -d'      # <-- Añade una dependencia de desarrollo (--dev)
-alias bunrm='bun remove'      # <-- Elimina una dependencia del proyecto
-alias bunup='bun update'      # <-- Actualiza las dependencias a la última versión permitida
-alias bunou='bun pm outdated' # <-- Muestra los paquetes que tienen versiones más recientes
-alias buncl='bun pm cache rm' # <-- Limpia la caché de paquetes de Bun
-
-# --- Testing y Calidad ---
-alias bunt='bun test'          # <-- Ejecuta la suite de pruebas unitarias
-alias buntw='bun test --watch' # <-- Ejecuta los tests en modo observación (watch mode)
-alias bunsec='bun pm audit'    # <-- Analiza el proyecto en busca de vulnerabilidades de seguridad
-
-# --- Proyecto y Construcción ---
-alias bunit='bun init'        # <-- Inicializa un nuevo proyecto Bun interactivo
-alias bunild='bun build'      # <-- Empaqueta (bundle) el proyecto para producción
-alias bunrepl='bun'           # <-- Abre el REPL interactivo de Bun
-
-# --- Mantenimiento de Bun ---
-alias bunew='bun upgrade'     # <-- Actualiza Bun a su última versión oficial
-alias bunv='bun --version'    # <-- Muestra la versión instalada de Bun
-alias bunh='bun --help'       # <-- Muestra la ayuda general de comandos
+alias vpd='v -prod'         # <-- Compila V y genera el ejecutable con todas las optimizaciones posibles
+alias vspd='v -stats -prod' # <-- Compila V y genera el ejecutable con todas las optimizaciones posibles junto con sus stats
+alias vrun='v run'          # <-- Compila código V y enseguida ejecuta el ejecutable creado
+alias vruns='v -stats run'  # <-- Compila código V y enseguida ejecuta el ejecutable creado junto con sus stats
+alias vpruns='v -stats -prod run' # <-- Compila código V en modo optimización y enseguida ejecuta el ejecutable creado junto con sus stats
+alias vrunc='v crun'        # <-- Realiza lo mismo que 'v run' con excepción de que solo guardará y recompilará cuando haya cambios
+alias vest='v test'         # <-- Corre los 'test' que haya en los archivos y directorios seleccionados
+alias vet='v vet'           # <-- Reporta construcciones de código sospechosas 
+alias voc='v doc'           # <-- Genera documentación del módulo, directorio o archivo seleccionado ¡Checar opciones!
+alias vatch='v watch'       # <-- Recoleta todos los '.v' necesario para compilar, si algún archivo cambia lo vuelve a recompilar

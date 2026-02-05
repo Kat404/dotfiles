@@ -25,6 +25,20 @@ for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
 done
 unset _rc
 
+# Bun Completions (Necesario tener Bun instalado)
+# [ -s "/home/josel/.bun/_bun" ] && source "/home/josel/.bun/_bun"
+
+# Configuración de PATH de Bun (Necesario tener Bun instalado)
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Configuración de PATH de Cargo (Necesario tener Rust/Cargo instalado)
+# export PATH="$HOME/.cargo/bin:$PATH"
+
+# Configuración de PATH .NET (Necesario tener .NET instalado)
+# export DOTNET_ROOT="/usr/share/dotnet"
+# export PATH="$PATH:$HOME/.dotnet/tools"
+
 # Inicialización de Starship
 # Descomentar si se va a hacer uso de Starship
 # eval "$(starship init zsh)"
