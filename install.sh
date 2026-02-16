@@ -88,6 +88,9 @@ print_info() {
 
 declare -a COMMON_LINKS=(
     "fastfetch/config.jsonc:.config/fastfetch/config.jsonc"
+    "helix/config.toml:.config/helix/config.toml"
+    "helix/languages.toml:.config/helix/languages.toml"
+    "helix/themes:.config/helix/themes"
     "kitty/kitty.conf:.config/kitty/kitty.conf"
     "lazygit/config.yml:.config/lazygit/config.yml"
     #"nvim:.config/nvim" # Gestionado por install_nvchad
@@ -445,24 +448,24 @@ install_common_dependencies() {
     case $pm in
         apt)
             # Nombres específicos para Debian/Ubuntu
-            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter build-essential libssl-dev pkg-config
+            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config
             ;;
         pacman)
             # Nombres específicos para Arch
-            install_pkg ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter base-devel
+            install_pkg ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel
             ;;
         dnf)
             # Nombres para Fedora
-            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter
+            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix
             ;;
         brew)
             # Nombres para macOS
-            install_pkg ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter
+            install_pkg ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix
             ;;
         zypper)
             # Nombres para openSUSE (Leap/Tumbleweed)
             # Nota: Incluimos herramientas de desarrollo para asegurar la compilación en Leap si es necesario.
-            install_pkg ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter gcc gcc-c++ make libopenssl-devel
+            install_pkg ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter helix gcc gcc-c++ make libopenssl-devel
             ;;
         *)
             echo "⚠️  No se pueden instalar dependencias comunes automáticamente en $pm."
@@ -575,7 +578,7 @@ install_arch_full() {
             "ttf-jetbrains-mono-nerd" "ttf-ubuntu-font-family" "yazi" "ffmpeg" 
             "7zip" "jq" "poppler" "fd" "ripgrep" "fzf" "zoxide" "resvg" "unclutter"
             "imagemagick" "libayatana-appindicator" "keepassxc" "signal-desktop" 
-            "proton-vpn-gtk-app" "neovim" "lazygit" "less" "reflector" 
+            "proton-vpn-gtk-app" "neovim" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
             "cmatrix" "cava"
         ) 
@@ -718,7 +721,7 @@ check_and_install_software() {
     echo "🔍 Verificando software necesario (Instalación Estándar)..."
     
     # Lista base + shell seleccionada
-    local tools=("kitty" "lazygit" "nvim:neovim" "fastfetch" "rustup" "$target_shell")
+    local tools=("kitty" "lazygit" "nvim:neovim" "hx:helix" "fastfetch" "rustup" "$target_shell")
 
     for tool_spec in "${tools[@]}"; do
         IFS=":" read -r cmd pkg <<< "$tool_spec"
