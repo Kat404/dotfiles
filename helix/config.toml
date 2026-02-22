@@ -8,9 +8,41 @@ cursorline = true
 color-modes = true
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "underline"
 normal = "block"
-select = "underline"
+select = "block"
 
 [editor.indent-guides]
 render = true
+
+[editor.statusline]
+left = [
+    "mode",
+    "spacer",
+    "version-control",
+    "spacer",
+    "spinner",
+    "read-only-indicator",
+]
+center = ["file-name", "file-modification-indicator"]
+right = [
+    "diagnostics",
+    "selections",
+    "position",
+    "file-encoding",
+    "file-line-ending",
+    "file-type",
+]
+separator = " "
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+# Soft-Wrap
+[editor.soft-wrap]
+enable = true
+wrap-indicator = "↪ "
+max-indent-retain = 40
+max-wrap = 20

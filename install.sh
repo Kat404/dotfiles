@@ -182,31 +182,42 @@ install_antidote() {
     fi
 }
 
-setup_zoxide_for_nushell() {
-    print_step "Configurando Zoxide para Nushell..." "1" "1"
+setup_zoxide_for_shell() {
+    local target_shell=$1
+    print_step "Configurando Zoxide para $target_shell..." "1" "1"
     
-    local default_init="$HOME/.cache/zoxide/init.nu"
-    echo -e "${Y}📍 Zoxide necesita generar un archivo init.nu.${NC}"
-    echo -e "   Ruta por defecto sugerida en config.nu: ${C}$default_init${NC}"
-    read -r -p "   ¿Dónde deseas guardarlo? (Enter para usar default): " custom_path
+    local default_init="$HOME/.cache/zoxide/init.$target_shell"
     
-    local target_path="$default_init"
-    if [[ -n "$custom_path" ]]; then
-        target_path="$custom_path"
+    if [[ "$target_shell" == "nushell" ]]; then
+        echo -e "${Y}📍 Zoxide necesita generar un archivo init.${target_shell}.${NC}"
+        echo -e "   Ruta por defecto sugerida en config.nu: ${C}$default_init${NC}"
+        read -r -p "   ¿Dónde deseas guardarlo? (Enter para usar default): " custom_path
+        
+        if [[ -n "$custom_path" ]]; then
+            default_init="$custom_path"
+        fi
     fi
     
     # Expandir ~ si es necesario (el shell lo hace, pero si está entre comillas...)
     # Simplemente nos aseguramos que el directorio padre exista.
-    local parent_dir=$(dirname "$target_path")
+    local parent_dir=$(dirname "$default_init")
     if [[ ! -d "$parent_dir" ]]; then
         echo "📂 Creando directorio: $parent_dir"
         mkdir -p "$parent_dir"
     fi
     
     if command -v zoxide &> /dev/null; then
-         echo "⚡ Generando init.nu..."
-         zoxide init nushell --cmd cd | save -f "$target_path"
-         print_success "Zoxide configurado en $target_path"
+         echo "⚡ Generando init.$target_shell en $default_init..."
+         if [[ "$target_shell" == "nushell" ]]; then
+             zoxide init nushell --cmd cd > "$default_init"
+         elif [[ "$target_shell" == "zsh" ]]; then
+             zoxide init zsh > "$default_init"
+             echo -e "${C}ℹ  Si zoxide no carga, asegúrate que se importe 'source $default_init' en tu config de Zsh.${NC}"
+         elif [[ "$target_shell" == "fish" ]]; then
+             zoxide init fish > "$default_init"
+             echo -e "${C}ℹ  Si zoxide no carga, asegúrate que se importe 'source $default_init' en tu config de Fish.${NC}"
+         fi
+         print_success "Zoxide configurado en $default_init"
     else
          print_error "Zoxide no encontrado. Asegúrate de que se instaló correctamente."
     fi
@@ -419,20 +430,36 @@ install_pkg() {
             fi
             ;;
         apt)
-            sudo apt-get update -qq && sudo apt-get install -y "$@" &> /dev/null
-            echo -e "${G}OK${NC}"
+            if sudo apt-get update -qq && sudo apt-get install -y "$@" &> /dev/null; then
+                echo -e "${G}OK${NC}"
+            else
+                echo -e "${R}Fallo${NC}"
+                return 1
+            fi
             ;;
         dnf)
-            sudo dnf install -y "$@" &> /dev/null
-            echo -e "${G}OK${NC}"
+            if sudo dnf install -y "$@" &> /dev/null; then
+                echo -e "${G}OK${NC}"
+            else
+                echo -e "${R}Fallo${NC}"
+                return 1
+            fi
             ;;
         brew)
-            brew install "$@" &> /dev/null
-            echo -e "${G}OK${NC}"
+            if brew install "$@" &> /dev/null; then
+                echo -e "${G}OK${NC}"
+            else
+                echo -e "${R}Fallo${NC}"
+                return 1
+            fi
             ;;
         zypper)
-            sudo zypper install -y --no-recommends "$@" &> /dev/null
-            echo -e "${G}OK${NC}"
+            if sudo zypper install -y --no-recommends "$@" &> /dev/null; then
+                echo -e "${G}OK${NC}"
+            else
+                echo -e "${R}Fallo${NC}"
+                return 1
+            fi
             ;;
         *)
             print_error "Gestor de paquetes no soportado: $pm"
@@ -580,7 +607,7 @@ install_arch_full() {
             "imagemagick" "libayatana-appindicator" "keepassxc" "signal-desktop" 
             "proton-vpn-gtk-app" "neovim" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
-            "cmatrix" "cava"
+            "cmatrix" "cava" "libreoffice-fresh" "libreoffice-fresh-es"
         ) 
 
         
@@ -719,6 +746,21 @@ check_and_install_software() {
 
     # --- Lógica Normal (No Arch o Arch rechazada) ---
     echo "🔍 Verificando software necesario (Instalación Estándar)..."
+
+    # LibreOffice (Opcional fuera de Arch Full)
+    if ! command -v libreoffice &> /dev/null && ! command -v soffice &> /dev/null; then
+        echo ""
+        echo "📊 ¿Deseas instalar LibreOffice?"
+        read -r -p "   (s/n): " lo_opt
+        if [[ "$lo_opt" =~ ^[sS]$ ]]; then
+            case $pm in
+                pacman) install_pkg libreoffice-fresh libreoffice-fresh-es ;;
+                apt)    install_pkg libreoffice libreoffice-l10n-es ;;
+                dnf)    install_pkg libreoffice libreoffice-langpack-es ;;
+                *)      install_pkg libreoffice ;;
+            esac
+        fi
+    fi
     
     # Lista base + shell seleccionada
     local tools=("kitty" "lazygit" "nvim:neovim" "hx:helix" "fastfetch" "rustup" "$target_shell")
@@ -882,14 +924,13 @@ if [[ "$SHELL_TO_INSTALL" == "zsh" ]]; then
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${ZSH_LINKS[@]}")
 elif [[ "$SHELL_TO_INSTALL" == "nushell" ]]; then
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${NUSHELL_LINKS[@]}")
-    # Zoxide setup se debe hacer (idealmente) DESPUÉS de linking, 
-    # pero como es solo generar un archivo, podemos hacerlo aquí o al final.
-    # Lo haremos aquí para mantener la lógica agrupada, aunque el output
-    # quedará antes del linking final.
-    setup_zoxide_for_nushell
 else
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${FISH_LINKS[@]}")
 fi
+
+# Zoxide setup se debe generar para independientemente del shell que seleccione el usuario.
+# Lo haremos aquí para mantener la estructura original, antes del linking final de archivos.
+setup_zoxide_for_shell "$SHELL_TO_INSTALL"
 
 install_pipes_rs
 echo "--------------------------------------------------"

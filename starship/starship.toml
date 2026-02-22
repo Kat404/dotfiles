@@ -53,7 +53,7 @@ read_only_style = "fg:text_color bg:directory"
 before_repo_root_style = "fg:text_color bg:directory"
 truncation_symbol = "…/"
 truncate_to_repo = true
-read_only ="  "
+read_only = "  "
 
 [time]
 disabled = false
@@ -75,11 +75,11 @@ format = '([ ](fg:git_status)[ $all_status$ahead_behind ]($style)[](fg:git
 style = "fg:text_light bg:git_status"
 
 [docker_context]
-disabled=true
+disabled = true
 symbol = " "
 
 [package]
-disabled=true
+disabled = true
 
 # [nodejs]
 # format = "[ ](fg:node)[$symbol$version]($style)[](fg:node)"
@@ -107,34 +107,34 @@ disabled=true
 # version_format = "${raw}"
 # disabled=true
 
-[os.symbols]
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Gentoo = " "
-Linux = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-openSUSE = " "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = " "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = " "
+# [os.symbols]
+# Alpine = " "
+# Amazon = " "
+# Android = " "
+# Arch = " "
+# CentOS = " "
+# Debian = " "
+# DragonFly = " "
+# Emscripten = " "
+# EndeavourOS = " "
+# Fedora = " "
+# FreeBSD = " "
+# Gentoo = " "
+# Linux = " "
+# Macos = " "
+# Manjaro = " "
+# Mariner = " "
+# MidnightBSD = " "
+# Mint = " "
+# NetBSD = " "
+# NixOS = " "
+# openSUSE = " "
+# Pop = " "
+# Raspbian = " "
+# Redhat = " "
+# RedHatEnterprise = " "
+# Redox = " "
+# SUSE = " "
+# Ubuntu = " "
+# Unknown = " "
+# Windows = " "

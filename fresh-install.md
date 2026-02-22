@@ -28,7 +28,7 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 ## Instalar Paquetes
 
 ```zsh
-sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox kitty zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib starship xclip wl-clipboard fastfetch eza bat unclutter cmatrix cava && yay -S cryptomator windsurf visual-studio-code-bin antigravity phoenix-arch carapace-bin
+sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox libreoffice-fresh libreoffice-fresh-es kitty zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib starship xclip wl-clipboard fastfetch eza bat unclutter cmatrix cava asciiquarium && yay -S cryptomator windsurf visual-studio-code-bin antigravity phoenix-arch carapace-bin
 ```
 
 - Elimina `gnome-keyring` si ya tienes un agente de autenticación
