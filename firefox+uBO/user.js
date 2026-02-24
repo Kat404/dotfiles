@@ -198,7 +198,7 @@ user_pref("browser.tabs.groups.smart.enabled", false);
 user_pref("browser.tabs.groups.smart.userEnabled", false);
 user_pref("browser.ml.linkPreview.enabled", false);
 user_pref("browser.search.visualSearch.featureGate", false);
-user_pref("extensions.ml.enabled");
+user_pref("extensions.ml.enabled", false);
 
 /** FULLSCREEN NOTICE ***/
 user_pref("full-screen-api.transition-duration.enter", "0 0");

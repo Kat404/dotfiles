@@ -47,13 +47,22 @@ error_symbol = "[󰍟](fg:red)"
 
 [directory]
 format = " [](fg:directory)[  $path ]($style)[$read_only]($read_only_style)[](fg:directory)"
-truncation_length = 2
+truncation_length = 3
 style = "fg:text_color bg:directory"
 read_only_style = "fg:text_color bg:directory"
 before_repo_root_style = "fg:text_color bg:directory"
 truncation_symbol = "…/"
 truncate_to_repo = true
-read_only = "  "
+read_only ="  "
+
+[directory.substitutions]
+"Escritorio" = "  "
+"Documentos" = "  "
+"Descargas" = "  "
+"Música" = " 󰎈"
+"Imágenes" = "  "
+"Vídeos" = "  "
+"Proyectos" = " 󰊤 "
 
 [time]
 disabled = false
@@ -74,9 +83,9 @@ symbol = " "
 format = '([ ](fg:git_status)[ $all_status$ahead_behind ]($style)[](fg:git_status))'
 style = "fg:text_light bg:git_status"
 
-[docker_context]
-disabled = true
-symbol = " "
+# [docker_context]
+# disabled=true
+# symbol = " "
 
 [package]
 disabled = true
@@ -94,18 +103,18 @@ disabled = true
 # version_format = "${raw}"
 # disabled=false
 
+# [bun]
+# disabled=false
+# format = "[ ](fg:bun)[$symbol$version](bg:bun fg:text_color)[](fg:bun)"
+# symbol = " "
+# version_format = "${raw}"
+
 # [python]
 # disabled=false
 # format = '[ ](fg:python)[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\))]($style)[](fg:python)'
 # symbol = " "
 # version_format = "${raw}"
 # style = "fg:text_light bg:python"
-
-# [c]
-# format = "[ ](fg:clang)[$symbol($version(-$name) )](bg:clang fg:text_color)[](fg:clang)"
-# symbol = " "
-# version_format = "${raw}"
-# disabled=true
 
 # [os.symbols]
 # Alpine = " "
