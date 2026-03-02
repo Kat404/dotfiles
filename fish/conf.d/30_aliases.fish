@@ -8,10 +8,9 @@
 # 1.           LISTADOS (EZA)
 # =============================================
 # Aliases/shortcuts para reemplazar 'ls' con 'eza'
-alias l='eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons' # <-- Listado con iconos y ocultos
-alias la='eza -a --color=always --group-directories-first --icons'                                 # <-- Listado incluyendo ocultos
-alias ll='eza -l --color=always --group-directories-first --icons'                                 # <-- Listado detallado
-alias l\.="eza -a | grep -e '^\.'"                                                                 # <-- Solo archivos/dirs ocultos
+alias x="eza --classify=auto --color=always --group-directories-first --sort=extension -A --icons=always"  # <-- Listar carpetas y archivos (contando ocultos) con eza
+alias xa="eza -a -f --color=always --icons=always"                                                         # <-- Listar archivos ocultos con eza
+alias xl="eza -l --tree --level=3 --color=always --group-directories-first --icons=always"                 # <-- Listado en tree (sin ocultos) con eza
 
 # =============================================
 # 2.          SISTEMA Y PAQUETES
@@ -34,7 +33,7 @@ alias ...='cd ../..'             # <-- Subir dos directorios
 alias ....='cd ../../..'         # <-- Subir tres directorios
 alias .....='cd ../../../..'     # <-- Subir cuatro directorios
 alias ......='cd ../../../../..' # <-- Subir cinco directorios
-alias ir='cd'                    # <-- Ir al directorio HOME
+alias ir='cd'                    # <-- Llévame a casa
 alias irq='prevd'                # <-- Ir al directorio anterior en el stack
 alias ira='nextd'                # <-- Ir al siguiente directorio en el stack
 alias cds='yazi'                 # <-- Abrir el gestor de archivos Yazi
@@ -52,6 +51,7 @@ alias ungz="gunzip"        # <-- Descomprimir archivos .gz
 alias wget='wget -c '      # <-- Continuar descargas interrumpidas automáticamente
 alias zipnow='7z a '       # <-- Crear un archivo .7z usando 7zip
 alias unzip='7z x'         # <-- Descomprimir .zip usando la heramienta de 7zip
+alias bankai='rm -rf'      # <-- Yokoso
 
 # =============================================
 # 5.     HERRAMIENTAS Y ACCESOS DIRECTOS
@@ -61,7 +61,13 @@ alias icat='kitten icat' # <-- Visor rápida y nativo de imágenes usando la ter
 alias tub='pipes-rs'     # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias lg='lazygit'       # <-- Uso rápido de 'lazygit'
 alias py='python3'       # <-- Uso rápido de 'python3'
-alias postgrestart='sudo systemctl start postgresql.service'  # <-- Inicializar PostgreSQL
+alias hx='helix'         # <-- Uso rápido de 'helix'
+alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL
+alias postgrestop = sudo systemctl stop postgresql   # <-- Detener PostgreSQL
+alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
+alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
+alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
+alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
 
 # =============================================
 # 6.      INFORMACIÓN DEL SISTEMA
@@ -76,18 +82,7 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl" # 
 alias fsh='fastfetch'                                                         # <-- Información rápida del sistema
 
 # =============================================
-# 7.         RED Y TEXTO
-# =============================================
-# Aliases/shortcuts para utilidades de texto y red
-alias dir='dir --color=auto'     # <-- Listado con color
-alias vdir='vdir --color=auto'   # <-- Listado detallado con color
-alias grep='grep --color=auto'   # <-- Búsqueda con color
-alias fgrep='fgrep --color=auto' # <-- Búsqueda fija con color
-alias egrep='egrep --color=auto' # <-- Búsqueda extendida con color
-alias tb='nc termbin.com 9999'   # <-- Enviar texto a termbin
-
-# =============================================
-# 8.                 GIT
+# 7.                 GIT
 # =============================================
 # Aliases/shortcuts para un workflow más fluido usando git 
 alias gi='git init'               # <-- Inicializar un nuevo repositorio Git
@@ -102,7 +97,7 @@ alias gbr='git branch'            # <-- Listar, crear o eliminar ramas
 alias gp='git push'               # <-- Subir cambios al repositorio remoto
 
 # =============================================
-# 9.             RUST Y CARGO
+# 8.             RUST Y CARGO
 # =============================================
 # Aliases/shortcuts para un workflow más fluido usando Rust y Cargo
 

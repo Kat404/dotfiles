@@ -18,7 +18,7 @@
 # them for future reference.
 # ~/.config/nushell/env.nu
 
-# Inicializa Carapace desde el source (Necesario tener Carapace instalado)
+# Inicializa Carapace desde el source (Necesario tener instalado Carapace)
 # $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 # mkdir $"($nu.cache-dir)"
 # carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
@@ -27,12 +27,12 @@
 $env.EDITOR = "helix"
 $env.VISUAL = "helix"
 
-# Configuración de binarios de Cargo
-$env.PATH = (
-    $env.PATH 
-    | split row (char esep) 
-    | prepend $"($env.HOME)/.cargo/bin"
-)
+# Configuración de binarios de Cargo (Necesario tener instalado Cargo)
+# $env.PATH = (
+#     $env.PATH 
+#     | split row (char esep) 
+#     | prepend $"($env.HOME)/.cargo/bin"
+# )
 
 # Configuración de Bun (Necesario tener instalado Bun)
 # $env.BUN_INSTALL = $"($env.HOME)/.bun"

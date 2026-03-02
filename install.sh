@@ -248,12 +248,7 @@ install_pipes_rs() {
 install_betterfox() {
     print_step "Configurando Betterfox (user.js)..." "1" "1"
     local mozilla_dir="$HOME/.mozilla/firefox"
-    local source_js="$DOTFILES_DIR/firefox+uBO/user.js"
-    
-    if [[ ! -f "$source_js" ]]; then
-        print_error "No se encontró el archivo user.js en $source_js"
-        return
-    fi
+    local betterfox_url="https://raw.githubusercontent.com/Kat404/dotfiles/refs/heads/main/firefox%2BuBO/user.js"
     
     if [[ ! -d "$mozilla_dir" ]]; then
         print_info "No se encontró directorio de Firefox. Ejecuta Firefox una vez para crear el perfil."
@@ -278,11 +273,24 @@ install_betterfox() {
     
     if [[ -z "$target_profile" ]]; then
         print_error "No se pudo detectar un perfil de Firefox válido automáticamente."
-        print_info "Por favor, copia manualmente $source_js a tu carpeta de perfil."
+        print_info "Por favor, revisa la configuración o inicia Firefox primero."
     else
         echo -e "${C}Perfil detectado:${NC} $(basename "$target_profile")"
-        cp "$source_js" "$target_profile/user.js"
-        print_success "Betterfox aplicado correctamente."
+        
+        # Asegurar curl
+        if ! command -v curl &> /dev/null; then
+            echo -e "${C}ℹ  Curl no encontrado. Instalando para descargar Betterfox...${NC}"
+            install_pkg curl
+        fi
+        
+        echo -ne "${Y}⬇️  Descargando Betterfox desde GitHub... ${NC}"
+        if curl -sL "$betterfox_url" -o "$target_profile/user.js"; then
+            echo -e "${G}OK${NC}"
+            print_success "Betterfox aplicado correctamente."
+        else
+            echo -e "${R}Fallo${NC}"
+            print_error "Error al descargar el user.js de Betterfox."
+        fi
     fi
 }
 
@@ -471,33 +479,40 @@ install_pkg() {
 install_common_dependencies() {
     echo "📦 Instalando dependencias comunes (ffmpeg, 7zip, jq, fzf...)..."
     local pm=$(get_pkg_manager)
+    local pkgs=()
     
     case $pm in
         apt)
             # Nombres específicos para Debian/Ubuntu
-            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config)
             ;;
         pacman)
             # Nombres específicos para Arch
-            install_pkg ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel
+            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel)
             ;;
         dnf)
             # Nombres para Fedora
-            install_pkg ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix)
             ;;
         brew)
             # Nombres para macOS
-            install_pkg ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix
+            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix)
             ;;
         zypper)
             # Nombres para openSUSE (Leap/Tumbleweed)
-            # Nota: Incluimos herramientas de desarrollo para asegurar la compilación en Leap si es necesario.
-            install_pkg ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter helix gcc gcc-c++ make libopenssl-devel
+            pkgs=(ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter helix gcc gcc-c++ make libopenssl-devel)
             ;;
         *)
             echo "⚠️  No se pueden instalar dependencias comunes automáticamente en $pm."
+            return
             ;;
     esac
+
+    for pkg in "${pkgs[@]}"; do
+        if ! install_pkg "$pkg"; then
+            echo -e "${Y}⚠️  Sugerencia: El paquete '${pkg}' no se encontró o falló. Te sugiero una instalación nativa (compilando desde fuente u obteniendo el binario oficial).${NC}"
+        fi
+    done
 }
 
 install_yazi() {
@@ -599,7 +614,6 @@ install_arch_full() {
         
         # --- Construcción de listas de paquetes ---
         
-        # 1. Base fija (según fresh-install.md)
         local pacman_pkgs=(
             "noto-fonts-emoji" "firefox" "kitty" "${SHELL_TO_INSTALL}" "nodejs" "gufw" 
             "ttf-jetbrains-mono-nerd" "ttf-ubuntu-font-family" "yazi" "ffmpeg" 
@@ -608,6 +622,7 @@ install_arch_full() {
             "proton-vpn-gtk-app" "neovim" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
             "cmatrix" "cava" "libreoffice-fresh" "libreoffice-fresh-es"
+            "xdg-user-dirs" "asciiquarium"
         ) 
 
         
@@ -771,7 +786,9 @@ check_and_install_software() {
 
         if ! command -v "$cmd" &> /dev/null; then
              # Pasamos solo el nombre del paquete
-             install_pkg "$pkg"
+             if ! install_pkg "$pkg"; then
+                 echo -e "${Y}⚠️  Sugerencia: El paquete '${pkg}' no está disponible o falló en tu gestor. Considera realizar una instalación nativa (desde código fuente o binario oficial).${NC}"
+             fi
         else
              echo "✅ $cmd ya está instalado."
         fi

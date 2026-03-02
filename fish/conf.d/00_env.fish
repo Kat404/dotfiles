@@ -21,8 +21,20 @@ if test -d ~/.local/bin
     end
 end
 
+# Añadimos todos nuestro ENV Personal según nuestras herramientas & utilidades
+set -gx EDITOR helix
+set -gx VISUAL helix
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx DOTNET_ROOT "/usr/share/dotnet"
+set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
+
+# Añadimos a nuestro PATH todos nuestro lenguajes, package manager & utilidades faltantes
+fish_add_path "$HOME/.cargo/bin"
+fish_add_path "$BUN_INSTALL/bin"
+fish_add_path "$HOME/.dotnet/tools"
+
 # Configuración del plugin 'done' para notificaciones
 # Duración mínima de un comando para notificar (10 segundos) 
-set -U __done_min_cmd_duration 10000
+# set -U __done_min_cmd_duration 10000
 # Nivel de urgencia de la notificación (bajo) 
-set -U __done_notification_urgency_level low
+# set -U __done_notification_urgency_level low

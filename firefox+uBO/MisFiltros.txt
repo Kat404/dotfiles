@@ -6,7 +6,7 @@
 tubitv.com#@#+js(set, blockAdBlock, noopFunc)
 .mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com
 
-! Mensaje de Cookies
+! Anuncio de Cookies
 www.megacable.com.mx###d-cookies
 
 ! Barra innecesaria y molesta de publicidad/anuncio
@@ -15,7 +15,7 @@ www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 ! Evitar que 'img.shields.io' se vea bloqueado en Codeberg
 @@||img.shields.io^$image,domain=codeberg.org
 
-! Anuncios molesto en Souceforge
+! Anuncios molestos en Souceforge
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-m-b16*.png$image
 
@@ -27,5 +27,12 @@ www.kimi.com##.header-center > .membership-upgrade
 ! Anuncio del nuevo agente de IA de DeepL
 www.deepl.com##.max-w-\[1440px\].mx-auto.w-full.px-\[2rem\]
 
-! Permitir funcionalidad core en tryhackme.com (provocado por BadBlock) 
-@@||vnc.tryhackme.tech/core/util/logging.js$script,domain=vnc.tryhackme.tech
+! Eliminar sección de "minijuegos" dentro de YouTube
+www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(1)
+
+! Molestias de anuncios para adquirir Google Ultra AI
+gemini.google.com##.ng-star-inserted.adv-upsell.buttons-container
+gemini.google.com##.ng-star-inserted.desktop-controls.mdc-list.mat-mdc-list-base.mat-mdc-action-list > .ng-star-inserted
+
+! Anuncio de Cookies
+www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.fixed.w-100.mxmoto-motorola-components-ytSdHkainCgOc3yKpfRbQ
