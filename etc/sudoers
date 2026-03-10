@@ -1,0 +1,20 @@
+# /etc/sudoers - Minimalista y Fortificado
+
+# 1. Conservar variables seguras (Idioma y Editor)
+Defaults env_keep += "LANG LANGUAGE LC_* _XKB_CHARSET"
+Defaults!/usr/bin/visudo env_keep += "SUDO_EDITOR EDITOR VISUAL"
+
+# 2. Rutas seguras absolutas (Evita secuestro de PATH)
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin"
+
+# 3. Hardening
+Defaults passwd_timeout=1
+Defaults timestamp_timeout=5
+Defaults !pwfeedback
+
+# 4. Privilegios base
+root ALL=(ALL:ALL) ALL
+%wheel ALL=(ALL:ALL) ALL
+
+# 5. Directorio modular
+@includedir /etc/sudoers.d

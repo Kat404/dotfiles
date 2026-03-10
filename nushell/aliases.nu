@@ -5,35 +5,37 @@
 # 1.          COMANDOS DEL SISTEMA
 # =============================================
 # Actualización del sistema y utilidades básicas
-def update [] {                                           # <-- Actualizar todo el sistema y Flatpaks
+def update [] {                                              # <-- Actualizar todo el sistema y Flatpaks
   yay; flatpak update
 }
-def cleanup [] {                                          # <-- Limpia paquetes huérfanos
+def cleanup [] {                                             # <-- Limpia paquetes huérfanos
     sudo pacman -Rns (pacman -Qtdq)
 }
-alias mirrors = sudo reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+alias mirrors = sudo-rs reflector --latest 30 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 # ↳ Selecciona los 30 servidores https más actualizados, organizados por velocidad de descarga, reescribe en pacman.d/mirrorlist ↲
-alias grubup = sudo grub-mkconfig -o /boot/grub/grub.cfg  # <-- Actualiza las configuraciones del GRUB
-alias fsh = fastfetch                                     # <-- Yo Angelo 
-alias salir = exit                                        # <-- Sácame de aquí
-alias cls = clear                                         # <-- Limpia, limpia
-alias bankai = rm -r                                      # <-- Yokoso
-alias Bankai = sudo rm -r                                 # <-- Root Yokoso
+alias grubup = sudo-rs grub-mkconfig -o /boot/grub/grub.cfg  # <-- Actualiza las configuraciones del GRUB
+alias fsh = fastfetch                                        # <-- Yo Angelo 
+alias salir = exit                                           # <-- Sácame de aquí
+alias cls = clear                                            # <-- Limpia, limpia
+alias bankai = rm -r                                         # <-- Yokoso
+alias Bankai = sudo-rs rm -r                                 # <-- Root Yokoso
+alias sudo = sudo-rs                                         # <-- Ferris Sudo
+alias sudoedit = sudo-rs -e                                  # <-- Ferris editando...
 
 # =============================================
 # 2.        NAVEGACIÓN DE DIRECTORIOS
 # =============================================
 # Comandos para moverse entre directorios
-alias ir = cd                             # <-- Llévame a casa
-# def irc [] {                            # <-- Ir al home y limpiar consola
-#   cd | clear
+alias ir = cd                      # <-- Llévame a casa
+# def irc [] {                     # <-- Ir al home y limpiar consola
+#   clear; cd
 # }
-alias cds = yazi                          # <-- Me encanta yazi 
-alias .. = cd ..                          # <-- Subir un nivel de directorio
-alias ... = cd ../..                      # <-- Subir dos niveles de directorio
-alias .... = cd ../../..                  # <-- Subir tres niveles de directorio
-alias ..... = cd ../../../..              # <-- Subir cuatro niveles de directorio
-alias ...... = cd ../../../../..          # <-- Subir cinco niveles de directorio
+alias cds = yazi                   # <-- Me encanta yazi 
+alias .. = cd ..                   # <-- Subir un nivel de directorio
+alias ... = cd ../..               # <-- Subir dos niveles de directorio
+alias .... = cd ../../..           # <-- Subir tres niveles de directorio
+alias ..... = cd ../../../..       # <-- Subir cuatro niveles de directorio
+alias ...... = cd ../../../../..   # <-- Subir cinco niveles de directorio
 
 # =============================================
 # 3.           COMANDOS LS
@@ -53,11 +55,12 @@ alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías
 alias lg = lazygit        # <-- Uso rápido de 'lazygit'
 alias py = python3        # <-- Uso rápido de 'python3'
 alias hx = helix          # <-- Uso rápido de 'helix'
-alias postgrestart = sudo systemctl start postgresql.service  # <-- Inicializar PostgreSQL
-alias mariastart = sudo systemctl start mariadb               # <-- Inicializar MariaDB
-alias mariastop = sudo systemctl stop mariadb                 # <-- Detener MariaDB
-alias mariaenter = mariadb -u root -p                         # <-- Entrar a MariaDB como root
-alias mariadeventer = mariadb -u dev -p                       # <-- Entrar a MariaDB como dev
+alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL
+alias postgrestop = sudo systemctl stop postgresql   # <-- Detener PostgreSQL
+alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
+alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
+alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
+alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
 
 # =============================================
 # 5.          MANEJO DE ARCHIVOS
@@ -76,7 +79,7 @@ alias zipnow = 7z a        # <-- Crear un archivo .7z usando 7zip
 # Aliases/shortcuts para un workflow más fluido usando git
 alias gi = git init                # <-- Inicializar un nuevo repositorio Git
 alias gs = git status              # <-- Ver el estado del repositorio
-# alias gsx = gstat                # <-- Git Status organizado por Nu (Necesario instalar)
+alias gsx = gstat                  # <-- Git Status organizado por Nu
 alias ga = git add                 # <-- Añadir archivos al staging
 alias gaa = git add --all          # <-- Añadir todos los archivos al staging
 alias gc = git commit -m           # <-- Hacer commit con mensaje
@@ -89,13 +92,18 @@ alias gp = git push                # <-- Subir cambios al repositorio remoto
 # =============================================
 # 7.             RUST Y CARGO
 # =============================================
-# Aliases/shortcuts para un workflow más fluido usando Rust y Cargo
+# Aliases/shortcuts para un workflow más fluido usando Rust & Cargo
 
 # --- Creación y Comprobación ---
 alias cn = cargo new        # <-- Crear un nuevo proyecto (binario)
 alias ci = cargo init       # <-- Crear un Cargo.toml de un src/ ya existente
 alias cnl = cargo new --lib # <-- Crear un nuevo proyecto (biblioteca)
 alias cc = cargo check      # <-- Compilar el código sin producir un ejecutable (muy rápido) 
+
+# --- Gestión de Dependencias ---
+alias cad = cargo add     # <-- Añadir un nuevo paquete o dependencia al proyecto dentro del Cargo.toml 
+alias crm = cargo remove  # <-- Eliminar un paquete o dependencia del proyecto dentro del Cargo.toml
+alias ctree = cargo tree  # <-- Visualizar en forma de tree todos los paquetes, dependencias y subdependencias
 
 # --- Compilación (Build) ---
 alias cb = cargo build            # <-- Compilar el proyecto (modo debug, más lento que 'check')
@@ -110,12 +118,13 @@ alias ct = cargo test            # <-- Ejecutar los tests (modo debug)
 alias ctr = cargo test --release # <-- Ejecutar los tests (modo release)
 
 # --- Calidad y Formato ---
-alias cf = cargo fmt                # <-- Formatear el código
-alias ccl = cargo clippy            # <-- Ejecutar el linter (análisis de código)
-alias cclr = cargo clippy --release # <-- Ejecutar el linter (modo release)
+# alias cf = cargo fmt                # <-- Formatear el código
+# alias ccl = cargo clippy            # <-- Ejecutar el linter (análisis de código)
+# alias cclr = cargo clippy --release # <-- Ejecutar el linter (modo release)
 
 # --- Utilidades ---
 alias cu = cargo update       # <-- Actualizar las dependencias (Cargo.lock)
+alias cclean = cargo clean    # <-- Limpiar la carpeta target/, limpiar espacio y compilaciones
 alias cdo = cargo doc         # <-- Generar la documentación
 alias cdoo = cargo doc --open # <-- Generar y abrir la documentación
 
