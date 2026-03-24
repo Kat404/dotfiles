@@ -2,15 +2,11 @@
 # ~/.zshrc
 # Encargado de cargar todo lo interactivo con la sesión del shell
 
-# Lazy-load para antidote y generar el archivo estático solo cuando sea necesario
-#zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-#if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-#  (
-#    source /path-to-antidote/antidote.zsh
-#    antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
-#  )
-#fi
-#source ${zsh_plugins}.zsh
+# Configuraciones Personales para Antidote
+zstyle ':antidote:git' site     'github.com'
+zstyle ':antidote:git' protocol 'ssh'
+zstyle ':antidote:git' cmd      'git'
+zstyle ':antidote:bundle' use-friendly-names 'yes'
 
 # Crea una configuración asombrosa de Zsh usando los plugins de antidote
 source ${ZDOTDIR:-$HOME}/.antidote/antidote.zsh
@@ -32,13 +28,15 @@ unset _rc
 # export BUN_INSTALL="$HOME/.bun"
 # export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Configuración de PATH de Cargo (Necesario tener Rust/Cargo instalado)
+# Configuración de PATH de Cargo (Necesario tener Cargo instalado)
 # export PATH="$HOME/.cargo/bin:$PATH"
 
-# Configuración de PATH .NET (Necesario tener .NET instalado)
+# Configuración de PATH .NET (Necesario tener .NET SDK instalado)
 # export DOTNET_ROOT="/usr/share/dotnet"
 # export PATH="$PATH:$HOME/.dotnet/tools"
 
+# Inicializar Zoxide
+eval "$(zoxide init zsh)"
+
 # Inicialización de Starship
-# Descomentar si se va a hacer uso de Starship
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"

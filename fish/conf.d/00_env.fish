@@ -32,9 +32,3 @@ set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path "$BUN_INSTALL/bin"
 fish_add_path "$HOME/.dotnet/tools"
-
-# Configuración del plugin 'done' para notificaciones
-# Duración mínima de un comando para notificar (10 segundos) 
-# set -U __done_min_cmd_duration 10000
-# Nivel de urgencia de la notificación (bajo) 
-# set -U __done_notification_urgency_level low

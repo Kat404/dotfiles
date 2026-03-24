@@ -20,14 +20,14 @@ alias bankai='rm -rf'                                    # <-- Yokoso
 # 2.        NAVEGACIÓN DE DIRECTORIOS
 # =============================================
 # Comandos para moverse entre directorios
-alias ir='cd'                             # <-- Llévame a casa
-alias irc='cd && clear'                   # <-- Ir al home y limpiar consola
-alias cds='yazi'                          # <-- Me encanta yazi 
-alias ..='cd ..'                          # <-- Subir un nivel de directorio
-alias ...='cd ../..'                      # <-- Subir dos niveles de directorio
-alias ....='cd ../../..'                  # <-- Subir tres niveles de directorio
-alias .....='cd ../../../..'              # <-- Subir cuatro niveles de directorio
-alias ......='cd ../../../../..'          # <-- Subir cinco niveles de directorio
+alias ir='cd'                     # <-- Llévame a casa
+alias irc='cd && clear'           # <-- Ir al home y limpiar consola
+alias cds='yazi'                  # <-- Me encanta yazi 
+alias ..='cd ..'                  # <-- Subir un nivel de directorio
+alias ...='cd ../..'              # <-- Subir dos niveles de directorio
+alias ....='cd ../../..'          # <-- Subir tres niveles de directorio
+alias .....='cd ../../../..'      # <-- Subir cuatro niveles de directorio
+alias ......='cd ../../../../..'  # <-- Subir cinco niveles de directorio
 
 # =============================================
 # 3.           COMANDOS LS
@@ -114,19 +114,3 @@ alias cdoo='cargo doc --open' # <-- Generar y abrir la documentación
 
 # --- Ecosistema (Rustup) ---
 alias ru='rustup update' # <-- Actualizar el toolchain de Rust
-
-# =============================================
-# 8.                   V
-# =============================================
-# Aliases/shortcuts para un workflow más fluido usando V (vlang)
-
-alias vpd='v -prod'         # <-- Compila V y genera el ejecutable con todas las optimizaciones posibles
-alias vspd='v -stats -prod' # <-- Compila V y genera el ejecutable con todas las optimizaciones posibles junto con sus stats
-alias vrun='v run'          # <-- Compila código V y enseguida ejecuta el ejecutable creado
-alias vruns='v -stats run'  # <-- Compila código V y enseguida ejecuta el ejecutable creado junto con sus stats
-alias vpruns='v -stats -prod run' # <-- Compila código V en modo optimización y enseguida ejecuta el ejecutable creado junto con sus stats
-alias vrunc='v crun'        # <-- Realiza lo mismo que 'v run' con excepción de que solo guardará y recompilará cuando haya cambios
-alias vest='v test'         # <-- Corre los 'test' que haya en los archivos y directorios seleccionados
-alias vet='v vet'           # <-- Reporta construcciones de código sospechosas 
-alias voc='v doc'           # <-- Genera documentación del módulo, directorio o archivo seleccionado ¡Checar opciones!
-alias vatch='v watch'       # <-- Recoleta todos los '.v' necesario para compilar, si algún archivo cambia lo vuelve a recompilar
