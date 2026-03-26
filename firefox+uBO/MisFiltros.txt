@@ -36,3 +36,10 @@ gemini.google.com##.ng-star-inserted.desktop-controls.mdc-list.mat-mdc-list-base
 
 ! Anuncio de Cookies
 www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.fixed.w-100.mxmoto-motorola-components-ytSdHkainCgOc3yKpfRbQ
+
+! Permitir tracker en midu.dev para poder tener registro de avance de los cursos
+@@||analytics.ahrefs.com^$xhr,domain=midu.dev
+@@||analytics.ahrefs.com^$script,domain=midu.dev
+
+! Borrar aviso de Upgrade a Claude Pro
+claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-center.pr-2\.5.pl-2.h-8.rounded-lg.gap-1\.5.items-center.inline-flex.ml-0\.5
