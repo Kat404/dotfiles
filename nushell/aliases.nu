@@ -55,6 +55,12 @@ alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías
 alias lg = lazygit        # <-- Uso rápido de 'lazygit'
 alias py = python3        # <-- Uso rápido de 'python3'
 alias hx = helix          # <-- Uso rápido de 'helix'
+def hf [] {               # <-- fzf + helix = отлично
+    let file = (fd --type f --hidden --exclude .git | fzf --layout=reverse --height=40% | str trim)
+    if ($file | is-not-empty) {
+        hx $file
+    }
+}
 alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL
 alias postgrestop = sudo systemctl stop postgresql   # <-- Detener PostgreSQL
 alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
@@ -90,6 +96,17 @@ alias gbr = git branch             # <-- Listar, crear o eliminar ramas
 alias gp = git push                # <-- Subir cambios al repositorio remoto
 def gcl [] {                       # <-- Configuración de Git en forma tabular
   git config --list | lines | split column '=' key value
+}
+def g-dual [user: string, repo: string] {   # <-- Configuración Dual Push para GitHub & Codeberg
+    let gh = $"git@github.com:($user)/($repo).git"
+    let cb = $"ssh://git@codeberg.org/($user)/($repo).git"
+
+    git remote set-url origin $gh
+    git remote set-url --add --push origin $gh
+    git remote set-url --add --push origin $cb
+    
+    print "✅ Configuración dual completada:"
+    git remote -v
 }
 
 # =============================================
