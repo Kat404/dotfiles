@@ -55,10 +55,30 @@ alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías
 alias lg = lazygit        # <-- Uso rápido de 'lazygit'
 alias py = python3        # <-- Uso rápido de 'python3'
 alias hx = helix          # <-- Uso rápido de 'helix'
-def hf [] {               # <-- fzf + helix = отлично
-    let file = (fd --type f --hidden --exclude .git | fzf --layout=reverse --height=40% | str trim)
+def hf [] {               # <-- helix + fzf + bat = отлично
+    let fzf_preview = "bat --color=always --line-range :500 --theme='Catppuccin Mocha' {}"
+    
+    let file = (
+        fd --type f --hidden --exclude .git --exclude node_modules --exclude .cache 
+        | fzf --preview $fzf_preview --preview-window="right:55%:rounded:border-sharp" --bind="ctrl-/:toggle-preview" --header="📄 Archivos (Ctrl+/ para preview)" 
+        | str trim
+    )
+
     if ($file | is-not-empty) {
         hx $file
+    }
+}
+def --env fzd [] {        # <-- 'cd' inteligente: fzf + fd + eza
+    let fzf_preview = "eza --tree --color=always --icons=always --group-directories-first --level=2 {}"
+    
+    let folder = (
+        fd --type d --hidden --exclude .git --exclude node_modules --exclude .cache 
+        | fzf --preview $fzf_preview --preview-window="right:50%:rounded" --header="📁 Carpetas" 
+        | str trim
+    )
+
+    if ($folder | is-not-empty) {
+        cd $folder
     }
 }
 alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL

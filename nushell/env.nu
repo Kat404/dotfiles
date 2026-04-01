@@ -3,40 +3,45 @@
 # Installed by:
 # version = "0.111.0"
 #
-# Previously, environment variables were typically configured in `env.nu`.
-# In general, most configuration can and should be performed in `config.nu`
-# or one of the autoload directories.
-#
-# This file is generated for backwards compatibility for now.
-# It is loaded before config.nu and login.nu
-#
-# See https://www.nushell.sh/book/configuration.html
-#
-# Also see `help config env` for more options.
-#
-# You can remove these comments if you want or leave
-# them for future reference.
 # ~/.config/nushell/env.nu
 
-# Inicializa Carapace desde el source (Necesario tener instalado Carapace)
-# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-# mkdir $"($nu.cache-dir)"
-# carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
-
-# Define a Helix para una integración total del sistema Nushell con él
+# ❯ Variables Esenciales & Editor {
 $env.EDITOR = "helix"
 $env.VISUAL = "helix"
+# }
 
-# Configuración de binarios de Cargo (Necesario tener instalado Cargo)
-# $env.PATH = (
-#     $env.PATH 
-#     | split row (char esep) 
-#     | prepend $"($env.HOME)/.cargo/bin"
-# )
+# ❯ Integración de Herramientas Externas (FZF & Caparace) {
+# Inicialización de Carapace
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+mkdir $"($nu.cache-dir)"
+carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
 
-# Configuración de Bun (Necesario tener instalado Bun)
-# $env.BUN_INSTALL = $"($env.HOME)/.bun"
-# $env.PATH = ($env.PATH | split row (char esep) | prepend $"($env.BUN_INSTALL)/bin")
+# Configuración Visual Global de FZF (Catppuccin Mocha)
+$env.FZF_DEFAULT_OPTS = "--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc --color=marker:#a6e3a1,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 --border=rounded --border-label=' ◆ fzf ◆ ' --border-label-pos=3:-3:top --layout=reverse --height=45% --padding=1,3 --margin=1,2 --info=inline-right --pointer='❯ ' --marker='◆ ' --separator='─' --multi"
 
-# Configuración de Nim (Necesario tener instalado Nim)
-# $env.PATH = ($env.PATH | split row (char esep) | prepend "/home/josel/.nimble/bin")
+# Búsqueda optimizada con 'fd'
+$env.FZF_DEFAULT_COMMAND = "fd --type f --color=never --hidden --exclude .git --exclude node_modules --exclude .cache"
+
+# Zoxide + FZF (Visualización con Eza)
+$env._ZO_FZF_OPTS = "--preview 'eza --tree --color=always --icons=always --group-directories-first --level=3 {2..}' --preview-window='right:50%:rounded' --header='📁 Zoxide Navegación'"
+# }
+
+# ❯ Variables de Runtime & Lenguajes {
+$env.BUN_INSTALL = $"($env.HOME)/.bun"
+$env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
+# }
+
+# ❯ Gestión 'Awesome' del PATH >_< {
+let binary_paths = [
+    $"($env.HOME)/.cargo/bin"
+    $"($env.BUN_INSTALL)/bin"
+    $env.PNPM_HOME
+]
+
+$env.PATH = (
+    $env.PATH 
+    | split row (char esep) 
+    | prepend $binary_paths 
+    | uniq
+)
+# }
