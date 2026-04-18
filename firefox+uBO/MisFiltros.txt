@@ -12,9 +12,6 @@ www.megacable.com.mx###d-cookies
 ! Barra innecesaria y molesta de publicidad/anuncio
 www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 
-! Evitar que 'img.shields.io' se vea bloqueado en Codeberg
-@@||img.shields.io^$image,domain=codeberg.org
-
 ! Anuncios molestos en Souceforge
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-m-b16*.png$image
@@ -43,3 +40,17 @@ www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.f
 
 ! Borrar aviso de Upgrade a Claude Pro
 claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-center.pr-2\.5.pl-2.h-8.rounded-lg.gap-1\.5.items-center.inline-flex.ml-0\.5
+
+! Molestias de Amazon Prime
+||m.media-amazon.com/images/I/41KBk4VXOvL.jpg$image
+||m.media-amazon.com/images/I/21dUHQstNdL.jpg$image
+||m.media-amazon.com/images/I/41OLye+xmpL.jpg$image
+||m.media-amazon.com/images/I/51+-Sldxa8L.jpg$image
+||m.media-amazon.com/images/I/316UFuM92BL.jpg$image
+||m.media-amazon.com/images/I/41694PeI4qL.jpg$image
+
+! Aviso de Cookies en Minimax
+www.minimax.io##.md\:px-8.py-6.px-6.max-w-\[1440px\].mx-auto
+
+! Aviso de Inicio de Sesión en X/Twitter
+x.com##.r-yz1j6i.r-qo02w8.r-l5o3uw.css-175oi2r

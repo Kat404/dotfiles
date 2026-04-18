@@ -1,7 +1,7 @@
 # config.nu
 #
 # Installed by:
-# version = "0.111.0"
+# version = "0.112.2"
 #
 # ~/.config/nushell/config.nu
 
