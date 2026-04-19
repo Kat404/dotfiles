@@ -38,7 +38,32 @@ alias ..... = cd ../../../..       # <-- Subir cuatro niveles de directorio
 alias ...... = cd ../../../../..   # <-- Subir cinco niveles de directorio
 
 # =============================================
-# 3.           COMANDOS LS
+# 3.             TASKWARRIOR
+# =============================================
+alias t = task                     # <-- Taskwarrior!
+alias tn = task next               # <-- Mostrar las tareas más próximas
+alias ts = task summary            # <-- Resumen de todas las tareas
+alias td = task done               # <-- Marcar una tarea como hecha
+def ta [                           # <-- Crear nueva tarea de manera 'Awesome' O_<
+    name: string,             # El título es lo único obligatorio
+    --project (-p): string,   # Proyecto opcional
+    --due (-d): string,       # Fecha opcional
+    --priority (-i): string   # Prioridad opcional (i de 'importance')
+] {
+    # Construimos el comando base
+    let command = ["add" $name]
+    
+    # Añadimos atributos solo si fueron proporcionados
+    let command = if ($project != null) { $command | append $"project:($project)" } else { $command }
+    let command = if ($due != null) { $command | append $"due:($due)" } else { $command }
+    let command = if ($priority != null) { $command | append $"priority:($priority)" } else { $command }
+
+    # Ejecutamos el comando final
+    run-external $command.0 ...($command | drop 1)
+}
+
+# =============================================
+# 4.             COMANDOS LS
 # =============================================
 # eza >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ls 
 alias l = ls  # <-- Listar directorios y archivos
@@ -47,7 +72,7 @@ alias xa = eza -a -f --color=always --icons=always                              
 alias xl = eza -l --tree --level=2 --color=always --group-directories-first --icons=always                 # <-- Listado en tree (sin ocultos) con eza
 
 # =============================================
-# 4.     HERRAMIENTAS Y ACCESOS DIRECTOS
+# 5.     HERRAMIENTAS Y ACCESOS DIRECTOS
 # =============================================
 # Accesos rápidos a herramientas externas
 alias icat = kitten icat  # <-- Visor rápida y nativo de imágenes usando la terminal de Kitty
@@ -87,9 +112,12 @@ alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
 alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
 alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
 alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
+alias ollamastart = sudo systemctl start ollama      # <-- Inicializar Ollama
+alias ollamastop = sudo systemctl stop ollama        # <-- Detener Ollama
+alias clc = ollama launch claude                     # <-- Inicializar Claude Code mediante Ollama
 
 # =============================================
-# 5.          MANEJO DE ARCHIVOS
+# 6.          MANEJO DE ARCHIVOS
 # =============================================
 # Comandos para manipulación de archivos
 alias tarnow = tar -acvf   # <-- Crear un archivo .tar usando comprensión automática
@@ -100,7 +128,7 @@ alias wget = wget -c       # <-- Continuar descargas interrumpidas automáticame
 alias zipnow = 7z a        # <-- Crear un archivo .7z usando 7zip
 
 # =============================================
-# 6.                 GIT
+# 7.                 GIT
 # =============================================
 # Aliases/shortcuts para un workflow más fluido usando git
 alias gi = git init                # <-- Inicializar un nuevo repositorio Git
@@ -130,7 +158,7 @@ def g-dual [user: string, repo: string] {   # <-- Configuración Dual Push para 
 }
 
 # =============================================
-# 7.             RUST Y CARGO
+# 8.             RUST Y CARGO
 # =============================================
 # Aliases/shortcuts para un workflow más fluido usando Rust & Cargo
 
