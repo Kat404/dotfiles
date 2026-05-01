@@ -1,9 +1,144 @@
 # Configuración de LSPs
+# ~/.config/helix/languages.toml
+#
+# ❯ Lenguajes
 # HTML
-# ¡Necesario tener 'superhtml' en el PATH
-# [[language]]
-# name = "html"
-# language-servers = [ "superhtml" ]
-# 
-# [language-server.superhtml]
-# command = "superhtml"
+[[language]]
+name = "html"
+language-servers = ["superhtml"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+# CSS
+[[language]]
+name = "css"
+formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+# V
+[[language]]
+name = "v"
+language-servers = ["vlang-language-server"]
+
+# Rust
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer"]
+
+# Astro
+[[language]]
+name = "astro"
+scope = "source.astro"
+injection-regex = "astro"
+file-types = ["astro"]
+roots = ["package.json", "astro.config.mjs"]
+formatter = { command = "prettier", args = ["--parser", "astro"] }
+auto-format = true
+language-servers = ["astro-ls"]
+
+# Python
+[[language]]
+name = "python"
+language-servers = ["ty"]
+
+# JavaScript
+[[language]]
+name = "javascript"
+language-servers = [
+  { name = "typescript-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+# JSX
+[[language]]
+name = "jsx"
+language-servers = [
+  { name = "typescript-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+# TypeScript
+[[language]]
+name = "typescript"
+language-servers = [
+  { name = "typescript-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+# TSX
+[[language]]
+name = "tsx"
+language-servers = [
+  { name = "typescript-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+# JSON
+[[language]]
+name = "json"
+language-servers = [
+  { name = "vscode-json-language-server", except-features = [
+    "format",
+  ] },
+  "biome",
+]
+formatter = { command = "prettier", args = ["--parser", "json"] }
+auto-format = true
+
+# TOML
+[[language]]
+name = "toml"
+language-servers = ["tombi"]
+auto-format = true
+
+# Markdown
+[[language]]
+name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+auto-format = true
+
+# - - - - - - - - - - - - - - - - -
+
+# ❯ LSPs
+[language-server.superhtml]
+command = "superhtml"
+
+[language-server.vlang-language-server]
+command = "v-analyzer"
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = { typescript = { tsdk = "/home/josel/.local/share/pnpm/global/5/node_modules/typescript/lib" }, environment = "node" }
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
+[language-server.ty.config]
+inlayHints.callArgumentNames = false
+experimental.rename = true
+experimental.autoImport = true
+
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]

@@ -1,6 +1,6 @@
 # Syntax highlighting
 # -------------------
-"attribute" = "yellow"
+"attribute" = { fg = "yellow", modifiers = ["italic"] }
 
 "type" = "yellow"
 "type.builtin" = "mauve"
@@ -27,15 +27,18 @@
 "label" = "sapphire" # used for lifetimes
 
 "punctuation" = "overlay2"
-"punctuation.special" = "sky"
+"punctuation.special" = { fg = "sky", modifiers = ["bold"] }
 
-"keyword" = "mauve"
-"keyword.control.conditional" = { fg = "mauve", modifiers = ["italic"] }
+"keyword" = { fg = "mauve", modifiers = ["bold"] }
+"keyword.control.conditional" = { fg = "mauve", modifiers = ["bold"] }
+"keyword.control.repeat" = { fg = "mauve", modifiers = ["bold"] }
+"keyword.control.return" = { fg = "mauve", modifiers = ["bold"] }
 
 "operator" = "sky"
 
 "function" = "blue"
-"function.macro" = "rosewater"
+"function.builtin" = "red"
+"function.macro" = { fg = "rosewater", modifiers = ["italic", "bold"] }
 
 "tag" = "blue"
 

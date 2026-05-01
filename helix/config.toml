@@ -1,7 +1,10 @@
-# Tema
+# Configuración Base de Helix
+# ~/.config/helix/config.toml
+# 
+# ❯ Tema
 theme = "catppuccin_mocha"
 
-# Features
+# ❯ Features
 [editor]
 line-number = "relative"
 cursorline = true
@@ -16,23 +19,9 @@ select = "block"
 render = true
 
 [editor.statusline]
-left = [
-    "mode",
-    "spacer",
-    "version-control",
-    "spacer",
-    "spinner",
-    "read-only-indicator",
-]
+left = ["mode", "spacer", "version-control", "spacer", "spinner", "read-only-indicator"]
 center = ["file-name", "file-modification-indicator"]
-right = [
-    "diagnostics",
-    "selections",
-    "position",
-    "file-encoding",
-    "file-line-ending",
-    "file-type",
-]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
 separator = " "
 mode.normal = "NOR"
 mode.insert = "INS"
@@ -40,7 +29,7 @@ mode.select = "SEL"
 diagnostics = ["warning", "error"]
 workspace-diagnostics = ["warning", "error"]
 
-# Soft-Wrap
+# ❯ Soft-Wrap
 [editor.soft-wrap]
 enable = true
 wrap-indicator = "↪ "

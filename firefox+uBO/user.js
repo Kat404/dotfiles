@@ -10,14 +10,9 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 149                                                             *
+ * version: 150                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
 ****************************************************************************/
-
-/****************************************************************************
- * SECTION: FASTFOX                                                         *
-****************************************************************************/
-user_pref("gfx.canvas.accelerated.cache-size", 256); // reset pref
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
@@ -233,6 +228,11 @@ user_pref("network.connectivity-service.enabled", false);
 // 1 = allow user MiTM (such as your antivirus) (default)
 // 2 = strict
 user_pref("security.cert_pinning.enforcement_level", 2);
+
+// PREF: disable JIT optimization
+// This removes most of the attack surface while keeping JIT compilation.
+user_pref("javascript.options.ion", false);
+user_pref("javascript.options.wasm_optimizingjit", false);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
