@@ -484,23 +484,23 @@ install_common_dependencies() {
     case $pm in
         apt)
             # Nombres específicos para Debian/Ubuntu
-            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config)
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config yt-dlp timeshift taskwarrior rsync rclone postgresql btop flatpak cowsay)
             ;;
         pacman)
             # Nombres específicos para Arch
-            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel)
+            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay)
             ;;
         dnf)
             # Nombres para Fedora
-            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix)
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix yt-dlp timeshift task rsync rclone postgresql btop flatpak cowsay rust-analyzer)
             ;;
         brew)
             # Nombres para macOS
-            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix)
+            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix yt-dlp task rsync rclone postgresql btop cowsay rust-analyzer pnpm)
             ;;
         zypper)
             # Nombres para openSUSE (Leap/Tumbleweed)
-            pkgs=(ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter helix gcc gcc-c++ make libopenssl-devel)
+            pkgs=(ffmpeg p7zip jq poppler-tools fd ripgrep fzf zoxide ImageMagick unclutter helix gcc gcc-c++ make libopenssl-devel yt-dlp timeshift taskwarrior rsync rclone postgresql btop flatpak cowsay rust-analyzer)
             ;;
         *)
             echo "⚠️  No se pueden instalar dependencias comunes automáticamente en $pm."
@@ -622,7 +622,10 @@ install_arch_full() {
             "proton-vpn-gtk-app" "neovim" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
             "cmatrix" "cava" "libreoffice-fresh" "libreoffice-fresh-es"
-            "xdg-user-dirs" "asciiquarium"
+            "xdg-user-dirs" "asciiquarium" "pnpm" "yt-dlp" "ty" "tombi"
+            "timeshift" "task" "sudo-rs" "rust-analyzer" "rsync" "rclone"
+            "postgresql" "obsidian" "marksman" "markdownlint-cli" "btop"
+            "gemini-cli" "flatpak" "cowsay"
         ) 
 
         
