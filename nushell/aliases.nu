@@ -38,32 +38,7 @@ alias ..... = cd ../../../..       # <-- Subir cuatro niveles de directorio
 alias ...... = cd ../../../../..   # <-- Subir cinco niveles de directorio
 
 # =============================================
-# 3.             TASKWARRIOR
-# =============================================
-alias t = task                     # <-- Taskwarrior!
-alias tn = task next               # <-- Mostrar las tareas más próximas
-alias ts = task summary            # <-- Resumen de todas las tareas
-alias td = task done               # <-- Marcar una tarea como hecha
-def ta [                           # <-- Crear nueva tarea de manera 'Awesome' O_<
-    name: string,             # El título es lo único obligatorio
-    --project (-p): string,   # Proyecto opcional
-    --due (-d): string,       # Fecha opcional
-    --priority (-i): string   # Prioridad opcional (i de 'importance')
-] {
-    # Construimos el comando base
-    let command = ["add" $name]
-    
-    # Añadimos atributos solo si fueron proporcionados
-    let command = if ($project != null) { $command | append $"project:($project)" } else { $command }
-    let command = if ($due != null) { $command | append $"due:($due)" } else { $command }
-    let command = if ($priority != null) { $command | append $"priority:($priority)" } else { $command }
-
-    # Ejecutamos el comando final
-    run-external $command.0 ...($command | drop 1)
-}
-
-# =============================================
-# 4.             COMANDOS LS
+# 3.             COMANDOS LS
 # =============================================
 # eza >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ls 
 alias l = ls  # <-- Listar directorios y archivos
@@ -72,12 +47,11 @@ alias xa = eza -a -f --color=always --icons=always                              
 alias xl = eza -l --tree --level=2 --color=always --group-directories-first --icons=always                 # <-- Listado en tree (sin ocultos) con eza
 
 # =============================================
-# 5.     HERRAMIENTAS Y ACCESOS DIRECTOS
+# 4.     HERRAMIENTAS Y ACCESOS DIRECTOS
 # =============================================
 # Accesos rápidos a herramientas externas
 alias icat = kitten icat  # <-- Visor rápida y nativo de imágenes usando la terminal de Kitty
 alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
-alias lg = lazygit        # <-- Uso rápido de 'lazygit'
 alias py = python3        # <-- Uso rápido de 'python3'
 alias hx = helix          # <-- Uso rápido de 'helix'
 def hf [] {               # <-- helix + fzf + bat = отлично
@@ -117,6 +91,102 @@ alias ollamastop = sudo systemctl stop ollama        # <-- Detener Ollama
 alias clc = ollama launch claude                     # <-- Inicializar Claude Code mediante Ollama
 
 # =============================================
+# 5.                 PODMAN
+# =============================================
+# ❯ Contenedores
+
+def psa [] {  # <-- Lista todos los contenedores (activo e inactivos)
+    let raw = (^podman ps -a --format json)
+    if ($raw | is-empty) { return [] }
+
+    $raw 
+    | from json 
+    | each { |row| 
+        {
+            # Mapeo directo y seguro
+            id: ($row.Id | str substring 0..11)
+            # Extraemos el primer nombre, si está vacío devolvemos un valor por defecto
+            nombre: (if ($row.Names | is-empty) { "<none>" } else { $row.Names | first })
+            imagen: $row.Image
+            estado: $row.State
+            status: $row.Status
+            creado: $row.CreatedAt
+        }
+    }
+}
+def ps [] {  # <-- Lista solo los contenedores activos
+    let raw = (^podman ps --format json)
+    if ($raw | is-empty) { return [] }
+
+    $raw 
+    | from json 
+    | each { |row| 
+        {
+            id: ($row.Id | str substring 0..11)
+            nombre: (if ($row.Names | is-empty) { "<none>" } else { $row.Names | first })
+            imagen: $row.Image
+            estado: $row.State
+            status: $row.Status
+            puertos: (if ($row.Ports | is-empty) { "Ninguno" } else { $row.Ports })
+        }
+    }
+}
+
+# ❯ Imágenes
+
+def pi [] {  # <-- Lista las imágenes locales estructuradas
+    let raw = (^podman images --format json)
+    if ($raw | is-empty) { return [] }
+
+    $raw 
+    | from json 
+    | each { |row| 
+        {
+            id: ($row.Id | str substring 0..11)
+            nombre: (if ($row.Names | is-empty) { "<none>" } else { $row.Names | first })
+            tamaño: $row.Size
+            creado: $row.Created
+        }
+    }
+}
+
+# ❯ Redes & Volúmenes
+
+def pnet [] {  # <-- Lista redes virtuales
+    let raw = (^podman network ls --format json)
+    if ($raw | is-empty) { return [] }
+
+    $raw 
+    | from json 
+    | select name id driver network_interface
+    | rename nombre id driver interfaz
+}
+def pvol [] {  # <-- Lista volúmenes locales
+    let raw = (^podman volume ls --format json)
+    if ($raw | is-empty) { return [] }
+
+    $raw 
+    | from json 
+    | select Name Driver Mountpoint
+    | rename nombre driver ruta
+}
+
+# ❯ Utilidades Avanzadas 0_<
+
+def pinspect [target: string] {  # <-- Inspecciona un contenedor y devuelve un récord
+    ^podman inspect $target | from json | get 0
+}
+def pclean [] {                  # <-- Limpieza total con confirmación explícita
+    print "(!!) Iniciando purga absoluta de Podman (imágenes, contenedores y redes sin uso)..."
+    ^podman system prune -a --volumes -f
+    print "Purga completada. Tu sistema está limpio."
+}
+def pkali [] {                   # <-- Lanzador interactivo y efímero para Hacking ético
+    print "Iniciando instancia efímera de Kali Linux en modo rootless..."
+    ^podman run -it --rm --name lab-kali docker.io/kalilinux/kali-rolling /bin/bash
+}
+
+# =============================================
 # 6.          MANEJO DE ARCHIVOS
 # =============================================
 # Comandos para manipulación de archivos
@@ -141,7 +211,9 @@ alias glo = git log --oneline      # <-- Ver historial de commits en una línea
 alias glo5 = git log --oneline -5  # <-- Ver últimos 5 commits en una línea
 alias gco = git checkout           # <-- Cambiar de rama o versión
 alias gbr = git branch             # <-- Listar, crear o eliminar ramas
-alias gp = git push                # <-- Subir cambios al repositorio remoto
+alias gp = git pull                # <-- Traer cambios desde el repositorio remoto
+alias gP = git push                # <-- Subir cambios al repositorio remoto
+alias lg = lazygit                 # <-- Uso rápido de 'lazygit'
 def gcl [] {                       # <-- Configuración de Git en forma tabular
   git config --list | lines | split column '=' key value
 }
