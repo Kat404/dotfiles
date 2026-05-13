@@ -2,7 +2,7 @@
 
 ## Stack
 
-- Herramientas modernas: eza, bat, fd, ripgrep, fzf, zoxide, starship, yazi, helix & zsh
+- Herramientas modernas: eza, bat, fd, ripgrep, fzf, zoxide, starship, yazi, helix, fastfetch & zsh
 - Hacking OOTB: rustscan, nmap, feroxbuster, iputils
 
 ## Uso
