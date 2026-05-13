@@ -1,0 +1,50 @@
+# Configuración Base de Helix
+# ~/.config/helix/config.toml
+# ❯ Tema
+theme = "catppuccin_mocha"
+
+# ❯ Features
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+
+[editor.cursor-shape]
+insert = "underline"
+normal = "block"
+select = "block"
+
+[editor.indent-guides]
+render = true
+
+[editor.statusline]
+left = [
+  "mode",
+  "spacer",
+  "version-control",
+  "spacer",
+  "spinner",
+  "read-only-indicator"
+]
+center = ["file-absolute-path", "file-modification-indicator"]
+right = [
+  "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type"
+]
+separator = " "
+mode.normal = "N"
+mode.insert = "I"
+mode.select = "S"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+# ❯ Soft-Wrap
+[editor.soft-wrap]
+enable = true
+wrap-indicator = "↪ "
+max-indent-retain = 40
+max-wrap = 20

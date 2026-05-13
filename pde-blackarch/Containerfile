@@ -1,0 +1,42 @@
+# Base oficial de Arch Linux
+FROM docker.io/library/archlinux:latest
+
+# 1. Preparación del Sistema y Repositorio BlackArch
+RUN pacman -Syu --noconfirm curl git && \
+    curl -O https://blackarch.org/strap.sh && \
+    chmod +x strap.sh && \
+    ./strap.sh && \
+    pacman -Syu --noconfirm
+
+# 2. Instalación del Stack Completo (ZSH + PDE Rust + Hacking)
+RUN pacman -S --noconfirm \
+    zsh fzf zoxide starship \
+    eza bat ripgrep fd yazi \
+    helix \
+    rustscan feroxbuster nmap iputils
+
+# 3. Preparación de Antidote
+RUN git clone --depth=1 https://github.com/mattmc3/antidote.git /root/.antidote
+
+# 4. Creación de la estructura XDG_CONFIG_HOME
+RUN mkdir -p /root/.zshrc.d \
+             /root/.config/yazi \
+             /root/.config/helix \
+             /root/.config/starship
+
+# 5. Inyección de Dotfiles
+COPY .zshrc /root/.zshrc
+COPY .zsh_plugins.txt /root/.zsh_plugins.txt
+COPY zshrc.d/ /root/.zshrc.d/
+COPY starship.toml /root/.config/starship.toml
+COPY yazi/ /root/.config/yazi/
+COPY helix/ /root/.config/helix/
+
+# 6. Pre-compilación de Plugins (Rendimiento)
+RUN zsh -c 'source /root/.antidote/antidote.zsh && antidote bundle < /root/.zsh_plugins.txt > /root/.zsh_plugins.zsh'
+
+# 7. Configuración de Entrada
+WORKDIR /root
+# Definimos el editor para que las herramientas lo reconozcan (ej. git commit)
+ENV EDITOR=hx
+CMD ["/usr/bin/zsh"]

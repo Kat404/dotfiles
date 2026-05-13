@@ -27,6 +27,8 @@ git clone --depth 1 https://github.com/Kat404/dotfiles.git && cd dotfiles && chm
 
 ## Guías de Configuración y Más
 
+[![PDE BlackArch](https://img.shields.io/badge/PDE_BlackArch-85182A?style=for-the-badge&logo=podman&logoColor=white&labelColor=2E3440)](pde-blackarch/README.md)
+
 [![Fresh Install](<https://img.shields.io/badge/Fresh_Install_(Arch)-89DCEB?style=for-the-badge&logo=arch-linux&logoColor=white&labelColor=0B6EA8>)](fresh-install.md)
 
 [![Nushell](https://img.shields.io/badge/Nushell-4E9A06?style=for-the-badge&logo=nushell&logoColor=white&labelColor=2E3440)](nushell)
