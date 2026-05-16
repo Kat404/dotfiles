@@ -29,39 +29,22 @@ print_banner() {
     clear
     # Gradiente simulado (Azul -> Magenta)
     # ASCII Art: KAT404
-    echo "          _____                    _____                _____                    _____          ";
-    echo "         /\\    \\                  /\\    \\              /\\    \\                  /\\    \\         ";
-    echo "        /::\\____\\                /::\\    \\            /::\\    \\                /::\\    \\        ";
-    echo "       /:::/    /               /::::\\    \\           \\:::\\    \\              /::::\\    \\       ";
-    echo "      /:::/    /               /::::::\\    \\           \\:::\\    \\            /::::::\\    \\      ";
-    echo "     /:::/    /               /:::/\\:::\\    \\           \\:::\\    \\          /:::/\\:::\\    \\     ";
-    echo "    /:::/____/               /:::/__\\:::\\    \\           \\:::\\    \\        /:::/__\\:::\\    \\    ";
-    echo "   /::::\\    \\              /::::\\   \\:::\\    \\          /::::\\    \\       \\:::\\   \\:::\\    \\   ";
-    echo "  /::::::\\____\\________    /::::::\\   \\:::\\    \\        /::::::\\    \\    ___\\:::\\   \\:::\\    \\  ";
-    echo " /:::/\\:::::::::::\\    \\  /:::/\\:::\\   \\:::\\    \\      /:::/\\:::\\    \\  /\\   \\:::\\   \\:::\\    \\ ";
-    echo "/:::/  |:::::::::::\\____\\/:::/  \\:::\\   \\:::\\____\\    /:::/  \\:::\\____\\/::\\   \\:::\\   \\:::\\____\\";
-    echo "\\::/   |::|~~~|~~~~~     \\::/    \\:::\\  /:::/    /   /:::/    \\::/    /\\:::\\   \\:::\\   \\::/    /";
-    echo " \\/____|::|   |           \\/____/ \\:::\\/:::/    /   /:::/    / \\/____/  \\:::\\   \\:::\\   \\/____/ ";
-    echo "       |::|   |                    \\::::::/    /   /:::/    /            \\:::\\   \\:::\\    \\     ";
-    echo "       |::|   |                     \\::::/    /   /:::/    /              \\:::\\   \\:::\\____\\    ";
-    echo "       |::|   |                     /:::/    /    \\::/    /                \\:::\\  /:::/    /    ";
-    echo "       |::|   |                    /:::/    /      \\/____/                  \\:::\\/:::/    /     ";
-    echo "       |::|   |                   /:::/    /                                 \\::::::/    /      ";
-    echo "       \\::|   |                  /:::/    /                                   \\::::/    /       ";
-    echo "        \\:|   |                  \\::/    /                                     \\::/    /        ";
-    echo "         \\|___|                   \\/____/                                       \\/____/         ";
-    echo "                                                                                                "; 
-    echo "      ___           ___           ___           ___                       ___       ___           ___     ";
-    echo "     /\\  \\         /\\  \\         /\\  \\         /\\  \\          ___        /\\__\\     /\\  \\         /\\  \\    ";
-    echo "    /::\\  \\       /::\\  \\        \\:\\  \\       /::\\  \\        /\\  \\      /:/  /    /::\\  \\       /::\\  \\   ";
-    echo "   /:/\\:\\  \\     /:/\\:\\  \\        \\:\\  \\     /:/\\:\\  \\       \\:\\  \\    /:/  /    /:/\\:\\  \\     /:/\\ \\  \\  ";
-    echo "  /:/  \\:\\__\\   /:/  \\:\\  \\       /::\\  \\   /::\\~\\:\\  \\      /::\\__\\  /:/  /    /::\\~\\:\\  \\   _\\:\\~\\ \\  \\ ";
-    echo " /:/__/ \\:|__| /:/__/ \\:\\__\\     /:/\\:\\__\\ /:/\\:\\ \\:\\__\\  __/:/\\/__/ /:/__/    /:/\\:\\ \\:\\__\\ /\\ \\:\\ \\ \\__\\";
-    echo " \\:\\  \\ /:/  / \\:\\  \\ /:/  /    /:/  \\/__/ \\/__\\:\\ \\/__/ /\\/:/  /    \\:\\  \\    \\:\\~\\:\\ \\/__/ \\:\\ \\:\\ \\/__/";
-    echo "  \\:\\  /:/  /   \\:\\  /:/  /    /:/  /           \\:\\__\\   \\::/__/      \\:\\  \\    \\:\\ \\:\\__\\    \\:\\ \\:\\__\\  ";
-    echo "   \\:\\/:/  /     \\:\\/:/  /     \\/__/             \\/__/    \\:\\__\\       \\:\\  \\    \\:\\ \\/__/     \\:\\/:/  /  ";
-    echo "    \\::/__/       \\::/  /                                  \\/__/        \\:\\__\\    \\:\\__\\        \\::/  /   ";
-    echo "     ~~            \\/__/                                                 \\/__/     \\/__/         \\/__/    "; 
+    echo "                                                                       ";
+    echo "       ,--.                             ,--,                      ,--, ";
+    echo "   ,--/  /|               ___         ,--.'|    ,----..         ,--.'| ";
+    echo ",---,': / '             ,--.'|_    ,--,  | :   /   /   \\     ,--,  | : ";
+    echo ":   : '/ /              |  | :,',---.'|  : '  /   .     : ,---.'|  : ' ";
+    echo "|   '   ,               :  : ' :;   : |  | ; .   /   ;.  \\;   : |  | ; ";
+    echo "'   |  /     ,--.--.  .;__,'  / |   | : _' |.   ;   /  \` ;|   | : _' | ";
+    echo "|   ;  ;    /       \\ |  |   |  :   : |.'  |;   |  ; \\ ; |:   : |.'  | ";
+    echo ":   '   \\  .--.  .-. |:__,'| :  |   ' '  ; :|   :  | ; | '|   ' '  ; : ";
+    echo "|   |    '  \\__\\/: . .  '  : |__\\   \\  .'. |.   |  ' ' ' :\\   \\  .'. | ";
+    echo "'   : |.  \\ ,\" .--.; |  |  | '.'|\`---\`:  | ''   ;  \\; /  | \`---\`:  | ' ";
+    echo "|   | '_\\.'/  /  ,.  |  ;  :    ;     '  ; | \\   \\  ',  /       '  ; | ";
+    echo "'   : |   ;  :   .'   \\ |  ,   /      |  : ;  ;   :    /        |  : ; ";
+    echo ";   |,'   |  ,     .-./  ---\`-'       '  ,/    \\   \\ .'         '  ,/  ";
+    echo "'---'      \`--\`---'                   '--'      \`---\`           '--'   ";
+    echo "                                                                       ";
 }
 
 print_step() {
@@ -93,9 +76,8 @@ declare -a COMMON_LINKS=(
     "helix/themes:.config/helix/themes"
     "kitty/kitty.conf:.config/kitty/kitty.conf"
     "lazygit/config.yml:.config/lazygit/config.yml"
-    #"nvim:.config/nvim" # Gestionado por install_nvchad
     "pipes-rs/config.toml:.config/pipes-rs/config.toml"
-    "vscode/settings.json:.config/Code/User/settings.json"
+    "vim/.vimrc:.vimrc"
     "yazi:.config/yazi"
 )
 
@@ -126,7 +108,9 @@ choose_shell() {
     
     local pm=$(get_pkg_manager)
     if [[ "$pm" == "pacman" ]]; then
-         echo -e "   ${G}3)${NC} nushell ${C}(Experimental - Arch Only)${NC}"
+         echo -e "   ${G}3)${NC} nushell ${C}(Nativo - Pacman)${NC}"
+    else
+         echo -e "   ${G}3)${NC} nushell ${C}(Se compilará desde source con Cargo)${NC}"
     fi
 
     echo -e "${B}--------------------------------------------------${NC}"
@@ -139,12 +123,7 @@ choose_shell() {
             SHELL_TO_INSTALL="fish"
             ;;
         3|nushell|nu|NU)
-            if [[ "$pm" == "pacman" ]]; then
-                SHELL_TO_INSTALL="nushell"
-            else
-                print_error "Nushell solo está soportado en Arch Linux por ahora."
-                SHELL_TO_INSTALL="zsh"
-            fi
+            SHELL_TO_INSTALL="nushell"
             ;;
         *)
             print_error "Opción no válida. Usando zsh por defecto."
@@ -294,61 +273,159 @@ install_betterfox() {
     fi
 }
 
-install_nvchad() {
-    print_step "Configurando Neovim (NvChad)..." "1" "1"
+install_nushell_from_source() {
+    # Compila Nushell desde source para distros que no lo tienen en sus repos.
+    # En Arch Linux, Nushell se instala nativamente via pacman.
+    print_step "Compilando Nushell desde source..." "1" "1"
     
-    # Check de versión (Requiere >= 0.11.0)
-    if ! command -v nvim &> /dev/null; then
-        print_error "Neovim no está instalado. Saltando configuración NvChad."
+    # Verificar si ya está instalado
+    if command -v nu &> /dev/null; then
+        local nu_ver=$(nu --version 2>/dev/null || echo "desconocida")
+        print_success "Nushell ya está instalado (v$nu_ver)."
         return
     fi
     
-    local nvim_version=$(nvim --version | head -n 1 | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | sed 's/v//')
-    # Comparación básica de semver (asumimos formato X.Y.Z)
-    local major=$(echo "$nvim_version" | cut -d. -f1)
-    local minor=$(echo "$nvim_version" | cut -d. -f2)
-    
-    echo -e "   Versión detectada: ${C}v$nvim_version${NC}"
-    
-    if [[ "$major" -lt 0 || ("$major" -eq 0 && "$minor" -lt 11) ]]; then
-        print_error "NvChad requiere Neovim >= 0.11.0. Tienes v$nvim_version."
-        print_info "Saltando configuración NvChad."
-        return
+    # Verificar que Rust/Cargo esté disponible
+    if ! command -v cargo &> /dev/null; then
+        print_error "Cargo no está instalado. No se puede compilar Nushell."
+        print_info "Instala Rust primero: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+        print_info "O consulta rust-setup.md para más detalles."
+        return 1
     fi
     
-    # Directorios
-    local nvim_config="$HOME/.config/nvim"
-    local nvim_share="$HOME/.local/share/nvim"
-    local nvim_state="$HOME/.local/state/nvim"
-    local nvim_cache="$HOME/.cache/nvim"
+    # Instalar dependencias de compilación según la distro
+    local pm=$(get_pkg_manager)
+    echo -e "${C}ℹ  Instalando dependencias de compilación para Nushell...${NC}"
+    case $pm in
+        apt)
+            install_pkg build-essential libssl-dev pkg-config
+            ;;
+        dnf)
+            install_pkg gcc gcc-c++ openssl-devel pkg-config
+            ;;
+        zypper)
+            install_pkg gcc gcc-c++ make libopenssl-devel pkg-config
+            ;;
+        brew)
+            install_pkg openssl pkg-config
+            ;;
+    esac
     
-    # Backup si existe
-    if [[ -d "$nvim_config" ]]; then
-        # Verificar si ya es NvChad para no sobreescribir repetidamente si se corre el script varias veces
-        # (Opcional, pero por ahora hacemos backup siempre para asegurar limpieza)
-        echo -e "${Y}⚠️  Moviendo configuración existente de Neovim a backup...${NC}"
-        mv "$nvim_config" "$BACKUP_DIR/nvim_backup_$(date +%s)"
-        
-        # Limpiar cache/share para evitar conflictos de plugins antiguos
-        rm -rf "$nvim_share" "$nvim_state" "$nvim_cache"
-    fi
+    echo "📦 Compilando Nushell via cargo install (esto puede tardar varios minutos)..."
+    echo -e "${Y}⏳ Descargando e instalando la última versión estable...${NC}"
     
-    echo "📦 Clonando NvChad Starter..."
-    git clone https://github.com/NvChad/starter "$nvim_config"
-    
-    # Quitar git history
-    rm -rf "$nvim_config/.git"
-    
-    # Copiar options.lua custom
-    local custom_options="$DOTFILES_DIR/nvim/options.lua"
-    if [[ -f "$custom_options" ]]; then
-        echo "📄 Copiando options.lua personalizado..."
-        cp "$custom_options" "$nvim_config/lua/options.lua"
+    if cargo install nu; then
+        # Verificar que se instaló correctamente
+        if command -v nu &> /dev/null; then
+            local nu_ver=$(nu --version)
+            print_success "Nushell v$nu_ver compilado e instalado exitosamente."
+            
+            # Agregar nu a /etc/shells si no está
+            local nu_path=$(which nu)
+            if ! grep -qxF "$nu_path" /etc/shells 2>/dev/null; then
+                echo -e "${Y}📝 Agregando $nu_path a /etc/shells...${NC}"
+                echo "$nu_path" | sudo tee -a /etc/shells > /dev/null
+                print_success "Nushell agregado a /etc/shells."
+            fi
+        else
+            print_error "La compilación finalizó pero 'nu' no se encuentra en el PATH."
+            print_info "Asegúrate de que ~/.cargo/bin está en tu PATH."
+        fi
     else
-        print_error "No se encontró $custom_options"
+        print_error "Error al compilar Nushell."
+        print_info "Revisa los logs anteriores para identificar dependencias faltantes."
+        return 1
+    fi
+}
+
+apply_sudoers_hardening() {
+    print_step "Hardening de Sudoers..." "1" "1"
+    
+    local sudoers_source="$DOTFILES_DIR/etc/sudoers"
+    local sudoers_dest="/etc/sudoers"
+    
+    if [[ ! -f "$sudoers_source" ]]; then
+        print_error "No se encontró $sudoers_source en el repositorio."
+        return
     fi
     
-    print_success "NvChad instalado. Ejecuta 'nvim' para instalar plugins."
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🔐 HARDENING DE SUDOERS${NC}"
+    echo -e "   Se aplicará una configuración mínima y fortificada de sudoers."
+    echo -e "   ${C}Incluye: timeout agresivo, secure_path, sin pwfeedback${NC}"
+    echo -e "${B}--------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas aplicar el hardening de sudoers? (s/n): ${NC}")" sudoers_opt
+    if [[ "$sudoers_opt" =~ ^[sS]$ ]]; then
+        # Validar sintaxis ANTES de aplicar (CRÍTICO: un sudoers roto = sin sudo)
+        echo -ne "${Y}🔍 Validando sintaxis del sudoers... ${NC}"
+        if sudo visudo -cf "$sudoers_source" &> /dev/null; then
+            echo -e "${G}OK${NC}"
+            
+            # Backup del sudoers actual
+            echo -e "${Y}🛡️  Creando backup del sudoers actual...${NC}"
+            sudo cp "$sudoers_dest" "${sudoers_dest}.bak.$(date +%Y%m%d_%H%M%S)"
+            
+            # Copiar (NO symlink — sudoers debe ser owned by root con permisos 0440)
+            sudo cp "$sudoers_source" "$sudoers_dest"
+            sudo chmod 0440 "$sudoers_dest"
+            sudo chown root:root "$sudoers_dest"
+            
+            print_success "Sudoers fortificado aplicado correctamente."
+        else
+            print_error "El archivo sudoers tiene errores de sintaxis. NO se aplicó."
+            print_info "Revisa $sudoers_source manualmente."
+        fi
+    else
+        print_info "Saltando hardening de sudoers."
+    fi
+}
+
+setup_ide_symlink() {
+    # Detecta qué IDE tipo VSCode está instalado y crea el symlink correcto
+    local settings_source="$DOTFILES_DIR/vscode/settings.json"
+    
+    if [[ ! -f "$settings_source" ]]; then
+        return
+    fi
+    
+    local ide_config_dir=""
+    
+    if command -v windsurf &> /dev/null; then
+        ide_config_dir="$HOME/.config/Windsurf/User"
+    elif command -v antigravity &> /dev/null; then
+        ide_config_dir="$HOME/.config/Antigravity/User"
+    elif command -v codium &> /dev/null; then
+        ide_config_dir="$HOME/.config/VSCodium/User"
+    elif command -v code &> /dev/null; then
+        ide_config_dir="$HOME/.config/Code/User"
+    fi
+    
+    if [[ -n "$ide_config_dir" ]]; then
+        local dest="$ide_config_dir/settings.json"
+        
+        # Si ya está correctamente enlazado, no hacer nada
+        if [[ -L "$dest" && "$(readlink "$dest")" == "$settings_source" ]]; then
+            echo "✅  [ENLAZADO] $dest (IDE)"
+            return
+        fi
+        
+        mkdir -p "$ide_config_dir"
+        
+        # Backup si existe
+        if [[ -e "$dest" ]]; then
+            if [[ ! -d "$BACKUP_DIR" ]]; then
+                mkdir -p "$BACKUP_DIR"
+            fi
+            echo "🛡️  [BACKUP] IDE settings: $dest"
+            mv "$dest" "$BACKUP_DIR/ide_settings.json.bak"
+        fi
+        
+        ln -s "$settings_source" "$dest"
+        echo "🔗  [ENLAZANDO] $dest -> $settings_source"
+    else
+        print_info "No se detectó ningún IDE tipo VSCode instalado. Saltando symlink de settings.json."
+    fi
 }
 
 install_maple_font() {
@@ -484,15 +561,15 @@ install_common_dependencies() {
     case $pm in
         apt)
             # Nombres específicos para Debian/Ubuntu
-            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config yt-dlp timeshift taskwarrior rsync rclone postgresql btop flatpak cowsay)
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick unclutter helix build-essential libssl-dev pkg-config yt-dlp timeshift taskwarrior rsync rclone postgresql btop flatpak cowsay podman)
             ;;
         pacman)
             # Nombres específicos para Arch
-            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay)
+            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay podman)
             ;;
         dnf)
             # Nombres para Fedora
-            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix yt-dlp timeshift task rsync rclone postgresql btop flatpak cowsay rust-analyzer)
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix yt-dlp timeshift task rsync rclone postgresql btop flatpak cowsay rust-analyzer podman)
             ;;
         brew)
             # Nombres para macOS
@@ -619,13 +696,13 @@ install_arch_full() {
             "ttf-jetbrains-mono-nerd" "ttf-ubuntu-font-family" "yazi" "ffmpeg" 
             "7zip" "jq" "poppler" "fd" "ripgrep" "fzf" "zoxide" "resvg" "unclutter"
             "imagemagick" "libayatana-appindicator" "keepassxc" "signal-desktop" 
-            "proton-vpn-gtk-app" "neovim" "helix" "lazygit" "less" "reflector" 
+            "proton-vpn-gtk-app" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
             "cmatrix" "cava" "libreoffice-fresh" "libreoffice-fresh-es"
-            "xdg-user-dirs" "asciiquarium" "pnpm" "yt-dlp" "ty" "tombi"
+            "xdg-user-dirs" "asciiquarium" "pnpm" "yt-dlp" "ty" "uv" "tombi"
             "timeshift" "task" "sudo-rs" "rust-analyzer" "rsync" "rclone"
             "postgresql" "obsidian" "marksman" "markdownlint-cli" "btop"
-            "gemini-cli" "flatpak" "cowsay"
+            "gemini-cli" "flatpak" "cowsay" "podman"
         ) 
 
         
@@ -662,7 +739,7 @@ install_arch_full() {
         echo "   2) Windsurf"
         echo "   3) Antigravity"
         echo "   4) VSCodium (bin)"
-        echo "   5) Ninguno"
+        echo "   5) Ninguno / Más tarde"
         read -r -p "Opción: " ide_opt
         case $ide_opt in
             1) yay_pkgs+=("visual-studio-code-bin");;
@@ -685,7 +762,7 @@ install_arch_full() {
         # Firefox ya está en base, pero Phoenix es extra
         echo ""
         echo "🔥 ¿Deseas instalar Phoenix Arch (versión custom de Firefox)?"
-        echo "   (Se instalará junto a Firefox base)"
+        echo "   (Se instalará junto a Firefox base. Presiona 'n' si deseas decidir más tarde)"
         read -r -p "   (s/n): " phoenix_opt
         if [[ "$phoenix_opt" =~ ^[sS]$ ]]; then
             yay_pkgs+=("phoenix-arch")
@@ -696,7 +773,7 @@ install_arch_full() {
             # Betterfox (user.js)
             echo ""
             echo "🦊 ¿Deseas aplicar Betterfox (user.js) a tu perfil de Firefox?"
-            echo "   (Optimización de privacidad, seguridad y velocidad)"
+            echo "   (Optimización de privacidad, seguridad y velocidad. Presiona 'n' para aplicar más tarde)"
             read -r -p "   (s/n): " betterfox_opt
         fi
 
@@ -780,8 +857,8 @@ check_and_install_software() {
         fi
     fi
     
-    # Lista base + shell seleccionada
-    local tools=("kitty" "lazygit" "nvim:neovim" "hx:helix" "fastfetch" "rustup" "$target_shell")
+    # Lista base + shell seleccionada (nvim eliminado del repo — Helix es el editor principal)
+    local tools=("kitty" "lazygit" "hx:helix" "fastfetch" "rustup" "$target_shell")
 
     for tool_spec in "${tools[@]}"; do
         IFS=":" read -r cmd pkg <<< "$tool_spec"
@@ -826,6 +903,11 @@ check_and_install_software() {
     
     # Instalación de Yazi (Repo o Cargo)
     install_yazi
+
+    # Nushell: compilar desde source en distros no-Arch
+    if [[ "$target_shell" == "nushell" && "$pm" != "pacman" ]]; then
+        install_nushell_from_source
+    fi
 }
 
 apply_security_hardening() {
@@ -890,7 +972,7 @@ setup_unclutter_shortcut() {
             echo -e "${C}Configurando para XFCE...${NC}"
             # Intentamos establecer el atajo. La sintaxis de teclas puede variar.
             # <Primary> es Ctrl en Xfce. <Super> es Windows.
-            xfconf-query --create --channel xfce4-keyboard-shortcuts --property "/commands/custom/<Primary><Super>question" --type string --set "$cmd"
+            xfconf-query --create --channel xfce4-keyboard-shortcuts --property "/commands/custom/<Primary><Super>question" --type string --set "$cmd" || echo -e "${Y}⚠️  Nota: El atajo ya existe o hubo un problema al inyectarlo.${NC}"
             print_success "Atajo configurado en XFCE (Ctrl + Super + ¿)"
         else
             print_error "xfconf-query no encontrado."
@@ -996,13 +1078,16 @@ for link_pair in "${FILES_TO_LINK[@]}"; do
 done
 
 echo -e "${B}--------------------------------------------------${NC}"
-install_nvchad
+setup_ide_symlink
 
 echo -e "${B}--------------------------------------------------${NC}"
 install_maple_font
 
 echo -e "${B}--------------------------------------------------${NC}"
 apply_security_hardening
+
+echo -e "${B}--------------------------------------------------${NC}"
+apply_sudoers_hardening
 
 echo -e "${B}--------------------------------------------------${NC}"
 setup_unclutter_shortcut
@@ -1022,6 +1107,16 @@ else
 fi
 
 echo "--------------------------------------------------"
-echo "🎉 ¡Instalación completada!"
-echo "Se han creado los enlaces simbólicos y configurado el entorno."
-echo "Si tenías archivos de configuración previos, se han guardado en $BACKUP_DIR"
+echo -e "${C}  _______________________________________________${NC}"
+echo -e "${C} /                                               \\${NC}"
+echo -e "${C}| ${G}🎉 ¡Instalación completada sin errores!${C}         |${NC}"
+echo -e "${C}| ${Y}Enlaces simbólicos y entorno configurados.${C}      |${NC}"
+echo -e "${C} \\                                               /${NC}"
+echo -e "${C}  -----------------------------------------------${NC}"
+echo -e "        ${C}\\${NC}"
+echo -e "         ${C}\\${NC}  ${R}_~^~^~_${NC}"
+echo -e "          ${R}\\) /  o o  \\ (/${NC}"
+echo -e "            ${R}'_   -   _'${NC}"
+echo -e "            ${R}/ '-----' \\${NC}"
+echo ""
+echo -e "📦 ${NC}Backups guardados en: ${B}${BACKUP_DIR}${NC}"

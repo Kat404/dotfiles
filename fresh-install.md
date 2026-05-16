@@ -28,7 +28,7 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 ## Instalar Paquetes
 
 ```zsh
-sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox libreoffice-fresh libreoffice-fresh-es kitty nushell zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app neovim lazygit less reflector pacman-contrib starship xclip wl-clipboard xdg-user-dirs fastfetch helix eza bat unclutter cmatrix cava asciiquarium pnpm yt-dlp ty tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay uv && yay -S cryptomator windsurf visual-studio-code-bin antigravity phoenix-arch carapace-bin
+sudo pacman -S --needed gnome-keyring gnome-shell-extension-appindicator noto-fonts-emoji firefox libreoffice-fresh libreoffice-fresh-es kitty nushell zsh nodejs gufw ttf-jetbrains-mono-nerd ttf-ubuntu-font-family yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libayatana-appindicator keepassxc signal-desktop proton-vpn-gtk-app lazygit less reflector pacman-contrib starship xclip wl-clipboard xdg-user-dirs fastfetch helix eza bat unclutter cmatrix cava asciiquarium pnpm yt-dlp ty tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay uv podman && yay -S cryptomator windsurf visual-studio-code-bin antigravity phoenix-arch carapace-bin
 ```
 
 - Elimina `gnome-keyring` si ya tienes un agente de autenticación
