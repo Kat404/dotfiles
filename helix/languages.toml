@@ -15,11 +15,6 @@ name = "css"
 formatter = { command = "prettier", args = ["--parser", "css"] }
 auto-format = true
 
-# V
-[[language]]
-name = "v"
-language-servers = ["vlang-language-server"]
-
 # Rust
 [[language]]
 name = "rust"
@@ -118,9 +113,6 @@ auto-format = true
 # ❯ LSPs
 [language-server.superhtml]
 command = "superhtml"
-
-[language-server.vlang-language-server]
-command = "v-analyzer"
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"

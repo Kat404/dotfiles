@@ -78,7 +78,10 @@ declare -a COMMON_LINKS=(
     "lazygit/config.yml:.config/lazygit/config.yml"
     "pipes-rs/config.toml:.config/pipes-rs/config.toml"
     "vim/.vimrc:.vimrc"
-    "yazi:.config/yazi"
+    "yazi/Catppuccin-mocha.tmTheme:.config/yazi/Catppuccin-mocha.tmTheme"
+    "yazi/keymap.toml:.config/yazi/keymap.toml"
+    "yazi/theme.toml:.config/yazi/theme.toml"
+    "yazi/yazi.toml:.config/yazi/yazi.toml"
 )
 
 declare -a ZSH_LINKS=(
@@ -702,7 +705,8 @@ install_arch_full() {
             "xdg-user-dirs" "asciiquarium" "pnpm" "yt-dlp" "ty" "uv" "tombi"
             "timeshift" "task" "sudo-rs" "rust-analyzer" "rsync" "rclone"
             "postgresql" "obsidian" "marksman" "markdownlint-cli" "btop"
-            "gemini-cli" "flatpak" "cowsay" "podman"
+            "gemini-cli" "flatpak" "cowsay" "podman" "biome"
+            "vscode-css-languageserver" "vscode-json-languageserver"
         ) 
 
         
@@ -735,14 +739,14 @@ install_arch_full() {
         # IDE
         echo ""
         echo "🖥️  Elige tu IDE favorito:"
-        echo "   1) Visual Studio Code (bin)"
+        echo "   1) Code (OSS) - Nativo"
         echo "   2) Windsurf"
         echo "   3) Antigravity"
         echo "   4) VSCodium (bin)"
         echo "   5) Ninguno / Más tarde"
         read -r -p "Opción: " ide_opt
         case $ide_opt in
-            1) yay_pkgs+=("visual-studio-code-bin");;
+            1) pacman_pkgs+=("code");;
             2) yay_pkgs+=("windsurf");;
             3) yay_pkgs+=("antigravity");;
             4) 
@@ -786,6 +790,11 @@ install_arch_full() {
         fi
         
         # --- Instalación ---
+        
+        echo "⚙️  Instalando y configurando rustup primero para evitar conflictos de rustc..."
+        sudo pacman -S --needed --noconfirm rustup
+        rustup default stable
+        if [[ -f "$HOME/.cargo/env" ]]; then source "$HOME/.cargo/env"; fi
         
         echo "📦 Instalando paquetes oficiales (Pacman)..."
         sudo pacman -S --needed --noconfirm "${pacman_pkgs[@]}"

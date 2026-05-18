@@ -82,7 +82,7 @@ $env.config.history = {
 source ~/.config/nushell/aliases.nu
 
 # ❯ Carga zoxide
-source ~/.cache/zoxide/init.nu
+source ~/.zoxide.nu
 
 # ❯ Evita que aparezca el banner de bienvenida al iniciar Nushell
 $env.config.show_banner = false

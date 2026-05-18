@@ -26,15 +26,18 @@ $env.FZF_DEFAULT_COMMAND = "fd --type f --color=never --hidden --exclude .git --
 $env._ZO_FZF_OPTS = "--preview 'eza --tree --color=always --icons=always --group-directories-first --level=3 {2..}' --preview-window='right:50%:rounded' --header='📁 Zoxide Navegación'"
 # }
 
+# ❯ Zoxide! o_*
+zoxide init nushell | save -f ~/.zoxide.nu
+
 # ❯ Variables de Runtime & Lenguajes {
-$env.BUN_INSTALL = $"($env.HOME)/.bun"
+# $env.BUN_INSTALL = $"($env.HOME)/.bun"
 $env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
 # }
 
 # ❯ Gestión 'Awesome' del PATH >_< {
 let binary_paths = [
     $"($env.HOME)/.cargo/bin"
-    $"($env.BUN_INSTALL)/bin"
+    # $"($env.BUN_INSTALL)/bin"
     $env.PNPM_HOME
 ]
 
