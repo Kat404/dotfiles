@@ -12,11 +12,11 @@
  * "Ad meliora"                                                             *
  * version: 150                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
-****************************************************************************/
+ ****************************************************************************/
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
-****************************************************************************/
+ ****************************************************************************/
 /** TRACKING PROTECTION ***/
 user_pref("browser.contentblocking.category", "strict");
 user_pref("browser.download.start_downloads_in_tmp_dir", true);
@@ -124,14 +124,20 @@ user_pref("browser.tabs.crashReporting.sendReport", false);
 
 /****************************************************************************
  * SECTION: PESKYFOX                                                        *
-****************************************************************************/
+ ****************************************************************************/
 /** MOZILLA UI ***/
 user_pref("extensions.getAddons.showPane", false);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons",
+  false,
+);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features",
+  false,
+);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.aboutConfig.showWarning", false);
 user_pref("browser.startup.homepage_override.mstone", "ignore");
@@ -180,7 +186,7 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
-****************************************************************************/
+ ****************************************************************************/
 // visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
 // Enter your scrolling overrides below this line:
 user_pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
@@ -189,7 +195,7 @@ user_pref("mousewheel.default.delta_multiplier_y", 300); // 250-400; adjust this
 
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
-****************************************************************************/
+ ****************************************************************************/
 // visit https://github.com/yokoffing/Betterfox/wiki/Common-Overrides
 // visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
 // Enter your personal overrides below this line:
@@ -199,6 +205,9 @@ user_pref("signon.rememberSignons", false);
 // PREF: disable address and credit card manager
 user_pref("extensions.formautofill.addresses.enabled", false);
 user_pref("extensions.formautofill.creditCards.enabled", false);
+
+// PREF: disable passkeys
+user_pref("security.webauth.webauthn", false);
 
 // PREF: delete all browsing data on shutdowns
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
@@ -229,11 +238,12 @@ user_pref("network.connectivity-service.enabled", false);
 // 2 = strict
 user_pref("security.cert_pinning.enforcement_level", 2);
 
-// PREF: disable JIT optimization
-// This removes most of the attack surface while keeping JIT compilation.
+// PREF: disable JIT compilation
+// WARNING: Some sites may malfunction.
 user_pref("javascript.options.ion", false);
+user_pref("javascript.options.baselinejit", false);
 user_pref("javascript.options.wasm_optimizingjit", false);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
-****************************************************************************/
+ ****************************************************************************/
