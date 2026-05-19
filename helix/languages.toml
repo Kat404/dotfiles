@@ -117,6 +117,9 @@ command = "superhtml"
 [language-server.rust-analyzer]
 command = "rust-analyzer"
 
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]

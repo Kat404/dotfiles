@@ -48,6 +48,8 @@ claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-ce
 ||m.media-amazon.com/images/I/51+-Sldxa8L.jpg$image
 ||m.media-amazon.com/images/I/316UFuM92BL.jpg$image
 ||m.media-amazon.com/images/I/41694PeI4qL.jpg$image
+||m.media-amazon.com/images/I/41ztNyUE2sL.jpg$image
+||m.media-amazon.com/images/I/41G34ajyz3L.jpg$image
 
 ! Aviso de Cookies en Minimax
 www.minimax.io##.md\:px-8.py-6.px-6.max-w-\[1440px\].mx-auto

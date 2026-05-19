@@ -1,6 +1,6 @@
 # Configuración Base de Helix
 # ~/.config/helix/config.toml
-# 
+#
 # ❯ Tema
 theme = "catppuccin_mocha"
 
@@ -19,13 +19,27 @@ select = "block"
 render = true
 
 [editor.statusline]
-left = ["mode", "spacer", "version-control", "spacer", "spinner", "read-only-indicator"]
+left = [
+  "mode",
+  "spacer",
+  "version-control",
+  "spacer",
+  "spinner",
+  "read-only-indicator"
+]
 center = ["file-name", "file-modification-indicator"]
-right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+right = [
+  "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type"
+]
 separator = " "
-mode.normal = "NOR"
-mode.insert = "INS"
-mode.select = "SEL"
+mode.normal = "N"
+mode.insert = "I"
+mode.select = "S"
 diagnostics = ["warning", "error"]
 workspace-diagnostics = ["warning", "error"]
 
