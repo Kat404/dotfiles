@@ -1,0 +1,32 @@
+# ❯ Configuración SSH Local
+Host *
+	# Evita que servidores comprometidos accedan al agente SSH local
+	ForwardAgent no
+	# Deshabilita el reenvío gráfico
+	ForwardX11 no
+	ForwardX11Trusted no
+	# Evita fugas de túneles
+	Tunnel no
+	# Obliga a validar huellas dactilares estrictamente sin agregarlas automáticamente
+	StrictHostKeyChecking yes
+	# Suite Criptográfica Segura (Algoritmos modernos)
+	KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org
+    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com
+    MACs hmac-sha2-512-etm@openssh.com
+    HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
+
+# ❯ Plataformas de Git
+Host github.com
+	HostName github.com
+	User git
+	# Evita que SSH envíe todas las llaves disponibles al servidor
+	IdentitiesOnly yes
+	# Ruta específica para la llave dedicada a GitHub
+	# IdentityFile ~/.ssh/?
+Host codeberg.org
+	HostName codeberg.org
+	User git
+	# Evita que SSH envíe todas las llaves disponibles al servidor
+	IdentitiesOnly yes
+	# Ruta específica para la llave dedicada a GitHub
+	# IdentityFile ~/.ssh/?
