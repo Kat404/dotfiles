@@ -396,8 +396,6 @@ setup_ide_symlink() {
     
     if command -v windsurf &> /dev/null; then
         ide_config_dir="$HOME/.config/Windsurf/User"
-    elif command -v antigravity &> /dev/null; then
-        ide_config_dir="$HOME/.config/Antigravity/User"
     elif command -v codium &> /dev/null; then
         ide_config_dir="$HOME/.config/VSCodium/User"
     elif command -v code &> /dev/null; then
@@ -568,15 +566,15 @@ install_common_dependencies() {
             ;;
         pacman)
             # Nombres específicos para Arch
-            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift task sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay podman)
+            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay podman)
             ;;
         dnf)
             # Nombres para Fedora
-            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix yt-dlp timeshift task rsync rclone postgresql btop flatpak cowsay rust-analyzer podman)
+            pkgs=(ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide ImageMagick unclutter helix yt-dlp timeshift rsync rclone postgresql btop flatpak cowsay rust-analyzer podman pnpm)
             ;;
         brew)
             # Nombres para macOS
-            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix yt-dlp task rsync rclone postgresql btop cowsay rust-analyzer pnpm)
+            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix yt-dlp rsync rclone postgresql btop cowsay rust-analyzer pnpm)
             ;;
         zypper)
             # Nombres para openSUSE (Leap/Tumbleweed)
@@ -701,11 +699,11 @@ install_arch_full() {
             "imagemagick" "libayatana-appindicator" "keepassxc" "signal-desktop" 
             "proton-vpn-gtk-app" "helix" "lazygit" "less" "reflector" 
             "pacman-contrib" "starship" "fastfetch" "eza" "bat"
-            "cmatrix" "cava" "libreoffice-fresh" "libreoffice-fresh-es"
+            "cava" "libreoffice-fresh" "libreoffice-fresh-es"
             "xdg-user-dirs" "asciiquarium" "pnpm" "yt-dlp" "ty" "uv" "tombi"
-            "timeshift" "task" "sudo-rs" "rust-analyzer" "rsync" "rclone"
+            "timeshift" "sudo-rs" "rust-analyzer" "rsync" "rclone"
             "postgresql" "obsidian" "marksman" "markdownlint-cli" "btop"
-            "gemini-cli" "flatpak" "cowsay" "podman" "biome"
+            "gemini-cli" "flatpak" "cowsay" "podman" "ruff"
             "vscode-css-languageserver" "vscode-json-languageserver"
         ) 
 
@@ -741,14 +739,14 @@ install_arch_full() {
         echo "🖥️  Elige tu IDE favorito:"
         echo "   1) Code (OSS) - Nativo"
         echo "   2) Windsurf"
-        echo "   3) Antigravity"
+        echo "   3) Antigravity (Hub + CLI)"
         echo "   4) VSCodium (bin)"
         echo "   5) Ninguno / Más tarde"
         read -r -p "Opción: " ide_opt
         case $ide_opt in
             1) pacman_pkgs+=("code");;
             2) yay_pkgs+=("windsurf");;
-            3) yay_pkgs+=("antigravity");;
+            3) yay_pkgs+=("antigravity" "antigravity-cli");;
             4) 
                 yay_pkgs+=("vscodium-bin")
                 echo ""
@@ -787,6 +785,14 @@ install_arch_full() {
         read -r -p "   (s/n): " crypto_opt
         if [[ "$crypto_opt" =~ ^[sS]$ ]]; then
             yay_pkgs+=("cryptomator")
+        fi
+        
+        # Unimatrix (Opcional)
+        echo ""
+        echo "🧑‍💻 ¿Deseas instalar Unimatrix (efecto Matrix en la terminal)?"
+        read -r -p "   (s/n): " unimatrix_opt
+        if [[ "$unimatrix_opt" =~ ^[sS]$ ]]; then
+            yay_pkgs+=("unimatrix-git")
         fi
         
         # --- Instalación ---
@@ -938,7 +944,7 @@ apply_security_hardening() {
     if [[ "$secure_opt" =~ ^[sS]$ ]]; then
         print_step "Aplicando hardening..." "1" "2"
         
-        local sysctl_url="https://raw.githubusercontent.com/Kat404/linux_security.conf/refs/heads/main/99-linux-security-es.conf"
+        local sysctl_url="https://raw.githubusercontent.com/Kat404/linux-hardening-suite/refs/heads/main/sysctl/99-linux-security-es.conf"
         local sysctl_dest="/etc/sysctl.d/99-linux-security.conf"
         
         echo -ne "${Y}⬇️  Descargando configuración... ${NC}"
@@ -964,6 +970,211 @@ apply_security_hardening() {
         fi
     else
         print_info "Saltando hardening."
+    fi
+}
+
+apply_ssh_hardening() {
+    print_step "Verificando configuración de SSH..." "1" "1"
+    
+    local ssh_source="$DOTFILES_DIR/ssh/config"
+    local ssh_dest_dir="$HOME/.ssh"
+    local ssh_dest="$ssh_dest_dir/config"
+    
+    if [[ ! -f "$ssh_source" ]]; then
+        print_error "No se encontró $ssh_source en el repositorio."
+        return
+    fi
+    
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🔐 HARDENING DE SSH (LOCAL)${NC}"
+    echo -e "   Se aplicará una configuración de SSH fortificada para conexiones salientes."
+    echo -e "   ${C}Incluye: KexAlgorithms, Ciphers, MACs modernos y StrictHostKeyChecking.${NC}"
+    echo -e "${B}--------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas aplicar el hardening de SSH local (copiando configuración fortificada)? (s/n): ${NC}")" ssh_opt
+    if [[ "$ssh_opt" =~ ^[sS]$ ]]; then
+        mkdir -p "$ssh_dest_dir"
+        chmod 700 "$ssh_dest_dir"
+        
+        # Backup si existe
+        if [[ -e "$ssh_dest" ]]; then
+            if [[ -L "$ssh_dest" ]]; then
+                echo "🗑️  Eliminando enlace simbólico previo en: $ssh_dest"
+                rm "$ssh_dest"
+            else
+                if [[ ! -d "$BACKUP_DIR" ]]; then
+                    mkdir -p "$BACKUP_DIR"
+                fi
+                echo "🛡️  [BACKUP] SSH config existente: $ssh_dest"
+                mv "$ssh_dest" "$BACKUP_DIR/ssh_config.bak"
+            fi
+        fi
+        
+        # Copiar configuración de SSH
+        echo "📋 Copiando configuración de SSH a: $ssh_dest"
+        cp "$ssh_source" "$ssh_dest"
+        chmod 600 "$ssh_dest"
+        chown "$USER:$USER" "$ssh_dest"
+        
+        # Asegurar permisos correctos en el archivo origen
+        chmod 600 "$ssh_source"
+        
+        print_success "Hardening de SSH local aplicado correctamente."
+    else
+        print_info "Saltando hardening de SSH."
+    fi
+}
+
+install_lsp_linters_pnpm() {
+    # Verificar si pnpm está instalado OOTB
+    if ! command -v pnpm &> /dev/null; then
+        print_info "pnpm no está disponible en este sistema. Saltando la instalación global de linters y LSPs para Helix."
+        return 0
+    fi
+    
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}📦 INSTALACIÓN DE LINTERS Y LSPS (PNPM GLOBAL)${NC}"
+    echo -e "   Instalando globalmente LSPs y linters para Helix..."
+    echo -e "   ${C}- @astrojs/language-server (Astro)${NC}"
+    echo -e "   ${C}- typescript-language-server y typescript (TS/JS)${NC}"
+    echo -e "   ${C}- oxlint (JS/TS Linter)${NC}"
+    echo -e "   ${C}- oxfmt (JS/TS Formatter)${NC}"
+    echo -e "${B}--------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas instalar estos LSPs y linters globalmente con pnpm? (s/n): ${NC}")" pnpm_opt
+    if [[ "$pnpm_opt" =~ ^[sS]$ ]]; then
+        echo "⬇️  Instalando paquetes globales con pnpm..."
+        if pnpm add -g @astrojs/language-server typescript-language-server typescript oxlint oxfmt; then
+            print_success "Linters y LSPs globales instalados con pnpm."
+        else
+            print_error "Error al instalar los linters y LSPs con pnpm."
+        fi
+    else
+        print_info "Saltando instalación de linters y LSPs de Helix."
+    fi
+}
+
+apply_mac_spoofing() {
+    # Guard para asegurar que solo corre en Linux
+    if [[ "$(uname)" != "Linux" ]]; then
+        return 0
+    fi
+
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🛜 CONFIGURACIÓN DE MAC ADDRESS SPOOFING (PRIVACIDAD)${NC}"
+    echo -e "   Se descargará y ejecutará el asistente de MAC Spoofing."
+    echo -e "${B}--------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas ejecutar el asistente de MAC Spoofing para NetworkManager? (s/n): ${NC}")" run_opt
+    if [[ "$run_opt" =~ ^[sS]$ ]]; then
+        local script_url="https://raw.githubusercontent.com/Kat404/linux-hardening-suite/refs/heads/main/privacy/mac_spoofer.sh"
+        local temp_script=$(mktemp)
+        
+        # Asegurar curl
+        if ! command -v curl &> /dev/null; then
+            echo -e "${C}ℹ  Curl no encontrado. Instalando...${NC}"
+            install_pkg curl
+        fi
+        
+        echo "⬇️  Descargando asistente..."
+        if curl -sL "$script_url" -o "$temp_script"; then
+            chmod +x "$temp_script"
+            sudo "$temp_script"
+            rm -f "$temp_script"
+        else
+            print_error "No se pudo descargar el script de MAC Spoofing."
+            rm -f "$temp_script"
+        fi
+    else
+        print_info "Saltando MAC Spoofing."
+    fi
+}
+
+apply_ufw_setup() {
+    # Guard para asegurar que solo corre en Linux
+    if [[ "$(uname)" != "Linux" ]]; then
+        return 0
+    fi
+
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🧱🔥 CONFIGURACIÓN DEL FIREWALL (UFW)${NC}"
+    echo -e "   Se descargará y ejecutará el asistente de UFW / Kill-Switch."
+    echo -e "${B}--------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas ejecutar el asistente de Firewall UFW? (s/n): ${NC}")" run_opt
+    if [[ "$run_opt" =~ ^[sS]$ ]]; then
+        local script_url="https://raw.githubusercontent.com/Kat404/linux-hardening-suite/refs/heads/main/privacy/ufw_setup.sh"
+        local temp_script=$(mktemp)
+        
+        # Asegurar curl
+        if ! command -v curl &> /dev/null; then
+            echo -e "${C}ℹ  Curl no encontrado. Instalando...${NC}"
+            install_pkg curl
+        fi
+        
+        echo "⬇️  Descargando asistente..."
+        if curl -sL "$script_url" -o "$temp_script"; then
+            chmod +x "$temp_script"
+            sudo "$temp_script"
+            rm -f "$temp_script"
+        else
+            print_error "No se pudo descargar el script de configuración de UFW."
+            rm -f "$temp_script"
+        fi
+    else
+        print_info "Saltando configuración de UFW."
+    fi
+}
+
+apply_resolved_dns_over_tls() {
+    # Guard para asegurar que solo corre en Linux y con systemd
+    if [[ "$(uname)" != "Linux" ]]; then
+        return 0
+    fi
+    if [[ ! -d "/run/systemd/system" ]]; then
+        return 0
+    fi
+
+    echo -e "${B}---------------------------------------------------------------${NC}"
+    echo -e "          ${Y}☁️🔒 CONFIGURACIÓN DE DNS SECURO (DoT)${NC}"
+    echo -e " Se configurará systemd-resolved con Quad9 y Cloudflare como fallback."
+    echo -e "${B}---------------------------------------------------------------${NC}"
+    
+    read -r -p "$(echo -e "${Y}¿Deseas activar DNS over TLS mediante systemd-resolved? (s/n): ${NC}")" resolved_opt
+    if [[ "$resolved_opt" =~ ^[sS]$ ]]; then
+        print_step "Modificando resolved.conf de manera resiliente..." "1" "3"
+        
+        local file="/etc/systemd/resolved.conf"
+        
+        update_resolved_config() {
+            local key="$1"
+            local val="$2"
+            if grep -q "^#\?${key}=" "$file"; then
+                sudo sed -i "s|^#\?${key}=.*|${key}=${val}|" "$file"
+            else
+                sudo sed -i "/^\[Resolve\]/a ${key}=${val}" "$file"
+            fi
+        }
+        
+        update_resolved_config "DNS" "9.9.9.9#dns.quad9.net 149.112.112.112#dns.quad9.net 2620:fe::fe#dns.quad9.net 2620:fe::9#dns.quad9.net"
+        update_resolved_config "FallbackDNS" "1.1.1.1#cloudflare-dns.com 2606:4700:4700::1111#cloudflare-dns.com"
+        update_resolved_config "Domains" "~."
+        update_resolved_config "DNSSEC" "yes"
+        update_resolved_config "DNSOverTLS" "yes"
+        
+        print_success "Archivo resolved.conf actualizado."
+        
+        print_step "Reiniciando y habilitando servicio systemd-resolved..." "2" "3"
+        sudo systemctl restart systemd-resolved
+        sudo systemctl enable systemd-resolved
+        print_success "Servicio systemd-resolved reiniciado y habilitado."
+        
+        print_step "Verificando el estado de la resolución con resolvectl..." "3" "3"
+        resolvectl status || echo "⚠️ No se pudo obtener el estado detallado con resolvectl."
+        
+        print_success "systemd-resolved configurado e inicializado correctamente con DNS over TLS."
+    else
+        print_info "Saltando configuración de DNS over TLS."
     fi
 }
 
@@ -1096,7 +1307,22 @@ echo -e "${B}--------------------------------------------------${NC}"
 apply_security_hardening
 
 echo -e "${B}--------------------------------------------------${NC}"
+apply_ssh_hardening
+
+echo -e "${B}--------------------------------------------------${NC}"
+apply_mac_spoofing
+
+echo -e "${B}--------------------------------------------------${NC}"
+apply_ufw_setup
+
+echo -e "${B}--------------------------------------------------${NC}"
+apply_resolved_dns_over_tls
+
+echo -e "${B}--------------------------------------------------${NC}"
 apply_sudoers_hardening
+
+echo -e "${B}--------------------------------------------------${NC}"
+install_lsp_linters_pnpm
 
 echo -e "${B}--------------------------------------------------${NC}"
 setup_unclutter_shortcut
