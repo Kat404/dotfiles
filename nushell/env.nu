@@ -1,7 +1,7 @@
 # env.nu
 #
 # Installed by:
-# version = "0.112.2"
+# version = "0.113.0"
 #
 # ~/.config/nushell/env.nu
 

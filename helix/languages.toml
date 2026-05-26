@@ -6,13 +6,11 @@
 [[language]]
 name = "html"
 language-servers = ["superhtml"]
-formatter = { command = "prettier", args = ["--parser", "html"] }
 auto-format = true
 
 # CSS
 [[language]]
 name = "css"
-formatter = { command = "prettier", args = ["--parser", "css"] }
 auto-format = true
 
 # Rust
@@ -34,66 +32,36 @@ language-servers = ["astro-ls"]
 # Python
 [[language]]
 name = "python"
-language-servers = ["ty"]
+language-servers = ["ty", "ruff"]
+auto-format = true
 
 # JavaScript
 [[language]]
 name = "javascript"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [{ name = "typescript-language-server" }, "oxlint", "oxfmt"]
 auto-format = true
 
 # JSX
 [[language]]
 name = "jsx"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [{ name = "typescript-language-server" }, "oxlint", "oxfmt"]
 auto-format = true
 
 # TypeScript
 [[language]]
 name = "typescript"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [{ name = "typescript-language-server" }, "oxlint", "oxfmt"]
 auto-format = true
 
 # TSX
 [[language]]
 name = "tsx"
-language-servers = [
-  { name = "typescript-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = [{ name = "typescript-language-server" }, "oxlint", "oxfmt"]
 auto-format = true
 
 # JSON
 [[language]]
 name = "json"
-language-servers = [
-  { name = "vscode-json-language-server", except-features = [
-    "format",
-  ] },
-  "biome",
-]
-formatter = { command = "prettier", args = ["--parser", "json"] }
 auto-format = true
 
 # TOML
@@ -105,7 +73,7 @@ auto-format = true
 # Markdown
 [[language]]
 name = "markdown"
-formatter = { command = "prettier", args = ["--parser", "markdown"] }
+language-servers = ["marksman", "oxfmt"]
 auto-format = true
 
 # - - - - - - - - - - - - - - - - -
@@ -117,6 +85,11 @@ command = "superhtml"
 [language-server.rust-analyzer]
 command = "rust-analyzer"
 
+[language-server.rust-analyzer.config]
+cachePriming = { enable = false }
+cargo = { check = { extraArgs = ["-j", "2"] } }
+diagnostics = { disabled = ["unresolved-proc-macro"] }
+
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
@@ -124,6 +97,20 @@ command = "clippy"
 command = "astro-ls"
 args = ["--stdio"]
 config = { typescript = { tsdk = "/home/josel/.local/share/pnpm/global/5/node_modules/typescript/lib" }, environment = "node" }
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+config = { provideFormatter = false, publishDiagnostics = false }
+
+[language-server.oxlint]
+command = "oxlint"
+args = ["--lsp"]
+config = { run = "onType" }
+
+[language-server.oxfmt]
+command = "oxfmt"
+args = ["--lsp"]
 
 [language-server.ty]
 command = "ty"
@@ -134,6 +121,6 @@ inlayHints.callArgumentNames = false
 experimental.rename = true
 experimental.autoImport = true
 
-[language-server.biome]
-command = "biome"
-args = ["lsp-proxy"]
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
