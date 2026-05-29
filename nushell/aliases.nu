@@ -54,6 +54,7 @@ alias icat = kitten icat  # <-- Visor rápida y nativo de imágenes usando la te
 alias tub = pipes-rs      # <-- Generación fantástica y atractiva de tuberías (usando Pipes-RS) en la terminal
 alias py = python3        # <-- Uso rápido de 'python3'
 alias hx = helix          # <-- Uso rápido de 'helix'
+alias matrix = unimatrix -a -c blue -f -s 97 -l oc # <-- Uso rápido de 'unimatrix'
 def hf [] {               # <-- helix + fzf + bat = отлично
     let fzf_preview = "bat --color=always --line-range :500 --theme='Catppuccin Mocha' {}"
     
@@ -191,8 +192,21 @@ def pkali [] {                   # <-- Lanzador interactivo y efímero para Hack
 # =============================================
 # Comandos para manipulación de archivos
 alias tarnow = tar -acvf   # <-- Crear un archivo .tar usando comprensión automática
-alias untar = tar -xf      # <-- Descomprimir un .tar 
-alias targnow = tar -czvf  # <-- Crear un archivo .tar usando gzip como comprensión
+def untar [file: path] {   # <-- Descomprimir un .tar y borrarlo
+    if not ($file | path exists) {
+        print $"(ansi red)Error: El archivo '($file)' no existe.(ansi reset)"
+        return
+    }
+	  print $"(ansi blue)Extrayendo ($file)...(ansi reset)"
+	  # Intentamos extraer. Si 'tar' falla, el bloque catch evitará que se borre el original.
+   	try {
+        ^tar -xf $file
+        print $"(ansi green)Extracción exitosa. Purgando archivo original...(ansi reset)"
+        rm $file
+	  } catch {
+        print $"(ansi red)Fallo crítico durante la extracción. El archivo original fue preservado por seguridad.(ansi reset)"
+	  }
+}
 alias ungz = gunzip        # <-- Descomprimir archivos .gz
 alias wget = wget -c       # <-- Continuar descargas interrumpidas automáticamente
 alias zipnow = 7z a        # <-- Crear un archivo .7z usando 7zip
