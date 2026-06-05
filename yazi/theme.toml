@@ -1,5 +1,5 @@
 [app]
-overall = { bg = "#1e1e2e" }
+overall = { bg = "#11111b" }
 
 [mgr]
 cwd = { fg = "#94e2d5" }
@@ -148,6 +148,7 @@ dirs = [
   { name = "josel", text = "", fg = "#cba6f7" },
   { name = "Escritorio", text = "", fg = "#cba6f7" },
   { name = "Proyectos", text = "", fg = "#cba6f7" },
+  { name = "Juegos", text = "󱤙", fg = "#cba6f7" },
   { name = "Documentos", text = "", fg = "#cba6f7" },
   { name = "Descargas", text = "", fg = "#cba6f7" },
   { name = "Universidad", text = "", fg = "#cba6f7" },

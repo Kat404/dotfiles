@@ -24,7 +24,7 @@
 "variable.builtin" = "red"
 "variable.other.member" = "blue"
 
-"label" = "sapphire" # used for lifetimes
+"label" = "sapphire"  # used for lifetimes
 
 "punctuation" = "overlay2"
 "punctuation.special" = { fg = "sky", modifiers = ["bold"] }
@@ -44,7 +44,7 @@
 
 "namespace" = { fg = "yellow", modifiers = ["italic"] }
 
-"special" = "blue" # fuzzy highlight
+"special" = "blue"  # fuzzy highlight
 
 "markup.heading.1" = "red"
 "markup.heading.2" = "peach"
@@ -77,8 +77,8 @@
 "ui.statusline" = { fg = "subtext1", bg = "mantle" }
 "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
 "ui.statusline.normal" = { fg = "base", bg = "rosewater", modifiers = ["bold"] }
-"ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"]  }
-"ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"]  }
+"ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"] }
 
 "ui.popup" = { fg = "text", bg = "surface0" }
 "ui.window" = { fg = "crust" }
@@ -158,7 +158,7 @@ overlay0 = "#6c7086"
 surface2 = "#585b70"
 surface1 = "#45475a"
 surface0 = "#313244"
-base = "#1e1e2e"
+base = "#11111b"
 mantle = "#181825"
 crust = "#11111b"
 

@@ -1,7 +1,7 @@
 # env.nu
 #
 # Installed by:
-# version = "0.113.0"
+# version = "0.113.1"
 #
 # ~/.config/nushell/env.nu
 
@@ -38,7 +38,7 @@ $env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
 let binary_paths = [
     $"($env.HOME)/.cargo/bin"
     # $"($env.BUN_INSTALL)/bin"
-    $env.PNPM_HOME
+    $"($env.PNPM_HOME)/bin"
 ]
 
 $env.PATH = (

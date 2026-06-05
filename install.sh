@@ -566,7 +566,7 @@ install_common_dependencies() {
             ;;
         pacman)
             # Nombres específicos para Arch
-            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay podman)
+            pkgs=(ffmpeg 7zip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix base-devel pnpm yt-dlp ty uv tombi timeshift sudo-rs rust-analyzer rsync rclone postgresql obsidian marksman markdownlint-cli btop gemini-cli flatpak cowsay podman veracrypt dysk)
             ;;
         dnf)
             # Nombres para Fedora
@@ -574,7 +574,7 @@ install_common_dependencies() {
             ;;
         brew)
             # Nombres para macOS
-            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix yt-dlp rsync rclone postgresql btop cowsay rust-analyzer pnpm)
+            pkgs=(ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick unclutter helix yt-dlp rsync rclone postgresql btop cowsay rust-analyzer pnpm veracrypt dysk)
             ;;
         zypper)
             # Nombres para openSUSE (Leap/Tumbleweed)
@@ -704,7 +704,7 @@ install_arch_full() {
             "timeshift" "sudo-rs" "rust-analyzer" "rsync" "rclone"
             "postgresql" "obsidian" "marksman" "markdownlint-cli" "btop"
             "gemini-cli" "flatpak" "cowsay" "podman" "ruff"
-            "vscode-css-languageserver" "vscode-json-languageserver"
+            "vscode-css-languageserver" "vscode-json-languageserver" "veracrypt" "dysk"
         ) 
 
         
@@ -873,7 +873,11 @@ check_and_install_software() {
     fi
     
     # Lista base + shell seleccionada (nvim eliminado del repo — Helix es el editor principal)
-    local tools=("kitty" "lazygit" "hx:helix" "fastfetch" "rustup" "$target_shell")
+    local shell_tool="$target_shell"
+    if [[ "$target_shell" == "nushell" ]]; then
+        shell_tool="nu:nushell"
+    fi
+    local tools=("kitty" "lazygit" "hx:helix" "fastfetch" "rustup" "$shell_tool")
 
     for tool_spec in "${tools[@]}"; do
         IFS=":" read -r cmd pkg <<< "$tool_spec"
@@ -1330,7 +1334,12 @@ setup_unclutter_shortcut
 echo -e "${B}--------------------------------------------------${NC}"
 echo -e "${Y}🔄 Configurando shell por defecto...${NC}"
 
-path_to_shell=$(which "$SHELL_TO_INSTALL")
+shell_bin="$SHELL_TO_INSTALL"
+if [[ "$shell_bin" == "nushell" ]]; then
+    shell_bin="nu"
+fi
+
+path_to_shell=$(which "$shell_bin")
 if [[ "$SHELL" != "$path_to_shell" ]]; then
     echo "Cambiendo shell por defecto a $path_to_shell"
     # Usar sudo solo si es necesario, pero chsh suele pedir password por su cuenta o no requerirlo para el propio usuario
