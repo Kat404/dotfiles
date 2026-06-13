@@ -99,6 +99,7 @@ declare -a NUSHELL_LINKS=(
     "nushell/config.nu:.config/nushell/config.nu"
     "nushell/env.nu:.config/nushell/env.nu"
     "nushell/aliases.nu:.config/nushell/aliases.nu"
+    "nushell/.catppuccin_mocha.nu:.catppuccin_mocha.nu"
 )
 
 # --- FUNCIONES ---

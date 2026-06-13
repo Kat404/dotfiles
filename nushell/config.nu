@@ -84,6 +84,9 @@ source ~/.config/nushell/aliases.nu
 # ❯ Carga zoxide
 source ~/.zoxide.nu
 
+# ❯ Hello Catppuccin! :3
+source ~/.catppuccin_mocha.nu
+
 # ❯ Evita que aparezca el banner de bienvenida al iniciar Nushell
 $env.config.show_banner = false
 
