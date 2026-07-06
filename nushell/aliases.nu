@@ -96,7 +96,7 @@ alias clc = ollama launch claude                     # <-- Inicializar Claude Co
 # =============================================
 # ❯ Contenedores
 
-def psa [] {  # <-- Lista todos los contenedores (activo e inactivos)
+def psa [] {  # <-- Lista todos los contenedores (activos e inactivos)
     let raw = (^podman ps -a --format json)
     if ($raw | is-empty) { return [] }
 
@@ -139,14 +139,17 @@ def pi [] {  # <-- Lista las imágenes locales estructuradas
     let raw = (^podman images --format json)
     if ($raw | is-empty) { return [] }
 
-    $raw 
-    | from json 
-    | each { |row| 
+    $raw
+    | from json
+    | each { |row|
         {
             id: ($row.Id | str substring 0..11)
-            nombre: (if ($row.Names | is-empty) { "<none>" } else { $row.Names | first })
-            tamaño: $row.Size
-            creado: $row.Created
+            # Las imágenes dangling (<none>:<none>) no tienen campo `Names`
+            nombre: (if ($row.Names? | is-empty) { "<none>:<none>" } else { $row.Names | first })
+            # `into filesize` convierte bytes a la unidad más legible (B/kB/MB/GB/TB)
+            tamaño: ($row.Size | into filesize)
+            # `Created` viene en segundos epoch; nushell espera nanosegundos
+            creado: (($row.Created * 1_000_000_000) | into datetime | format date "%d/%m/%Y %H:%M")
         }
     }
 }
@@ -181,10 +184,6 @@ def pclean [] {                  # <-- Limpieza total con confirmación explíci
     print "(!!) Iniciando purga absoluta de Podman (imágenes, contenedores y redes sin uso)..."
     ^podman system prune -a --volumes -f
     print "Purga completada. Tu sistema está limpio."
-}
-def pkali [] {                   # <-- Lanzador interactivo y efímero para Hacking ético
-    print "Iniciando instancia efímera de Kali Linux en modo rootless..."
-    ^podman run -it --rm --name lab-kali docker.io/kalilinux/kali-rolling /bin/bash
 }
 
 # =============================================

@@ -1,43 +1,63 @@
-# Base oficial de Arch Linux
+# ❯ Imagen Base {
 FROM docker.io/library/archlinux:latest
+# }
 
-# 1. Preparación del Sistema y Repositorio BlackArch
-RUN pacman -Syu --noconfirm curl git && \
-    curl -O https://blackarch.org/strap.sh && \
+# ❯ DNS Resiliente & Pacman Paralelo {
+# Soluciona `network_isolation=enabled` por defecto en Podman 6.0.0+.
+# Independiente del DNS del host: el build funciona con/sin `--network=host`.
+RUN echo 'nameserver 1.1.1.1' >  /etc/resolv.conf && \
+    echo 'nameserver 9.9.9.9' >> /etc/resolv.conf && \
+    sed -i 's/^#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+# }
+
+# ❯ Sistema, Mirrorlist Óptimo & BlackArch {
+RUN pacman -Syu --noconfirm curl git ca-certificates reflector && \
+    reflector --protocol https --latest 15 --sort rate \
+              --save /etc/pacman.d/mirrorlist && \
+    pacman -Syu --noconfirm && \
+    curl -fsSL --retry 5 --retry-delay 10 --retry-all-errors \
+         -O https://blackarch.org/strap.sh && \
     chmod +x strap.sh && \
     ./strap.sh && \
     pacman -Syu --noconfirm
+# }
 
-# 2. Instalación del Stack Completo (ZSH + PDE Rust + Hacking)
+# ❯ Stack: ZSH + PDE Rust + Hacking Ético {
 RUN pacman -S --noconfirm \
-    zsh fzf zoxide starship \
-    eza bat ripgrep fd yazi \
-    helix fastfetch \
-    rustscan feroxbuster nmap iputils
+        zsh fzf zoxide starship \
+        eza bat ripgrep fd yazi \
+        helix fastfetch \
+        rustscan feroxbuster nmap iputils && \
+    pacman -Scc --noconfirm
+# }
 
-# 3. Preparación de Antidote
+# ❯ Gestor de Plugins: Antidote {
 RUN git clone --depth=1 https://github.com/mattmc3/antidote.git /root/.antidote
+# }
 
-# 4. Creación de la estructura XDG_CONFIG_HOME
+# ❯ Estructura XDG_CONFIG_HOME {
 RUN mkdir -p /root/.zshrc.d \
              /root/.config/yazi \
-             /root/.config/helix \
-             /root/.config/starship
+             /root/.config/helix
+# }
 
-# 5. Inyección de Dotfiles
-COPY .zshrc /root/.zshrc
+# ❯ Inyección de Dotfiles {
+COPY .zshrc           /root/.zshrc
 COPY .zsh_plugins.txt /root/.zsh_plugins.txt
-COPY zshrc.d/ /root/.zshrc.d/
-COPY starship.toml /root/.config/starship.toml
-COPY yazi/ /root/.config/yazi/
-COPY helix/ /root/.config/helix/
-COPY fastfetch/ /root/.config/fastfetch/
+COPY zshrc.d/         /root/.zshrc.d/
+COPY starship.toml    /root/.config/starship.toml
+COPY yazi/            /root/.config/yazi/
+COPY helix/           /root/.config/helix/
+COPY fastfetch/       /root/.config/fastfetch/
+# }
 
-# 6. Pre-compilación de Plugins (Rendimiento)
-RUN zsh -c 'source /root/.antidote/antidote.zsh && antidote bundle < /root/.zsh_plugins.txt > /root/.zsh_plugins.zsh'
+# ❯ Pre-compilación de Plugins (Rendimiento) {
+RUN zsh -c 'source /root/.antidote/antidote.zsh && \
+            antidote bundle < /root/.zsh_plugins.txt > /root/.zsh_plugins.zsh'
+# }
 
-# 7. Configuración de Entrada
+# ❯ Configuración de Entrada {
 WORKDIR /root
-# Definimos el editor para que las herramientas lo reconozcan (ej. git commit)
 ENV EDITOR=hx
 CMD ["/usr/bin/zsh"]
+# }
