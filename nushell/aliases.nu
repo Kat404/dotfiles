@@ -149,7 +149,7 @@ def pi [] {  # <-- Lista las imágenes locales estructuradas
             # `into filesize` convierte bytes a la unidad más legible (B/kB/MB/GB/TB)
             tamaño: ($row.Size | into filesize)
             # `Created` viene en segundos epoch; nushell espera nanosegundos
-            creado: (($row.Created * 1_000_000_000) | into datetime | format date "%d/%m/%Y %H:%M")
+            actualizado: (($row.Created * 1_000_000_000) | into datetime | format date "%d/%m/%Y %H:%M")
         }
     }
 }

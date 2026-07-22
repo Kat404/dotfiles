@@ -102,6 +102,15 @@ declare -a NUSHELL_LINKS=(
     "nushell/.catppuccin_mocha.nu:.catppuccin_mocha.nu"
 )
 
+declare -a OPENCODE_LINKS=(
+    "opencode/opencode.jsonc:.config/opencode/opencode.jsonc"
+    "opencode/package.json:.config/opencode/package.json"
+    "opencode/agents/code-flow-analyst.md:.config/opencode/agents/code-flow-analyst.md"
+    "opencode/agents/fixer.md:.config/opencode/agents/fixer.md"
+    "opencode/agents/qa-doctor.md:.config/opencode/agents/qa-doctor.md"
+    "opencode/commands/orchestrate-qa.md:.config/opencode/commands/orchestrate-qa.md"
+)
+
 # --- FUNCIONES ---
 
 choose_shell() {
@@ -339,6 +348,33 @@ install_nushell_from_source() {
         print_error "Error al compilar Nushell."
         print_info "Revisa los logs anteriores para identificar dependencias faltantes."
         return 1
+    fi
+}
+
+setup_opencode() {
+    print_step "Configurando Opencode..." "1" "1"
+
+    local pm=$(get_pkg_manager)
+    if [[ "$pm" != "pacman" ]]; then
+        print_info "Opencode solo se configura automáticamente en Arch (paquete 'opencode' del repo 'extra')."
+        return
+    fi
+
+    echo -e "${B}--------------------------------------------------${NC}"
+    echo -e "${Y}🤖 INSTALACIÓN Y PERSONALIZACIÓN DE OPENCODE${NC}"
+    echo -e "   Se instalará ${B}opencode${NC} desde el repo ${C}extra${NC} (no AUR)."
+    echo -e "   Y se enlazarán tus subagentes y comandos personalizados."
+    echo -e "${B}--------------------------------------------------${NC}"
+    read -r -p "$(echo -e "${Y}¿Deseas instalar y personalizar Opencode? (s/n): ${NC}")" oc_opt
+    if [[ "$oc_opt" =~ ^[sS]$ ]]; then
+        if install_pkg opencode; then
+            INSTALL_OPENCODE=1
+            print_success "Opencode instalado. Subagentes y comandos se enlazarán al final."
+        else
+            print_error "No se pudo instalar 'opencode' desde el repo extra."
+        fi
+    else
+        print_info "Saltando Opencode."
     fi
 }
 
@@ -795,6 +831,9 @@ install_arch_full() {
         if [[ "$unimatrix_opt" =~ ^[sS]$ ]]; then
             yay_pkgs+=("unimatrix-git")
         fi
+
+        # Opencode (Opcional, repo extra)
+        setup_opencode
         
         # --- Instalación ---
         
@@ -1253,6 +1292,11 @@ elif [[ "$SHELL_TO_INSTALL" == "nushell" ]]; then
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${NUSHELL_LINKS[@]}")
 else
     FILES_TO_LINK=("${COMMON_LINKS[@]}" "${FISH_LINKS[@]}")
+fi
+
+# Opencode (solo si el usuario eligió durante la instalación Full Arch)
+if [[ "${INSTALL_OPENCODE:-0}" == "1" ]]; then
+    FILES_TO_LINK+=("${OPENCODE_LINKS[@]}")
 fi
 
 # Zoxide setup se debe generar para independientemente del shell que seleccione el usuario.
