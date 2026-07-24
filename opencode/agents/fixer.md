@@ -24,6 +24,14 @@ permission:
     "cut *": allow
     "tr *": allow
     "awk *": allow
+    "sed *": allow
+    "readlink *": allow
+    "tree *": allow
+    "xargs *": allow
+    "command *": allow
+    "prettier *": allow
+    "git stash *": allow
+    "git stash pop *": allow
     # File finding (prefer fd > find; rg > grep)
     "find *": allow
     "fd *": allow
