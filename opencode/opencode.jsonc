@@ -13,9 +13,25 @@
         "MINIMAX_API_HOST": "https://api.minimax.io"
       },
       "enabled": true
+    },
+    "engram": {
+      "command": [
+        "/home/josel/.local/bin/engram",
+        "mcp",
+        "--tools=agent"
+      ],
+      "enabled": true,
+      "type": "local"
     }
   },
   "plugin": [
-    "@dietrichgebert/ponytail"
-  ]
+    "@dietrichgebert/ponytail",
+    "./plugins/caveman/plugin.js"
+  ],
+  "agent": {
+    "build": { "mode": "primary" },
+    "plan": { "mode": "primary" },
+    "chart": { "mode": "primary" },
+    "craft": { "mode": "primary" }
+  }
 }
