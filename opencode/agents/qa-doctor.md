@@ -49,6 +49,9 @@ permission:
     "ruff *": allow
     "ty *": allow
     "pytest *": allow
+    # Python interpreters (for venv-style pytest invocations)
+    "python *": allow
+    "python3 *": allow
     "unittest *": allow
     "oxlint *": allow
     "oxfmt *": allow
@@ -58,7 +61,7 @@ permission:
     "zig *": allow
     # Node package managers (detected by lockfile, never auto-install)
     "pnpm *": allow
-    "bun  *": allow
+    "bun *": allow
     "yarn *": allow
     "npm *": allow
   read: allow

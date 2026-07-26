@@ -107,12 +107,24 @@ Si irreversible + bajo costo → `assumed: <X>, say if you want to change`.
 
 ### Step 5 — Emit the plan
 
-Escribí el plan a `.opencode/plans/<slug>.md` (carpeta de plan del
-proyecto) o a `~/.local/share/opencode/plans/<slug>.md` (carpeta
-global). Usá el `write` con uno de esos paths.
+Emití el plan **inline en la respuesta** (markdown del template de
+abajo). Cero I/O, cero prompts, cero friction. El plan es moldeable y
+editable desde el prompt del usuario sin tocar disco.
 
-Template estricto abajo. Si `Open questions` sin resolver → NO emitas
-`READY FOR CRAFT`. Preguntá primero.
+Si `Open questions` sin resolver → NO emitas `READY FOR CRAFT`. Emití
+`NEEDS-USER` en chat y preguntá primero.
+
+Cuando el plan esté `READY FOR CRAFT`: **NO escribas a disco por tu
+cuenta**. Preguntá con `question`:
+
+- **Disco**: contrato que Craft lee como guía y fuente de TODOs al
+  construir (`write` a `.opencode/plans/<slug>.md` o
+  `~/.local/share/opencode/plans/<slug>.md`).
+- **Inline 100%**: el usuario pegará el plan a Craft manualmente;
+  Chart no escribe nada.
+
+Default sugerido: disco (Craft tiene contrato explícito). Esperá la
+respuesta del usuario antes de actuar.
 
 ## Output format
 

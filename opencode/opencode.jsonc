@@ -9,7 +9,7 @@
         "-y"
       ],
       "environment": {
-        "MINIMAX_API_KEY": "MINIMAX_API_KEY",
+        "MINIMAX_API_KEY": "{file:~/.config/opencode/secrets/minimax-api-key}",
         "MINIMAX_API_HOST": "https://api.minimax.io"
       },
       "enabled": true
@@ -22,6 +22,14 @@
       ],
       "enabled": true,
       "type": "local"
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "headers": {
+        "CONTEXT7_API_KEY": "{file:~/.config/opencode/secrets/context7-api-key}"
+      }
     }
   },
   "plugin": [
@@ -29,9 +37,17 @@
     "./plugins/caveman/plugin.js"
   ],
   "agent": {
-    "build": { "mode": "primary" },
-    "plan": { "mode": "primary" },
-    "chart": { "mode": "primary" },
-    "craft": { "mode": "primary" }
+    "build": {
+      "mode": "primary"
+    },
+    "plan": {
+      "mode": "primary"
+    },
+    "chart": {
+      "mode": "primary"
+    },
+    "craft": {
+      "mode": "primary"
+    }
   }
 }

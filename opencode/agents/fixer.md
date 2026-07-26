@@ -51,6 +51,10 @@ permission:
     "ruff *": allow
     "ty *": allow
     "pytest *": allow
+    # Python interpreters (for venv-style pytest invocations)
+    "python *": allow
+    "python3 *": allow
+    "mkdir *": allow
     "cargo test *": allow
     "rustfmt *": allow
     "clippy *": allow
@@ -59,7 +63,7 @@ permission:
     "zig *": allow
     # Node package managers (for re-verification, lockfile-driven only)
     "pnpm *": allow
-    "bun  *": allow
+    "bun *": allow
     "yarn *": allow
     "npm *": allow
   read: allow
