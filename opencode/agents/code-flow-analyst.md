@@ -133,27 +133,63 @@ comptime types, etc.):
 
 ## Output format
 
-```markdown
-# Code Flow Analysis
+Lead with a short Markdown prose header (`# Code Flow Analysis` +
+`## Stack` + detected stack). Then emit findings as a JSON literal
+block (shape adapted from `boundedreview.go:13`
+`nativeReviewerResultSchema` in gentle-ai):
 
-## Stack
-
-<detected stack>
-
-## Findings
-
-### [RED] file.py:42 — <one-line title>
-
-<context paragraph>
-**Recommendation:** <one-line fix>
-
-### [ORANGE] file.py:99 — <one-line title>
-
-<context paragraph>
-**Recommendation:** <one-line fix>
+```json
+{
+  "findings": [
+    {
+      "location": "src/foo.py:42",
+      "severity": "BLOCKER | CRITICAL | WARNING | SUGGESTION",
+      "claim": "observable incorrect behavior, one sentence",
+      "evidence_class": "deterministic | inferential | insufficient",
+      "causal_disposition": "introduced | behavior-activated | worsened | pre-existing | base-only | unknown",
+      "proof_refs": ["rg output line", "test failure log line"]
+    }
+  ],
+  "evidence": ["what was inspected to produce findings[]"]
+}
 ```
 
-For YELLOW findings use a single-line ponytail-style format:
+Top-level keys: only `findings` and `evidence` allowed (any other
+top-level key is a contract violation). Per-finding keys: only the 6
+fields listed — `location`, `severity`, `claim`, `evidence_class`,
+`causal_disposition`, `proof_refs`. Empty `findings: []` = no
+findings (clean).
+
+Missing `proof_refs[]` (empty array allowed, but the field MUST be present and an array — never omitted) is a contract violation. If you have no proof, emit `proof_refs: []` and lower `evidence_class` to `insufficient`.
+
+**Multi-location findings**: one `location` per finding. If a defect spans multiple lines or files, emit one finding per location. Describe the pattern once in the first finding's `claim`; reference subsequent locations in `proof_refs[]` of that first finding. Do not aggregate multiple locations into a single comma-separated string in `location`.
+
+After the JSON literal, add a human-readable Markdown rendering
+(one `### <SEVERITY> file.py:42 — <title>` section per finding,
+plus the `<context paragraph>` and `**Recommendation:**` line) so
+the report remains readable when consumed by humans. Both formats
+must stay in sync for BLOCKER/CRITICAL/WARNING prose findings (every JSON finding has a `### <SEVERITY> file.py:line — <title>` heading section, and every Markdown section has a JSON entry). **Ponytail-format findings are exempt** from the heading requirement: emit only the JSON entry + the single-line ponytail line (`L<line>: <tag> ...`). When `findings: []` is empty, emit JSON-only (`{findings: [], evidence: []}`) and finish with `Lean already. Ship.` — no Markdown sections required.
+
+End with one summary line:
+
+`analysis: <R> blocker, <C> critical, <W> warning, <S> suggestion. <next action>`
+
+If no findings:
+
+`Lean already. Ship.`
+
+Severity classification rubric: see `AGENTS.md §Severity taxonomy` — single source.
+
+`evidence_class` and `causal_disposition` definitions: see `AGENTS.md §Severity taxonomy` (now canonical; this file does NOT restate).
+
+Comparison procedure: see `AGENTS.md §Severity taxonomy` for the canonical git-diff / git-log procedure.
+
+**Upstream pointer:** definitions live in `AGENTS.md` as of 2026-07-26. This file used to be the secondary source; references upstream only.
+
+For the forbid-vocab rule and severity enum discipline, see `AGENTS.md §Severity taxonomy` — do NOT restate.
+
+For over-engineering findings (legacy spec-phase label was [YELLOW]),
+use the single-line ponytail format (this survives the migration):
 
 ```
 L<line>: <tag> <what to cut>. <replacement>.
@@ -167,21 +203,12 @@ L88: stdlib: hand-rolled retry loop. tenacity or `loop`/`sleep`.
 L30-44: shrink: manual dict build. dict(zip(keys, values)), 1 line.
 ```
 
-End with one summary line:
+These ponytail-format findings use a deterministic severity mapping in the JSON envelope:
 
-`analysis: <R> red, <O> orange, <Y> yellow. <next action>`
+- `yagni:` / `delete:` → `severity: SUGGESTION`
+- `stdlib:` / `native:` / `shrink:` → `severity: WARNING`
 
-If no findings:
-
-`Lean already. Ship.`
-
-Severity definitions:
-
-- **RED**: blocks correctness, breaks a public contract, causes
-  data loss, or exposes a security vulnerability.
-- **ORANGE**: important but not blocking (broad exception, missing
-  type, sub-optimal pattern).
-- **YELLOW**: nit / code smell.
+Do not deviate; do not assign SUGGESTION to `stdlib:` findings or WARNING to `yagni:` findings.
 
 Quote `file:line` for every finding. Quote `rg`/`grep` output
 verbatim where useful. Do not propose patches; just identify and

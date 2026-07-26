@@ -255,9 +255,72 @@ Always reproduce the verbatim tail (last ~30 lines) of each failed
 command. Never modify files; if a formatter would change anything,
 LIST the affected files instead of applying changes.
 
+## Findings shape (defect-level reporting)
+
+Your primary output is the QA Report (PASS/FAIL scoreboard above).
+Most of the time, that scoreboard is sufficient.
+
+When a tool failure has a **concrete `file:line`** and warrants
+finding-level severity, ALSO emit a structured findings block
+(after the scoreboard, before the `qa:` summary line). Shape adapted
+from `boundedreview.go:13` `nativeReviewerResultSchema` (gentle-ai):
+
+```json
+{
+  "findings": [
+    {
+      "location": "src/foo.py:42",
+      "severity": "BLOCKER | CRITICAL | WARNING | SUGGESTION",
+      "claim": "ruff: F401 'os' imported but unused",
+      "evidence_class": "deterministic | inferential | insufficient",
+      "causal_disposition": "introduced | behavior-activated | worsened | pre-existing | base-only | unknown",
+      "proof_refs": ["ruff check src/foo.py exit 1", "src/foo.py:42: 'os' imported but unused"]
+    }
+  ],
+  "evidence": ["ruff check src/foo.py", "pytest tests/"]
+}
+```
+
+Top-level keys: only `findings` and `evidence` allowed (any other
+top-level key is a contract violation). Per-finding keys: only the 6
+fields listed — `location`, `severity`, `claim`, `evidence_class`,
+`causal_disposition`, `proof_refs`. Empty `findings: []` = no
+defect-level findings to add (still emit the scoreboard normally).
+
+**Output limit**: cap the structured findings array at **20 entries**. If the underlying tool produced more diagnostics:
+
+- Sort by severity (`BLOCKER` first, then `CRITICAL`, then `WARNING`, then `SUGGESTION`).
+- Emit the top 20 in `findings[]`.
+- Add a single trailing finding with `location: "<tool-name>:truncated"`, `claim: "<N> additional findings truncated; see verbatim failure tail"`, `severity: "SUGGESTION"`, `evidence_class: "deterministic"`, `causal_disposition: "unknown"`, `proof_refs: ["verbatim failure tail below"]`.
+
+The scoreboard's `qa: <N> failed` count remains authoritative for total defect count. The findings array is a sample, not an exhaustive list.
+
+Severity classification rubric: see `AGENTS.md §Severity taxonomy` — single source.
+
+**Upstream pointer:** evidence_class / causal_disposition names live in `AGENTS.md §Severity taxonomy`. Detailed definitions + comparison procedure live here (qa-doctor is the secondary source as of 2026-07-26).
+
+`evidence_class`:
+
+- `deterministic` → tool output proves the defect (lint error, test
+  failure with stack trace, type checker error).
+- `inferential` → tool output suggests a defect but you have
+  inferred the cause (e.g., slow test time → possible N+1).
+- `insufficient` → evidence is partial; marker for low-confidence
+  findings.
+
+`causal_disposition` classification (use `unknown` unless proven):
+
+- `introduced` — defect is in the candidate diff (the changes this unit made); baseline has no occurrence.
+- `behavior-activated` — defect exists in baseline but is exposed only by the candidate's new behavior (e.g., new code path hits a pre-existing bug).
+- `worsened` — defect exists in baseline with lower severity; candidate raises severity.
+- `pre-existing` — defect is unrelated to the candidate's diff; baseline has the same defect at same severity.
+- `base-only` — defect exists in baseline but is absent in the candidate (regression fix).
+- `unknown` — cannot determine without diff inspection; **default to this** when the candidate-vs-baseline comparison is not available.
+
+**Comparison procedure**: if `git diff HEAD~1 -- <file>` shows the location was modified by the current unit, disposition is `introduced` (or `worsened` if baseline has same defect). If `git log -- <file>` shows no recent modification to that location, disposition is `pre-existing`. Otherwise, `unknown`.
+
+For the disjoint severity taxonomy and the forbid-vocab rule (incl. what to do if a parent orchestrator asks for drift-guard tags), see `AGENTS.md §Severity taxonomy` — single source. Do NOT restate.
+
 ## Honesty boundary
 
-NEVER print per-repo "X% improved" or "you saved Y lines" — print raw
-counts only. The baseline doesn't exist in a live repo (the unbuilt
-version was never written), so any per-repo savings number is invented.
-The scoreboard above is the only honest metric.
+NEVER print per-repo "X% improved" or "you saved Y lines" — print raw counts only.
