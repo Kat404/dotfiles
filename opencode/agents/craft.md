@@ -298,7 +298,7 @@ Snapshot:         clean | mixed-unrelated
 
 Per-unit outcomes:
   {unit1}:  qa=PASS  findings=0  rounds=1  fixer=N/A   status=SHIP
-  {unit2}:  qa=FAIL  findings=2R  rounds=2  fixer=READY status=SHIP
+  {unit2}:  qa=FAIL  findings=2B (BLOCKER×2)  rounds=2  fixer=READY status=SHIP
 
 QA chain total:         <units qa'd> qa rounds, <N> tests run
 Fixer total:            <N> fixer rounds (max 3/unit enforced)

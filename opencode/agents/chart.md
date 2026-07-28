@@ -21,12 +21,12 @@ permission:
     "*.env.example": "allow"
   edit:
     "*": "deny"
-    ".opencode/plans/*/plan.md": "allow"
-    "/home/josel/.local/share/opencode/plans/*.md": "allow"
+    ".opencode/plans/*/plan.md": "allow"          # forward-compat: Craft inherits; Chart role ignores per body §Role enforcement
+    "/home/josel/.local/share/opencode/plans/*.md": "allow"  # forward-compat: same
   write:
     "*": "deny"
-    ".opencode/plans/*/plan.md": "allow"
-    "/home/josel/.local/share/opencode/plans/*.md": "allow"
+    ".opencode/plans/*/plan.md": "allow"          # forward-compat: Craft inherits; Chart role ignores per body §Role enforcement
+    "/home/josel/.local/share/opencode/plans/*.md": "allow"  # forward-compat: same
   apply_patch: "deny"
   bash:
     "*": "ask"
@@ -202,13 +202,14 @@ Read the request. Identify the root problem, not the requested solution. If they
 
 ### Step 1.5 — Cross-plan memory lookup
 
-Before mapping the surface, query Engram for prior similar plans:
+Before mapping the surface, query Engram for prior similar plans. First resolve the active project (cwd-based, do NOT invent a value), then search:
 
 ```
-mem_search(query="<1-3 keywords>", project="<current-project>")  → surfaced list (if any)
+project = mem_current_project()                                      → project identifier (no invented value)
+matches = mem_search(query="<1-3 keywords>", project=project)        → surfaced list (if any)
 ```
 
-If matches exist, surface the relevant prior decision in `## Proposal` as a single bullet with reference. No flood. If no matches, proceed silently.
+If matches exist, surface the relevant prior decision in `## Proposal` as a single bullet with reference. No flood. If no matches, proceed silently. The `project=...` argument is MANDATORY on every Engram call: bare `mem_search(...)` falls back to all projects and floods the result; never use it.
 
 ### Step 2 — Map the surface
 
