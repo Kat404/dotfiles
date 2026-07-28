@@ -278,10 +278,13 @@ Default suggested: disk (Craft has an explicit contract). Wait for the user's re
 After `READY FOR CRAFT` (and after the user confirms disk write), persist a memory observation via Engram:
 
 ```
+project = mem_current_project()   → project identifier (no invented value)
+
 mem_save(
   title=f"plan:{change_name}",
   topic_key=f"plan:{change_name}",
   type="decision",
+  project=project,
   content=f"""# Plan: {change_name}
 
 **Intent**: <1-line intent from ## Proposal>
