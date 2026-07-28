@@ -1,4 +1,16 @@
 {
+  // NOTE 2026-07-28 — opencode permission merge is opencode-side.
+  //
+  // opencode 1.18.x merges per-agent frontmatter `permission:` with
+  // user-level config via `de.merge(agent.permission, user.permission ?? [])`
+  // and matches rules with `findLast` (last-wins). The resolved config
+  // can thus present rules from defaults + user frontmatter + plugins in
+  // any order. This makes the audit-flagged "duplicate question: deny +
+  // allow rules (fragile)" inherent to opencode merge semantics, not a
+  // user-config defect. Cannot fix on user side. Do NOT add manual
+  // `question:` rules here to "dedupe" — they will just stack on top.
+  // Defer the underlying audit finding (harness-audit/2026-07-27 #69
+  // WARN-2) until upstream opencode ships a deterministic merge semantic.
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
     "MiniMax": {
