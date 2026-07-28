@@ -291,33 +291,13 @@ defect-level findings to add (still emit the scoreboard normally).
 
 - Sort by severity (`BLOCKER` first, then `CRITICAL`, then `WARNING`, then `SUGGESTION`).
 - Emit the top 20 in `findings[]`.
-- Add a single trailing finding with `location: "<tool-name>:0"`, `claim: "<N> additional findings truncated; see verbatim failure tail"`, `severity: "SUGGESTION"`, `sentinel_kind: "truncation"`, `evidence_class: "deterministic"`, `causal_disposition: "unknown"`, `proof_refs: ["verbatim failure tail below"]`. (Line `0` is conventionally invalid but satisfies the schema's `^[^,]+:\d+$` location pattern. `sentinel_kind` is the typed discriminator; absence is the schema default.)
+- Add a single trailing finding with `location: "<handle>:0"` (e.g. `qa-doctor:0`), `claim: "<N> additional findings truncated; see verbatim failure tail"`, `severity: "SUGGESTION"`, `sentinel_kind: "truncation"`, `evidence_class: "deterministic"`, `causal_disposition: "unknown"`, `proof_refs: ["verbatim failure tail below"]`. (Line `0` is conventionally invalid but satisfies the schema's `^[^,]+:\d+$` location pattern. `sentinel_kind` is the typed discriminator; absence is the schema default.)
 
 The scoreboard's `qa: <N> failed` count remains authoritative for total defect count. The findings array is a sample, not an exhaustive list.
 
 Severity classification rubric: see `AGENTS.md §Severity taxonomy` — single source.
 
-**Upstream pointer:** evidence_class / causal_disposition names live in `AGENTS.md §Severity taxonomy`. Detailed definitions + comparison procedure live here (qa-doctor is the secondary source as of 2026-07-26).
-
-`evidence_class`:
-
-- `deterministic` → tool output proves the defect (lint error, test
-  failure with stack trace, type checker error).
-- `inferential` → tool output suggests a defect but you have
-  inferred the cause (e.g., slow test time → possible N+1).
-- `insufficient` → evidence is partial; marker for low-confidence
-  findings.
-
-`causal_disposition` classification (use `unknown` unless proven):
-
-- `introduced` — defect is in the candidate diff (the changes this unit made); baseline has no occurrence.
-- `behavior-activated` — defect exists in baseline but is exposed only by the candidate's new behavior (e.g., new code path hits a pre-existing bug).
-- `worsened` — defect exists in baseline with lower severity; candidate raises severity.
-- `pre-existing` — defect is unrelated to the candidate's diff; baseline has the same defect at same severity.
-- `base-only` — defect exists in baseline but is absent in the candidate (regression fix).
-- `unknown` — cannot determine without diff inspection; **default to this** when the candidate-vs-baseline comparison is not available.
-
-**Comparison procedure**: if `git diff HEAD~1 -- <file>` shows the location was modified by the current unit, disposition is `introduced` (or `worsened` if baseline has same defect). If `git log -- <file>` shows no recent modification to that location, disposition is `pre-existing`. Otherwise, `unknown`.
+**Upstream pointer:** `evidence_class` / `causal_disposition` definitions + comparison procedure live in `AGENTS.md §Severity taxonomy` (canonical source). Do NOT restate them here — referencing upstream keeps a single source of truth and avoids drift between agents.
 
 For the disjoint severity taxonomy and the forbid-vocab rule (incl. what to do if a parent orchestrator asks for drift-guard tags), see `AGENTS.md §Severity taxonomy` — single source. Do NOT restate.
 

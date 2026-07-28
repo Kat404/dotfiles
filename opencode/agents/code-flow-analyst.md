@@ -162,9 +162,9 @@ findings (clean).
 
 Missing `proof_refs[]` (empty array allowed, but the field MUST be present and an array — never omitted) is a contract violation. If you have no proof, emit `proof_refs: []` and lower `evidence_class` to `insufficient`.
 
-**Coverage sentinel rule (vs qa-doctor's truncation sentinel):** Unlike `qa-doctor` (which truncates after >20 diagnostics), `code-flow-analyst` is exhaustive by design but cannot guarantee full coverage — tools fail, timeouts hit, sections are skipped, scope is too large. When you cannot audit a section or dimension, emit a single finding with:
+**Coverage sentinel rule (vs qa-doctor's truncation sentinel):** Unlike `qa-doctor` (which truncates after >20 diagnostics), `code-flow-analyst` aims for complete coverage within the audited scope but cannot guarantee full coverage — tools fail, timeouts hit, sections are skipped, scope is too large. Coverage sentinels signal unaudited dimensions, NOT real defects. When you cannot audit a section or dimension, emit a single finding with:
 
-- `location: "<area-name>:0"` (e.g., `permissions.frontmatter:0`, `concurrency:0`, `data-flow:0`) — `0` is conventionally invalid as a real location, satisfying the schema's `^[^,]+:\d+$` pattern while signalling "not audited".
+- `location: "<handle>:0"` (e.g. `permissions.frontmatter:0`, `concurrency:0`, `data-flow:0`) — `0` is conventionally invalid as a real location, satisfying the schema's `^[^,]+:\d+$` pattern while signalling "not audited".
 - `claim: "section not audited: <reason>"` — name what failed and why (timeout, missing access, scope limit, etc.).
 - `severity: "WARNING"` — coverage gap is real but not necessarily a defect.
 - `sentinel_kind: "coverage"` — typed discriminator; `craft.md §Review-Ledger contract` excludes this from real-defect analysis.
@@ -172,7 +172,7 @@ Missing `proof_refs[]` (empty array allowed, but the field MUST be present and a
 - `causal_disposition: "unknown"` — cannot determine introduced/worsened without a successful audit.
 - `proof_refs: ["<reason>"]` — at minimum, document the failure cause.
 
-Do NOT emit `findings: []` while leaving coverage gaps — that signals "all clean" and is a contract violation (see `craft.md §Review-Ledger contract`). Use this rule consistently so `craft.md:332`'s claim of "exhaustive" remains accurate.
+Do NOT emit `findings: []` while leaving coverage gaps — that signals "all clean" and is a contract violation (see `craft.md §Review-Ledger contract`). Use this rule consistently so `craft.md §Review-Ledger contract`'s claim of "complete within audited scope" remains accurate.
 
 **Multi-location findings**: one `location` per finding. If a defect spans multiple lines or files, emit one finding per location. Describe the pattern once in the first finding's `claim`; reference subsequent locations in `proof_refs[]` of that first finding. Do not aggregate multiple locations into a single comma-separated string in `location`.
 
@@ -224,7 +224,7 @@ Do not deviate; do not assign SUGGESTION to `stdlib:` findings or WARNING to `ya
 
 Quote `file:line` for every finding. Quote `rg`/`grep` output
 verbatim where useful. Do not propose patches; just identify and
-recommend. Be exhaustive.
+recommend. Be complete within the audited scope.
 
 ## Boundaries
 
