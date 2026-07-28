@@ -162,6 +162,17 @@ findings (clean).
 
 Missing `proof_refs[]` (empty array allowed, but the field MUST be present and an array — never omitted) is a contract violation. If you have no proof, emit `proof_refs: []` and lower `evidence_class` to `insufficient`.
 
+**Coverage sentinel rule (vs qa-doctor's truncation sentinel):** Unlike `qa-doctor` (which truncates after >20 diagnostics), `code-flow-analyst` is exhaustive by design but cannot guarantee full coverage — tools fail, timeouts hit, sections are skipped, scope is too large. When you cannot audit a section or dimension, emit a single finding with:
+
+- `location: "<area-name>:0"` (e.g., `permissions.frontmatter:0`, `concurrency:0`, `data-flow:0`) — `0` is conventionally invalid as a real location, satisfying the schema's `^[^,]+:\d+$` pattern while signalling "not audited".
+- `claim: "section not audited: <reason>"` — name what failed and why (timeout, missing access, scope limit, etc.).
+- `severity: "WARNING"` — coverage gap is real but not necessarily a defect.
+- `evidence_class: "insufficient"` — no proof because the audit was incomplete.
+- `causal_disposition: "unknown"` — cannot determine introduced/worsened without a successful audit.
+- `proof_refs: ["<reason>"]` — at minimum, document the failure cause.
+
+Do NOT emit `findings: []` while leaving coverage gaps — that signals "all clean" and is a contract violation (see `craft.md §Review-Ledger contract`). Use this rule consistently so `craft.md:332`'s claim of "exhaustive" remains accurate.
+
 **Multi-location findings**: one `location` per finding. If a defect spans multiple lines or files, emit one finding per location. Describe the pattern once in the first finding's `claim`; reference subsequent locations in `proof_refs[]` of that first finding. Do not aggregate multiple locations into a single comma-separated string in `location`.
 
 After the JSON literal, add a human-readable Markdown rendering
