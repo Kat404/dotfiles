@@ -167,6 +167,7 @@ Missing `proof_refs[]` (empty array allowed, but the field MUST be present and a
 - `location: "<area-name>:0"` (e.g., `permissions.frontmatter:0`, `concurrency:0`, `data-flow:0`) — `0` is conventionally invalid as a real location, satisfying the schema's `^[^,]+:\d+$` pattern while signalling "not audited".
 - `claim: "section not audited: <reason>"` — name what failed and why (timeout, missing access, scope limit, etc.).
 - `severity: "WARNING"` — coverage gap is real but not necessarily a defect.
+- `sentinel_kind: "coverage"` — typed discriminator; `craft.md §Review-Ledger contract` excludes this from real-defect analysis.
 - `evidence_class: "insufficient"` — no proof because the audit was incomplete.
 - `causal_disposition: "unknown"` — cannot determine introduced/worsened without a successful audit.
 - `proof_refs: ["<reason>"]` — at minimum, document the failure cause.

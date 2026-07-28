@@ -215,6 +215,8 @@ If BOTH report `Lean already. Ship.` → mark `QA {unit}` as `completed`, skip t
 
 If there are findings (BLOCKER or CRITICAL) in either → step 4.
 
+If findings exist but ALL are sentinels (`sentinel_kind: 'truncation'` or `'coverage'`) — no actionable defects — surface to user via Build Report + skip fixer. Block shipment until user explicitly acknowledges the audit incomplete status (re-audit or accept). Sentinels are not code defects; routing to code fixer would be wrong.
+
 #### 4. Fixer (sequential, only if there are findings)
 
 Mark `Fix {unit}` as `in_progress`. Consolidate ALL findings verbatim (DO NOT paraphrase `file:line` or the recommendation):
@@ -329,7 +331,7 @@ Out of scope: write new plans (route to chart), speculative refactors, code styl
 
 When a plan has `## Review-Ledger` section, read it once at start. If `findings: []`, proceed. If non-empty, treat each entry as a pre-existing concern to address before completing the unit. Findings produced DURING your build are NOT written back to `plan.md` — they live in the QA chain run log and the Build Report.
 
-**Emitters differ in completeness semantics.** `code-flow-analyst` emits exhaustive findings (every finding listed). `qa-doctor` may emit a sample of the top 20 real diagnostics (per severity sort) plus a single `<tool-name>:0` truncation sentinel — up to **21 entries** in the array — when a tool produced >20 diagnostics. The scoreboard's combined `qa: <N> tests passed, <M> failed, <K> lints, <J> format drift` is authoritative for the total defect count (sum of `<M> + <K> + <J>` if PASS/FAIL is FAIL). Any finding whose location ends in `:0` is a sentinel (truncation for `qa-doctor`, coverage gap for `code-flow-analyst`), not a real defect — exclude from finding-level analysis. **Default for future emitters**: treat findings as exhaustive unless a `<tool-name>:0` sentinel is present.
+**Emitters differ in completeness semantics.** `code-flow-analyst` emits exhaustive findings (every finding listed). `qa-doctor` may emit a sample of the top 20 real diagnostics (per severity sort) plus a single `<tool-name>:0` truncation sentinel — up to **21 entries** in the array — when a tool produced >20 diagnostics. The scoreboard's combined `qa: <N> tests passed, <M> failed, <K> lints, <J> format drift` is authoritative for the total defect count (sum of `<M> + <K> + <J>` if PASS/FAIL is FAIL). Any finding with `sentinel_kind` set (`"truncation"` or `"coverage"`) is a sentinel, not a real defect — exclude from finding-level analysis. The `:0` location suffix is a legacy convention; `sentinel_kind` is the typed discriminator. **Default for future emitters**: emit `sentinel_kind` on every sentinel finding; absence means non-sentinel (real defect), even if location ends in `:0`.
 
 The literal envelope shape (per `contracts/review-integration/v1/schemas/result-artifact-v2.schema.json`, source adapted from `boundedreview.go:13` `nativeReviewerResultSchema` in gentle-ai):
 
