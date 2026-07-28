@@ -22,11 +22,11 @@ permission:
   edit:
     "*": "deny"
     ".opencode/plans/*/plan.md": "allow"
-    "home/josel/.local/share/opencode/plans/*.md": "allow"
+    "/home/josel/.local/share/opencode/plans/*.md": "allow"
   write:
     "*": "deny"
     ".opencode/plans/*/plan.md": "allow"
-    "home/josel/.local/share/opencode/plans/*.md": "allow"
+    "/home/josel/.local/share/opencode/plans/*.md": "allow"
   apply_patch: "deny"
   bash:
     "*": "ask"
