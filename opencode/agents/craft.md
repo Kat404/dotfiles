@@ -65,7 +65,7 @@ If the user asks to save the plan to disk:
    a. The path the user named in the request (if any) — use it directly, skip resolution.
    b. The output of `git rev-parse --show-toplevel` from within the cwd (fallback to `pwd` if not in a git repo).
    c. The cwd if both above fail.
-2. **Ask once** via `question` confirming the resolved path (default: `<project-root>/ROADMAP.md`); let the user override or cancel.
+2. **Ask once** via `question` confirming the resolved path (default: canonical per `AGENTS.md §Plan template` Handshake: `.opencode/plans/<change-name>/plan.md` or `~/.local/share/opencode/plans/<change>.md`); let the user override or cancel only when explicitly naming an alternative path. The legacy `<project-root>/ROADMAP.md` fallback is deprecated; accept it only if the user names it explicitly.
 3. Write the plan to the confirmed path via `write` tool.
 4. Proceed to the build immediately after writing — do not pause for additional confirmation unless the path is ambiguous.
 5. Reference the saved path in the Build Report header (`Plan persisted: <path>`).
@@ -357,7 +357,11 @@ For the full disjoint taxonomy and severity classification rubric, see `AGENTS.m
 
 When receiving a plan from Chart, the canonical shape is `plan.md` with 5 sections (`## Proposal | ## Spec | ## Design | ## Tasks | ## Review-Ledger`). For full template + per-section field list, see `AGENTS.md §Plan template` (single source).
 
-**Lost-context recovery**: re-read `## Review-Ledger` (empty = clean to start), then `## Tasks` (first unchecked `[ ]`), resume from there. First, rebuild `todowrite` to mirror `## Tasks` (skip `[x]` items; mark current unit as `in_progress`; reset downstream units to `pending`). The in-memory todo MUST match the plan before any other action.
+**Path discovery (before any other action):** resolve the plan path per `AGENTS.md §Plan template` Handshake. Project-relative: run `git rev-parse --show-toplevel`, append `.opencode/plans/<change-name>/plan.md`. Meta-plans: read `~/.local/share/opencode/plans/<change>.md` directly. If neither exists, ask the user before defaulting to inline regeneration.
+
+**Section read order (fresh plan):** `## Tasks` → `## Spec` → `## Review-Ledger` → `## Design` → `## Proposal` (per AGENTS.md §Plan template).
+
+**Lost-context recovery** (after compaction or session restart): re-read `## Review-Ledger` first (to surface prior findings), then `## Tasks` (first unchecked `[ ]`), rebuild `todowrite` to mirror `## Tasks` (skip `[x]` items; mark current unit as `in_progress`; reset downstream units to `pending`). The in-memory todo MUST match the plan before any other action.
 
 ## Hard constraints
 
