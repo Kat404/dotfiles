@@ -291,7 +291,7 @@ defect-level findings to add (still emit the scoreboard normally).
 
 - Sort by severity (`BLOCKER` first, then `CRITICAL`, then `WARNING`, then `SUGGESTION`).
 - Emit the top 20 in `findings[]`.
-- Add a single trailing finding with `location: "<tool-name>:truncated"`, `claim: "<N> additional findings truncated; see verbatim failure tail"`, `severity: "SUGGESTION"`, `evidence_class: "deterministic"`, `causal_disposition: "unknown"`, `proof_refs: ["verbatim failure tail below"]`.
+- Add a single trailing finding with `location: "<tool-name>:0"`, `claim: "<N> additional findings truncated; see verbatim failure tail"`, `severity: "SUGGESTION"`, `evidence_class: "deterministic"`, `causal_disposition: "unknown"`, `proof_refs: ["verbatim failure tail below"]`. (Line `0` is conventionally invalid but satisfies the schema's `^[^,]+:\d+$` location pattern.)
 
 The scoreboard's `qa: <N> failed` count remains authoritative for total defect count. The findings array is a sample, not an exhaustive list.
 

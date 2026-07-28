@@ -107,8 +107,8 @@ prompting the user for path-prefixed commands.
 
 1. Read the report's "Findings" section. Each finding has:
    - `file:line`
-   - Severity tag (`[RED]` / `[ORANGE]` / `[YELLOW]`)
-   - One-line description
+   - Severity tag (`BLOCKER` / `CRITICAL` / `WARNING` / `SUGGESTION`) — the post-build audit vocab; see `AGENTS.md §Severity taxonomy`. Severity comes from `findings[].severity` in the JSON envelope, NOT from drift-guard tags (`[RED]/[ORANGE]/[YELLOW]` are spec-phase vocab Chart emits in `plan.md` only).
+   - One-line description (`claim`)
    - Recommended fix
 
 2. For each finding:
