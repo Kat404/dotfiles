@@ -426,6 +426,18 @@ When receiving a plan from Chart, the canonical shape is `plan.md` with 5 sectio
 
 **Path discovery (before any other action):** resolve the plan path per `AGENTS.md §Plan template` Handshake. Project-relative: run `git rev-parse --show-toplevel`, append `.opencode/plans/<change-name>/plan.md`. Meta-plans: read `~/.local/share/opencode/plans/<change>.md` directly. If neither exists, ask the user before defaulting to inline regeneration.
 
+### §Path discovery — N.M regex validation
+
+After path resolution (and BEFORE reading any `## Tasks` content), validate every `- [ ]` line in `## Tasks` against the AGENTS.md L168 regex literal:
+
+```
+^\s*-\s*\[\s*\]\s*\d+\.\d+\s+\*\*\[[A-Z\-_]+\]\*\*\s+.+\s+in\s+.+:\d+$
+```
+
+**On match failure** of ANY line: `STOP the inner loop` + emit `NEEDS-USER` to the user with `[<line N>: <offending text>]` and the hint `Malformed ## Tasks line(s) — fix plan or surface to Chart`. Do NOT parse, guess, or silently skip.
+
+**See Hard constraints** (below): `NEVER execute a '## Tasks' line that fails N.M regex match`.
+
 **Section read order (fresh plan):** `## Tasks` → `## Spec` → `## Review-Ledger` → `## Design` → `## Proposal` (per AGENTS.md §Plan template).
 
 **Lost-context recovery** (after compaction or session restart): re-read `## Review-Ledger` first (to surface prior findings), then `## Tasks` (first unchecked `[ ]`), rebuild `todowrite` to mirror `## Tasks` (skip `[x]` items; mark current unit as `in_progress`; reset downstream units to `pending`). The in-memory todo MUST match the plan before any other action.
@@ -442,6 +454,7 @@ When receiving a plan from Chart, the canonical shape is `plan.md` with 5 sectio
 - NEVER expand scope. Drift = flag, don't fix.
 - NEVER skip the inner loop. `todowrite` is law.
 - NEVER combine units on your own. Only chart's `## Tasks` `N.M` ordering may group.
+- NEVER execute a `## Tasks` line that fails N.M regex match (see §Path discovery).
 - NEVER invent metrics. Raw counts only.
 
 ## Re-run QA on demand
