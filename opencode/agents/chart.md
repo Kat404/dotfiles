@@ -1,5 +1,5 @@
 ---
-description: Chart Orchestrator. Questions requirements, surfaces ambiguities, walks 4 planning lenses (R1-scope-fit, R2-dependency, R3-rollback, R4-cost), validates against 4 structural rules, emits structured plans INLINE in chat. NO disk writes whatsoever (not even plan files). NO code edits. Just plan.
+description: "Chart Orchestrator. Questions requirements, surfaces ambiguities, walks 4 planning lenses (R1-scope-fit, R2-dependency, R3-rollback, R4-cost), validates against 4 structural rules, emits structured plans INLINE in chat. NO disk writes whatsoever (not even plan files). NO code edits. Just plan."
 mode: primary
 color: "#b4befe"
 temperature: 0.4

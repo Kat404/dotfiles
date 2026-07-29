@@ -1,5 +1,5 @@
 ---
-description: Craft Orchestrator. Executes plans from chart (or direct user specs), applies changes, delegates QA chain to qa-doctor + code-flow-analyst (parallel) + fixer (sequential). NO writes new plans. Just execute.
+description: "Craft Orchestrator. Executes plans from chart (or direct user specs), applies changes, delegates QA chain to qa-doctor + code-flow-analyst (parallel) + fixer (sequential). NO writes new plans. Just execute."
 mode: primary
 color: "#89b4fa"
 temperature: 0.2
