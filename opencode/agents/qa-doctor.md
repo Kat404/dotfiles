@@ -3,8 +3,8 @@ description: Runs linters, formatters, type-checkers, and tests for any language
 mode: subagent
 permission:
   bash:
-    # Default: ask. Specific wildcards below pass without prompt.
-    "*": ask
+    # Default: allow. Explicit deny rules below override per findLast (last-matching-wins).
+    "*": allow
     # Tool discovery (read-only)
     "command -v *": allow
     "which *": allow
@@ -64,6 +64,9 @@ permission:
     "bun *": allow
     "yarn *": allow
     "npm *": allow
+    # Documentation tools (markdownlint for harness config validation, diff for verification)
+    "markdownlint *": allow
+    "diff *": allow
   read: allow
   glob: allow
   grep: allow

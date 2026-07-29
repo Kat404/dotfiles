@@ -29,7 +29,7 @@ permission:
     "/home/josel/.local/share/opencode/plans/*.md": "allow"  # forward-compat: same
   apply_patch: "deny"
   bash:
-    "*": "ask"
+    "*": "allow"
     "rg": "allow"
     "rg *": "allow"
     "fd": "allow"

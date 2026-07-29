@@ -3,8 +3,8 @@ description: Reads code and analyzes dependencies, functions, variables, constan
 mode: subagent
 permission:
   bash:
-    # Default: ask. Specific wildcards below pass without prompt.
-    "*": ask
+    # Default: allow. Explicit deny rules below override per findLast (last-matching-wins).
+    "*": allow
     # Tool discovery (read-only)
     "command -v *": allow
     "which *": allow
@@ -48,6 +48,9 @@ permission:
     "git ls-files *": allow
     "git show-branch *": allow
     "git describe *": allow
+    # Documentation tools (markdownlint for harness config validation, diff for verification)
+    "markdownlint *": allow
+    "diff *": allow
   read: allow
   glob: allow
   grep: allow
