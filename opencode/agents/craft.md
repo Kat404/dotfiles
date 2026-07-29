@@ -17,61 +17,45 @@ permission:
   bash:
     "*": "ask"
     # Broader ask families (consolidated from 18 specific patterns; closes C2 prefix-bypass gap).
-    # findLast ordering: deny rules below override these for known destructive ops.
+    # findLast ordering: deny rules below override these for known dangerous ops.
     "git *": "ask"
     "* install *": "ask"
     "rustup *": "ask"
-    # Safety net: explicit denies for destructive operations.
-    # Position matters for findLast (last-matching-wins): these come
-    # AFTER `*: ask` and all specific ask rules, so any matching
-    # destructive command matches the deny rule, not the ask rule.
-    "rm *": "deny"
-    "mv *": "deny"
-    "cp *": "deny"
-    "chmod *": "deny"
-    "chown *": "deny"
-    "tee *": "deny"
-    ">*": "deny"
-    ">>*": "deny"
+    # Safety net: deny ONLY for shell escape hatches, network/remote, process control, symlinks, in-place writes, ownership.
+    # Position matters for findLast (last-matching-wins): these come AFTER `*: ask` and all specific ask rules, so any matching dangerous command matches the deny rule.
+    # Symlinks (hijacking risk)
     "ln *": "deny"
-    "git push *": "deny"
-    "git commit *": "deny"
-    "git add *": "deny"
-    "git checkout *": "deny"
-    "git stash *": "deny"
-    "git reset *": "deny"
-    "git clean *": "deny"
-    "git rebase *": "deny"
-    "git merge *": "deny"
-    "git cherry-pick *": "deny"
-    "pip *": "deny"
-    "pip3 *": "deny"
-    "uv pip *": "deny"
-    "uv add *": "deny"
-    "npm install *": "deny"
-    "bun install *": "deny"
-    "cargo install *": "deny"
+    # Network / remote access (privilege escalation / data exfil risk)
     "wget *": "deny"
-    "sudo *": "deny"
     "ssh *": "deny"
     "scp *": "deny"
     "rsync *": "deny"
-    "systemctl *": "deny"
+    "sudo *": "deny"
+    # Process control
     "kill *": "deny"
     "killall *": "deny"
     "pkill *": "deny"
-    "python3 -c *": "deny"
-    "python -c *": "deny"
-    "node -e *": "deny"
+    "systemctl *": "deny"
+    # Shell escape hatches (compose with read-only allowlist)
     "bash -c *": "deny"
     "sh -c *": "deny"
     "zsh -c *": "deny"
+    "python -c *": "deny"
+    "python3 -c *": "deny"
+    "node -e *": "deny"
     "eval *": "deny"
     "xargs *": "deny"
+    # find composition risks (would defeat find *: allow via -exec/-delete forms)
     "find -exec *": "deny"
     "find -delete *": "deny"
     "find -execdir *": "deny"
+    # In-place writes (file corruption risk)
     "sed -i *": "deny"
+    "tee *": "deny"
+    ">*": "deny"
+    ">>*": "deny"
+    # Ownership change (typically requires sudo; listed for completeness)
+    "chown *": "deny"
   read:
     "*": "allow"
     "*.env": "ask"
