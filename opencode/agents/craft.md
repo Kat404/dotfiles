@@ -196,15 +196,12 @@ For each `unit`, in order of appearance in the plan:
 
 #### Timeout & cancellation
 
-Craft must NOT deadlock or zombie-wait at any blocking stage. Operational budgets below are **advisory** — opencode 1.18.x `task` tool does NOT expose a native per-task timeout (`task()` calls accept only `subagent_type` + `prompt` per the SDK Part types). User interruption (Ctrl-C / opencode TUI) is the reliable escape hatch; budgets below establish orchestration behavior on timeout/cancellation.
+opencode 1.18.x `task` tool no expone timeout nativo. Ctrl-C del user es el escape hatch reliable. Budgets advisory:
 
-- **Per `task` call** — target **10 minutes**. Covers `qa-doctor`, `code-flow-analyst`, `fixer`, and `qa-doctor` (re-verify). If exceeded or no signal returned: treat as BLOCKED — do NOT auto-retry.
-- **Per unit** — target **45 minutes** wall-clock. Covers initial QA chain + up to 3 fixer/re-verify rounds. If exceeded: mark unit `BLOCKED` and STOP; never consumes another automatic retry.
-- **Parallel QA** (Step 3) — if EITHER `qa-doctor` or `code-flow-analyst` exceeds 10min or returns no signal: incomplete QA. Do NOT treat the surviving result as a clean run.
-- **Fixer interruption** (Step 4) — preserve partial diff. Snapshot `git status` + `git diff --name-only`. Surface the dirty files to the user. Mark unit `BLOCKED: fixer interrupted; diff requires review`. Do NOT auto-invoke another fixer.
-- **User wait / SENTINEL-only branch** (L232) — never auto-accept. Mark unit `BLOCKED: audit incomplete; awaiting user decision`. Persist the current `todowrite` checkpoint so resume is safe. User choice: `re-audit` / `accept incomplete audit` / `cancel unit`.
-- **User cancellation** — user may interrupt at any time. Stop spawning tasks immediately. Preserve dirty worktree. Report current `todowrite` and resume options on next message.
-- **Report fields on BLOCKED** — name the timed-out stage, elapsed vs target, remaining dirty files, and the resumable next action.
+- **Per `task` call** — 10 min. Exceeded: BLOCKED, no auto-retry.
+- **Per unit** — 45 min wall-clock (QA + 3 fixer rounds). Exceeded: STOP, mark BLOCKED.
+- **Parallel QA** — si cualquier subagent > 10min o no signal: incomplete QA, do NOT trust surviving result.
+- **BLOCKED report** — name stage + elapsed vs target + dirty files + resumable next action.
 
 Per-step policy (Step 3, 4, 5, sentinel branch): each applies §Timeout & cancellation; do NOT duplicate the policy inline.
 
