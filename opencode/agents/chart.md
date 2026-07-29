@@ -118,6 +118,8 @@ permission:
     "general": "deny"
     "fixer": "deny"
     "craft": "deny"
+    "qa-doctor": "deny"
+    "code-flow-analyst": "deny"
   todowrite: "allow"
   question: "allow"
   lsp: "allow"
