@@ -48,7 +48,12 @@ permission:
     "git ls-files *": allow
     "git show-branch *": allow
     "git describe *": allow
-  read: allow
+  read:
+    "*": "allow"
+    "*.env": "ask"
+    "*.env.*": "ask"
+    "*.pem": "ask"
+    "*.key": "ask"
   glob: allow
   grep: allow
   edit: deny

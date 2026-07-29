@@ -66,7 +66,12 @@ permission:
     "bun *": allow
     "yarn *": allow
     "npm *": allow
-  read: allow
+  read:
+    "*": "allow"
+    "*.env": "ask"
+    "*.env.*": "ask"
+    "*.pem": "ask"
+    "*.key": "ask"
   glob: allow
   grep: allow
   edit: allow
