@@ -1,5 +1,5 @@
 ---
-description: Reads code and analyzes dependencies, functions, variables, constants, flows, databases, auth, security, memory and anything relevant to the stack. Stack-agnostic. Uses ripgrep (or fd for file finding). Read-only: never modifies files, never installs packages, never downloads from the internet. Use to deep-dive into code flow, contract changes, and side effects after a primary agent edits code.
+description: "Reads code and analyzes dependencies, functions, variables, constants, flows, databases, auth, security, memory and anything relevant to the stack. Stack-agnostic. Uses ripgrep (or fd for file finding). Read-only: never modifies files, never installs packages, never downloads from the internet. Use to deep-dive into code flow, contract changes, and side effects after a primary agent edits code."
 mode: subagent
 permission:
   bash:
