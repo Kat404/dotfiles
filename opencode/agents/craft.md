@@ -16,24 +16,11 @@ permission:
     "/home/josel/.cache/opencode/packages/**": "allow"
   bash:
     "*": "ask"
-    "git add *": "ask"
-    "git commit *": "ask"
-    "git push *": "ask"
-    "git stash *": "ask"
-    "git stash pop *": "ask"
-    "git * --amend *": "ask"
-    "git * --force *": "ask"
-    "git * --no-verify *": "ask"
-    "pip install *": "ask"
-    "pip3 install *": "ask"
-    "uv pip install *": "ask"
-    "npm install *": "ask"
-    "pnpm install *": "ask"
-    "bun install *": "ask"
-    "yarn install *": "ask"
-    "cargo install *": "ask"
-    "rustup install *": "ask"
-    "rustup update *": "ask"
+    # Broader ask families (consolidated from 18 specific patterns; closes C2 prefix-bypass gap).
+    # findLast ordering: deny rules below override these for known destructive ops.
+    "git *": "ask"
+    "* install *": "ask"
+    "rustup *": "ask"
     # Safety net: explicit denies for destructive operations.
     # Position matters for findLast (last-matching-wins): these come
     # AFTER `*: ask` and all specific ask rules, so any matching
