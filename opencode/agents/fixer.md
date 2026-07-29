@@ -27,21 +27,20 @@ permission:
     "sed *": allow
     "readlink *": allow
     "tree *": allow
-    "xargs *": "deny"
-    # Safety net: deny find -exec/-delete/-execdir forms (would compose with find *: allow to read .env via 'find / -name .env -exec cat {}').
-    # findLast ordering: these come AFTER find *: allow, so find <path> -exec <cmd> matches the deny.
-    "find -exec *": "deny"
-    "find -delete *": "deny"
-    "find -execdir *": "deny"
-    "command *": allow
+"command *": allow
     "prettier *": allow
     "git stash *": allow
     "git stash pop *": allow
-    # File finding (prefer fd > find; rg > grep)
     "find *": allow
     "fd *": allow
     "grep *": allow
     "rg *": allow
+    "xargs *": "deny"
+    # Safety net: deny find -exec/-delete/-execdir forms (would compose with find *: allow to read .env via 'find / -name .env -exec cat {}').
+    # findLast ordering: these come AFTER find *: allow, so find <path> -exec <cmd> matches the deny (findLast last-wins).
+    "find -exec *": "deny"
+    "find -delete *": "deny"
+    "find -execdir *": "deny"
     # Git safe-readonly (no push/commit/reset/clean/rebase/branch -D)
     "git status *": allow
     "git diff *": allow
