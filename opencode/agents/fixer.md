@@ -2,6 +2,7 @@
 description: Applies EXACT fixes from reports (qa-doctor, code-flow-analyst). No new features, no scope creep, no unrelated cleanup, no test-weakening. Use after a report lists findings with file:line + recommendation.
 mode: subagent
 permission:
+  doom_loop: "ask"
   bash:
     # Default: ask. Specific wildcards below pass without prompt.
     "*": ask

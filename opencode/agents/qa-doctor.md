@@ -2,6 +2,7 @@
 description: "Runs linters, formatters, type-checkers, and tests for any language stack. Detects Python (ruff+ty), JS/TS (oxlint+oxfmt, with Node package manager strictly by lockfile: pnpm > bun > yarn > npm), Rust (cargo+clippy+rustfmt), Zig (zig ast-check+fmt) automatically. Read-only: never modifies files, never installs packages, never downloads from the internet. Use after code changes to verify quality."
 mode: subagent
 permission:
+  doom_loop: "ask"
   bash:
     # Default: ask. Specific wildcards below pass without prompt.
     "*": ask
