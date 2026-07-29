@@ -27,7 +27,12 @@ permission:
     "sed *": allow
     "readlink *": allow
     "tree *": allow
-    "xargs *": allow
+    "xargs *": "deny"
+    # Safety net: deny find -exec/-delete/-execdir forms (would compose with find *: allow to read .env via 'find / -name .env -exec cat {}').
+    # findLast ordering: these come AFTER find *: allow, so find <path> -exec <cmd> matches the deny.
+    "find -exec *": "deny"
+    "find -delete *": "deny"
+    "find -execdir *": "deny"
     "command *": allow
     "prettier *": allow
     # File finding (prefer fd > find; rg > grep)
