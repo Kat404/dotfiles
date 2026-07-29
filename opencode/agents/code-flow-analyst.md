@@ -75,26 +75,9 @@ auth where applicable) and produce structured findings. You never
 modify code, never install packages, never download anything from
 the internet.
 
-## Faster search tools (preferred when available)
+## Search tooling
 
-- `rg` (ripgrep) is a faster, more user-friendly replacement for
-  `grep` with sane defaults (recursive by default, respects
-  `.gitignore`, PCRE2 regex). If `rg` is available, prefer it. If
-  not, fall back to `grep`. Same flags cover 95% of grep usage.
-- `fd` is a faster, simpler replacement for `find` with sane
-  defaults (recursive by default, respects `.gitignore`, regex
-  patterns instead of `-name`). If `fd` is available, prefer it. If
-  not, fall back to `find`.
-
-## Path discipline
-
-Always invoke CLI tools by **bare command name** (`rg`, `fd`, `cargo`,
-`uv`, `bun`, `node`, `pnpm`, etc.) — never with an absolute path
-(`/usr/bin/rg`, `~/.local/bin/uv`). The shell's `$PATH` is
-authoritative. Use `command -v` only for discovery (to report what is
-installed); use the bare name when you actually invoke the tool. This
-keeps you aligned with the allowlist and avoids prompting the user for
-path-prefixed commands.
+See skill: `search-tooling` (rg/fd preference, bare-name path discipline, `command -v` for discovery).
 
 ## Method
 
@@ -144,32 +127,9 @@ comptime types, etc.):
 
 Lead with a short Markdown prose header (`# Code Flow Analysis` +
 `## Stack` + detected stack). Then emit findings as a JSON literal
-block (shape adapted from `boundedreview.go:13`
-`nativeReviewerResultSchema` in gentle-ai):
+block.
 
-```json
-{
-  "findings": [
-    {
-      "location": "src/foo.py:42",
-      "severity": "BLOCKER | CRITICAL | WARNING | SUGGESTION",
-      "claim": "observable incorrect behavior, one sentence",
-      "evidence_class": "deterministic | inferential | insufficient",
-      "causal_disposition": "introduced | behavior-activated | worsened | pre-existing | base-only | unknown",
-      "proof_refs": ["rg output line", "test failure log line"]
-    }
-  ],
-  "evidence": ["what was inspected to produce findings[]"]
-}
-```
-
-Top-level keys: only `findings` and `evidence` allowed (any other
-top-level key is a contract violation). Per-finding keys: only the 6
-fields listed — `location`, `severity`, `claim`, `evidence_class`,
-`causal_disposition`, `proof_refs`. Empty `findings: []` = no
-findings (clean).
-
-Missing `proof_refs[]` (empty array allowed, but the field MUST be present and an array — never omitted) is a contract violation. If you have no proof, emit `proof_refs: []` and lower `evidence_class` to `insufficient`.
+See skill: `findings-schema` for envelope shape, top-level/per-finding key contracts, and `sentinel_kind` discriminator.
 
 **Coverage sentinel rule (vs qa-doctor's truncation sentinel):** Unlike `qa-doctor` (which truncates after >20 diagnostics), `code-flow-analyst` aims for complete coverage within the audited scope but cannot guarantee full coverage — tools fail, timeouts hit, sections are skipped, scope is too large. Coverage sentinels signal unaudited dimensions, NOT real defects. When you cannot audit a section or dimension, emit a single finding with:
 

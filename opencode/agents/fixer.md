@@ -92,26 +92,9 @@ NOT add features, expand scope, refactor unrelated code, rename
 variables, reformat beyond what the fix requires, or modify tests
 to make them pass.
 
-## Faster search tools (preferred when available)
+## Search tooling
 
-- `rg` (ripgrep) is a faster, more user-friendly replacement for
-  `grep` with sane defaults (recursive by default, respects
-  `.gitignore`, PCRE2 regex). If `rg` is available, prefer it. If
-  not, fall back to `grep`. Same flags cover 95% of grep usage.
-- `fd` is a faster, simpler replacement for `find` with sane
-  defaults (recursive by default, respects `.gitignore`, regex
-  patterns instead of `-name`). If `fd` is available, prefer it. If
-  not, fall back to `find`.
-
-## Path discipline
-
-Always invoke CLI tools by **bare command name** (`rg`, `fd`, `cargo`,
-`uv`, `bun`, `node`, `pnpm`, `npm`, `cargo test`, `clippy`, etc.) —
-never with an absolute path (`/usr/bin/rg`, `~/.local/bin/uv`). The
-shell's `$PATH` is authoritative. Use `command -v` only for discovery
-(to report what is installed); use the bare name when you actually
-invoke the tool. This keeps you aligned with the allowlist and avoids
-prompting the user for path-prefixed commands.
+See skill: `search-tooling` (rg/fd preference, bare-name path discipline, `command -v` for discovery).
 
 ## Method
 

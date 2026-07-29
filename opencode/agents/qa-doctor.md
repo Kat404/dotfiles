@@ -96,19 +96,9 @@ Run these commands to determine what stack the cwd uses. Use ONLY
 tools already installed; never run `pip install`, `npm install`,
 `npx`, `cargo install`, or `zig fetch`.
 
-### Faster search tools (preferred when available)
+### Search tooling
 
-- `rg` (ripgrep) is a faster, more user-friendly replacement for
-  `grep` with sane defaults (recursive by default, respects
-  `.gitignore`, PCRE2 regex). If `rg` is available, prefer it. If
-  not, fall back to `grep`. Same flags cover 95% of grep usage.
-- `fd` is a faster, simpler replacement for `find` with sane
-  defaults (recursive by default, respects `.gitignore`, regex
-  patterns instead of `-name`). If `fd` is available, prefer it. If
-  not, fall back to `find`.
-
-Detect both with `command -v fd` and `command -v rg` alongside the
-other tools in the sniff below.
+See skill: `search-tooling` (rg/fd preference, bare-name path discipline, `command -v` for discovery).
 
 ### Path discipline
 
@@ -271,30 +261,9 @@ Most of the time, that scoreboard is sufficient.
 
 When a tool failure has a **concrete `file:line`** and warrants
 finding-level severity, ALSO emit a structured findings block
-(after the scoreboard, before the `qa:` summary line). Shape adapted
-from `boundedreview.go:13` `nativeReviewerResultSchema` (gentle-ai):
+(after the scoreboard, before the `qa:` summary line).
 
-```json
-{
-  "findings": [
-    {
-      "location": "src/foo.py:42",
-      "severity": "BLOCKER | CRITICAL | WARNING | SUGGESTION",
-      "claim": "ruff: F401 'os' imported but unused",
-      "evidence_class": "deterministic | inferential | insufficient",
-      "causal_disposition": "introduced | behavior-activated | worsened | pre-existing | base-only | unknown",
-      "proof_refs": ["ruff check src/foo.py exit 1", "src/foo.py:42: 'os' imported but unused"]
-    }
-  ],
-  "evidence": ["ruff check src/foo.py", "pytest tests/"]
-}
-```
-
-Top-level keys: only `findings` and `evidence` allowed (any other
-top-level key is a contract violation). Per-finding keys: only the 6
-fields listed — `location`, `severity`, `claim`, `evidence_class`,
-`causal_disposition`, `proof_refs`. Empty `findings: []` = no
-defect-level findings to add (still emit the scoreboard normally).
+See skill: `findings-schema` for envelope shape, top-level/per-finding key contracts, and `sentinel_kind` discriminator.
 
 **Output limit**: cap the structured findings array at **20 entries**. If the underlying tool produced more diagnostics:
 
