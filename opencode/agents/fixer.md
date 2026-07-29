@@ -28,7 +28,7 @@ permission:
     "sed *": allow
     "readlink *": allow
     "tree *": allow
-"command *": allow
+    "command *": allow
     "prettier *": allow
     "git stash *": allow
     "git stash pop *": allow
