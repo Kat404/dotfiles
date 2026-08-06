@@ -1,13 +1,15 @@
 # env.nu
 #
 # Installed by:
-# version = "0.113.1"
+# version = "0.114.1"
 #
 # ~/.config/nushell/env.nu
 
 # ❯ Variables Esenciales & Editor {
 $env.EDITOR = "helix"
 $env.VISUAL = "helix"
+$env.OPENCODE_DISABLE_LSP_DOWNLOAD = "true"
+$env.OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS = "true"
 # }
 
 # ❯ Integración de Herramientas Externas (FZF & Caparace) {
@@ -31,13 +33,13 @@ zoxide init nushell | save -f ~/.zoxide.nu
 
 # ❯ Variables de Runtime & Lenguajes {
 $env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
-$env.UV_HOME = $"($env.HOME)/.local/bin"
+$env.LOCAL_HOME = $"($env.HOME)/.local/bin"
 # }
 
 # ❯ Gestión 'Awesome' del PATH >_< {
 let binary_paths = [
     $"($env.HOME)/.cargo/bin"
-    $env.UV_HOME
+    $env.LOCAL_HOME
     $"($env.PNPM_HOME)/bin"
 ]
 

@@ -87,9 +87,6 @@ alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
 alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
 alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
 alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
-alias ollamastart = sudo systemctl start ollama      # <-- Inicializar Ollama
-alias ollamastop = sudo systemctl stop ollama        # <-- Detener Ollama
-alias clc = ollama launch claude                     # <-- Inicializar Claude Code mediante Ollama
 
 # =============================================
 # 5.                 PODMAN
