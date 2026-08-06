@@ -1,0 +1,10 @@
+node_modules
+package.json
+package-lock.json
+bun.lock
+# Secrets — never commit API keys
+secrets/
+# Runtime state files
+.caveman-active
+.ponytail-active
+.gentle-ai-default-agent.json

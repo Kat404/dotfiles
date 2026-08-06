@@ -102,14 +102,8 @@ declare -a NUSHELL_LINKS=(
     "nushell/.catppuccin_mocha.nu:.catppuccin_mocha.nu"
 )
 
-declare -a OPENCODE_LINKS=(
-    "opencode/opencode.jsonc:.config/opencode/opencode.jsonc"
-    "opencode/package.json:.config/opencode/package.json"
-    "opencode/agents/code-flow-analyst.md:.config/opencode/agents/code-flow-analyst.md"
-    "opencode/agents/fixer.md:.config/opencode/agents/fixer.md"
-    "opencode/agents/qa-doctor.md:.config/opencode/agents/qa-doctor.md"
-    "opencode/commands/orchestrate-qa.md:.config/opencode/commands/orchestrate-qa.md"
-)
+# Opencode: whole directory is symlinked to dotfiles (no individual file links)
+declare -a OPENCODE_LINKS=()
 
 # --- FUNCIONES ---
 
@@ -1297,6 +1291,19 @@ fi
 # Opencode (solo si el usuario eligió durante la instalación Full Arch)
 if [[ "${INSTALL_OPENCODE:-0}" == "1" ]]; then
     FILES_TO_LINK+=("${OPENCODE_LINKS[@]}")
+    # Directory symlink: ~/.config/opencode → ~/.dotfiles/opencode
+    OPENCODE_SRC="$DOTFILES_DIR/opencode"
+    OPENCODE_DST="$HOME/.config/opencode"
+    if [[ -d "$OPENCODE_SRC" ]]; then
+        if [[ -L "$OPENCODE_DST" ]]; then
+            echo "✓ Opencode ya está vinculado"
+        elif [[ -e "$OPENCODE_DST" ]]; then
+            echo "⚠️  $OPENCODE_DST existe y no es symlink. Backup manual requerido."
+        else
+            ln -s "$OPENCODE_SRC" "$OPENCODE_DST"
+            echo "✓ Opencode vinculado: $OPENCODE_DST → $OPENCODE_SRC"
+        fi
+    fi
 fi
 
 # Zoxide setup se debe generar para independientemente del shell que seleccione el usuario.

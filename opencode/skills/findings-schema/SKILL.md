@@ -15,20 +15,20 @@ Trigger when a subagent emits review findings (`qa-doctor`, `code-flow-analyst`)
 - **Top-level keys:** only `findings` (array) and `evidence` (array). Any other top-level key = contract violation.
 - **`findings: []` (empty)** = clean. `findings` non-empty = list of finding records.
 - **Per-finding keys:** exactly 6 — `location`, `severity`, `claim`, `evidence_class`, `causal_disposition`, `proof_refs`. Missing `proof_refs[]` (even empty) = contract violation.
-- **Severity enum** (review vocab, NOT drift-guard vocab): `BLOCKER | CRITICAL | WARNING | SUGGESTION`. Drift guards `[RED]/[ORANGE]/[YELLOW]` are chart-only.
+- **Severity enum** (review vocab, NOT drift-guard vocab): `BLOCKER | CRITICAL | WARNING | SUGGESTION`. Drift guards `[RED]/[ORANGE]/[YELLOW]` are mitril-only.
 - **`evidence_class` enum:** `deterministic | inferential | insufficient`.
 - **`causal_disposition` enum:** `introduced | behavior-activated | worsened | pre-existing | base-only | unknown`.
 - **`sentinel_kind`** (optional): `"truncation"` or `"coverage"`. Absence = real defect, not sentinel.
 
 ## Decision Gates
 
-| Situation                                         | Action                                                       |
-| ------------------------------------------------- | ------------------------------------------------------------ |
-| Empty findings                                    | emit `{"findings": [], "evidence": []}`                      |
-| Findings with mixed severities                    | emit full envelope, do NOT filter BLOCKER/CRITICAL silently  |
-| Sentinel findings (`sentinel_kind` set)           | surface to user, do NOT route to fixer (sentinels are not code defects) |
-| Missing `proof_refs[]` field                      | emit empty array `[]`; missing field = contract violation    |
-| Unknown severity value                            | reject; do NOT emit                                          |
+| Situation                               | Action                                                                  |
+| --------------------------------------- | ----------------------------------------------------------------------- |
+| Empty findings                          | emit `{"findings": [], "evidence": []}`                                 |
+| Findings with mixed severities          | emit full envelope, do NOT filter BLOCKER/CRITICAL silently             |
+| Sentinel findings (`sentinel_kind` set) | surface to user, do NOT route to fixer (sentinels are not code defects) |
+| Missing `proof_refs[]` field            | emit empty array `[]`; missing field = contract violation               |
+| Unknown severity value                  | reject; do NOT emit                                                     |
 
 ## Steps
 

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencode.dev/contracts/review-integration/v1/schemas/result-artifact-v2.schema.json",
+  "title": "OpenCode review-finding envelope v1",
+  "description": "Envelope for findings emitted by qa-doctor and code-flow-analyst subagents. Adapted from /tmp/gentle-ai/contracts/review-integration/v1/schemas/result-artifact-v2.schema.json (per-finding payload pattern) and /tmp/gentle-ai/internal/components/sdd/boundedreview.go:13 (nativeReviewerResultSchema constant). Intentionally forked to map gentle-ai's per-artifact admission shape (sha256/lineage_id/lens) to our per-finding payload shape (location/severity/claim/evidence_class/causal_disposition/proof_refs).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["findings", "evidence"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/finding"}
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["location", "severity", "claim", "evidence_class", "causal_disposition", "proof_refs"],
+      "properties": {
+        "location": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^,]+:\\d+$",
+          "description": "file:line reference. ONE location per finding. Path must NOT contain commas (enforced by `^[^,]+:\\d+$`); for multi-line defects, emit one finding per location and reference subsequent locations in proof_refs[]."
+        },
+        "severity": {
+          "enum": ["BLOCKER", "CRITICAL", "WARNING", "SUGGESTION"],
+          "description": "BLOCKER/CRITICAL/WARNING/SUGGESTION. Disjoint from spec-phase drift guards [RED]/[ORANGE]/[YELLOW]."
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One-sentence observable incorrect behavior."
+        },
+        "evidence_class": {
+          "enum": ["deterministic", "inferential", "insufficient"],
+          "description": "deterministic = tool output proves the finding; inferential = cause inferred; insufficient = partial evidence."
+        },
+        "causal_disposition": {
+          "enum": ["introduced", "behavior-activated", "worsened", "pre-existing", "base-only", "unknown"],
+          "description": "How the candidate relates to baseline. Default 'unknown' when comparison is not available."
+        },
+        "proof_refs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Concrete evidence (rg output lines, test failure logs, tool stderr). Empty array allowed; field MUST be present."
+        },
+        "sentinel_kind": {
+          "type": "string",
+          "enum": ["truncation", "coverage"],
+          "description": "Optional sentinel marker. `truncation` (qa-doctor): >20 diagnostics truncated, severity SUGGESTION. `coverage` (code-flow-analyst): unaudited section, severity WARNING. Absence = non-sentinel finding. The `:0` location suffix is a legacy convention; this field is the typed discriminator."
+        }
+      }
+    }
+  }
+}
