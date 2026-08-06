@@ -6,41 +6,65 @@ import { createMemo } from "solid-js"
 
 const id = "mitril-eye-logo"
 
-// Catppuccin Mocha — 5-step halftone ramp mapped to shade characters.
-// Darker pixels → cooler/darker greys; lighter pixels → Catppuccin accents.
+// Toggle to switch between multi-color and single-color variants.
+// multi: per-character fg via <span style={{fg, bg}}>
+// mono:  single fg for entire logo (rose-style fallback)
+const MODE: "multi" | "mono" = "multi"
+const MONO_COLOR = "#a02525" // wine/lava red — fallback fg
+
+// Catppuccin-flavoured ramp — wine red center → grey rings → black background.
 const SHADE_COLORS: Record<string, { fg?: string; bg: string }> = {
-  " ": { bg: "#11111b" },                 // pupil → Crust (deep void)
-  "█": { fg: "#45475a", bg: "#11111b" },  // pupil rim → Surface1 (dark grey)
-  "▓": { fg: "#89b4fa", bg: "#11111b" },  // inner iris → Blue (Catppuccin accent)
-  "▒": { fg: "#b4befe", bg: "#11111b" },  // mid iris → Lavender
-  "░": { fg: "#cdd6f4", bg: "#11111b" },  // outer sclera → Text (lightest glow)
+  " ": { bg: "#11111b" },
+  "█": { fg: "#a02525", bg: "#11111b" }, // wine red centre
+  "▓": { fg: "#45475a", bg: "#11111b" }, // dark grey rim
+  "▒": { fg: "#7f849c", bg: "#11111b" }, // mid grey iris
+  "░": { fg: "#a6adc8", bg: "#11111b" }, // light grey sclera
 }
 
-// COSMIC — central surveillance eye + scattered constellation of micro-eyes.
-// 18 lines × 70 cols — fits in most TUI splash areas.
+// COSMIC — symmetric surveillance eye. 18 lines × 70 cols.
 const COSMIC: readonly string[] = [
-  "          ▓▒                       ▒                      ▓▒          ",
-  "   ▓▒     ▒           ▓▒           ▓              ▓▒      ▒           ",
-  "   ▒       ░    ▓▒    ▒ ▒▒▒▒▒▒▒▒░░░░░░░░░▒▒▒▒▒▒▒   ▒        ░      ▓▒",
-  "            ▒▓  ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒   ▓▒       ▒   ",
-  "    ▓▒      ▒▒▓▒░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒ ▓▒        ",
-  "    ▒    ▒▒▒░░▒░░░▒▒▒▒▓▒▒▒▓▒▒▒▓▒▒▒▓▓▓▓▓▓▓▓▓▒▒▒▒▓▒▒▒▓▒░░░░░▒▒▒    ▓▒  ",
-  "       ▒▒░░░░░░▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒░░░░░░▒▒  ▒   ",
-  "      ▒▒░░░░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓███▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░░░░▒▒     ",
-  "     ▒▒░░░░░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓████       ████▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒░░░░░▒▒    ",
-  "▒▓▓▓ ▒▒░░░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓███           ███▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░░░▒▒ ▓▓▓  ",
-  "     ▒▒░░░░░▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓████       ████▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒░░░░░▒▒    ",
-  "      ▒▒░░░░░▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓███▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░░░░▒▒     ",
-  "   ▓▒  ▒▒░░░░░░▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▒▒▒▒▒░░░░░░▒▒  ▓▒  ",
-  "   ▒     ▒▒▒░░░░▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░▓▒▒▒    ▒   ",
-  "          ▓▒▒▒▒░▒░░░░░▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒       ▓▒  ",
-  "          ▒ ▒▓   ▒▒▒░░▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒   ▓▒       ▒   ",
-  "     ▓▒    ░    ▓▒      ▒▒▒▒▒▒▒▒░░░░░░░░░▒▒▒▒▒▒▒     ▓▒     ░          ",
-  "     ▒          ▒                  ▓                ▒         ▓▒      ",
+  "          ▓▒                      ▒▒                      ▒▓          ",
+  "   ▓▒     ▒                       ▒▒                       ▒     ▒▓   ",
+  "   ▒       ▒▒     ▓▒                              ▒▓     ▒▒       ▒   ",
+  "            ░▒▒   ▒       ░░░░░░░░░░░░░░░░░░       ▒   ▒▒░            ",
+  "                   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    ",
+  "               ░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░               ",
+  "            ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░            ",
+  "           ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░░░░░░░░           ",
+  "          ░░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓████████▓▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░░          ",
+  "▒░░▒▒▒    ░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓████████████▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░    ▒▒▒░░▒",
+  "          ░░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓████████▓▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░░          ",
+  "           ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░░░░░░░░           ",
+  "            ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░            ",
+  "               ░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░               ",
+  "                   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    ",
+  "   ▓▒       ░▒▒           ░░░░░░░░░░░░░░░░░░           ▒▒░       ▒▓   ",
+  "   ▒       ▒▒     ▓▒                              ▒▓     ▒▒       ▒   ",
+  "          ▓▒      ▒               ▒▒               ▒      ▒▓           ",
 ]
 
-// Split a line into runs of contiguous same-shade characters so each run
-// becomes a single <span> with its own fg/bg color inside the parent <text>.
+// MONO — single-color fallback. Identical shape, gradient via char density only.
+const MONO: readonly string[] = [
+  "          ▓▒                      ▒▒                      ▒▓          ",
+  "   ▓▒     ▒                       ▒▒                       ▒     ▒▓   ",
+  "   ▒       ▒▒     ▓▒                              ▒▓     ▒▒       ▒   ",
+  "            ░▒▒   ▒       ░░░░░░░░░░░░░░░░░░       ▒   ▒▒░            ",
+  "                   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    ",
+  "               ░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░               ",
+  "            ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░            ",
+  "           ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░░░░░░░░           ",
+  "          ░░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓████████▓▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░░          ",
+  "▒░░▒▒▒    ░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓████████████▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░    ▒▒▒░░▒",
+  "          ░░░░░░░░░▒▒▒▒▒▒▒▒▓▓▓▓████████▓▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░░          ",
+  "           ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░░░░░░░░           ",
+  "            ░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░            ",
+  "               ░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░               ",
+  "                   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    ",
+  "   ▓▒       ░▒▒           ░░░░░░░░░░░░░░░░░░           ▒▒░       ▒▓   ",
+  "   ▒       ▒▒     ▓▒                              ▒▓     ▒▒       ▒   ",
+  "          ▓▒      ▒               ▒▒               ▒      ▒▒           ",
+]
+
 function splitLine(line: string): Array<{ shade: string; text: string }> {
   const runs: Array<{ shade: string; text: string }> = []
   let cur = ""
@@ -60,9 +84,23 @@ function splitLine(line: string): Array<{ shade: string; text: string }> {
 
 const Logo = () => {
   const dim = useTerminalDimensions()
-  // No text fallback — always render the eye. Will visibly clip on tiny terminals,
-  // but the user has already chosen visual fidelity over a generic compact glyph.
   const _term = dim()
+
+  if (MODE === "mono") {
+    // Single fg color — same approach as gentle-ai's rose logo.
+    // The <text> element accepts fg directly; bg on text also works.
+    return (
+      <box flexDirection="column" alignItems="center">
+        {MONO.map((line, y) => (
+          <text key={y} fg={MONO_COLOR} bg="#11111b">
+            {line}
+          </text>
+        ))}
+      </box>
+    )
+  }
+
+  // Multi-color — per-character fg via <span style={{fg, bg}}>.
   return (
     <box flexDirection="column" alignItems="center">
       {COSMIC.map((line, y) => (
@@ -70,7 +108,7 @@ const Logo = () => {
           {splitLine(line).map((run, x) => {
             const c = SHADE_COLORS[run.shade] ?? { bg: "#11111b" }
             return (
-              <span key={x} fg={c.fg} bg={c.bg}>
+              <span key={x} style={{ fg: c.fg, bg: c.bg }}>
                 {run.text}
               </span>
             )
