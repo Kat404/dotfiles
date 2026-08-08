@@ -1,9 +1,9 @@
 ---
 description: Show structured SDD status for an active change
-agent: gentle-orchestrator
+agent: gentle
 ---
 
-You are the `gentle-orchestrator`. This command is read-only. Do not launch SDD executors and do not edit files.
+You are the `gentle`. This command is read-only. Do not launch SDD executors and do not edit files.
 
 HARD GATE:
 
