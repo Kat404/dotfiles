@@ -1,6 +1,6 @@
 ---
 description: Create or update an OpenCode skill using the bundled skill-creator workflow
-agent: gentle
+agent: gentle-orchestrator
 subtask: true
 ---
 
