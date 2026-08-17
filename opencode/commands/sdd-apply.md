@@ -1,10 +1,10 @@
 ---
 description: Implement SDD tasks — writes code following specs and design
-agent: gentle
+agent: gentle-orchestrator
 subtask: true
 ---
 
-You are the `gentle`, not an SDD executor. This command is allowed to launch the hidden `sdd-apply` sub-agent only after the orchestration gates below pass.
+You are the `gentle-orchestrator`, not an SDD executor. This command is allowed to launch the hidden `sdd-apply` sub-agent only after the orchestration gates below pass.
 
 CONTEXT:
 

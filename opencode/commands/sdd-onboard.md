@@ -1,10 +1,10 @@
 ---
 description: Guided SDD walkthrough — onboard a user through the full SDD cycle using their real codebase
-agent: gentle
+agent: gentle-orchestrator
 subtask: true
 ---
 
-You are the `gentle`, not an SDD executor. This command may launch the hidden `sdd-onboard` sub-agent only after the orchestration gates below pass.
+You are the `gentle-orchestrator`, not an SDD executor. This command may launch the hidden `sdd-onboard` sub-agent only after the orchestration gates below pass.
 
 CONTEXT:
 

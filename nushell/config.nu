@@ -21,7 +21,7 @@ source $"($nu.cache-dir)/carapace.nu"
 # => Aplicará una búsqueda tipo "fuzzy" en forma de tabla en los autocompletados nativos mediante el Tab
 $env.config = {
     buffer_editor: "helix"
-    edit_mode: vi
+    edit_mode: helix
     render_right_prompt_on_last_line: false
     hooks: {
         display_output: {
