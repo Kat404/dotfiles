@@ -19,14 +19,15 @@
     <click_to_launch value="true"/>
     <click_commands value="true"/>
     
-    <!-- Component Visibility -->
-    <show_device value="false"/>             <!-- Disabled: Prevents T-UI from rendering centered title -->
+    <!-- Component Visibility & Counters -->
+    <show_device value="false"/>
     <show_ram value="true"/>
     <show_battery value="true"/>
     <show_time value="true"/>
     <show_storage value="true"/>
     <show_network_info value="true"/>
     <show_notes value="false"/>
+    <show_unlock_counter value="false"/>
     
     <!-- Font Sizing (pt) -->
     <input_output_size value="14"/>
