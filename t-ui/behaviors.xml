@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <behavior>
-    <!-- User & Shell Environment -->
+    <!-- User & Device Info -->
     <username value="josel"/>
+    <deviceName value="reno5"/>
     <home_path value="/storage/emulated/0"/>
     <input_prefix value="➜ "/>
     
@@ -14,29 +15,29 @@
     <enable_app_launch value="true"/>
     <show_alias_context value="false"/>
     
-    <!-- Nushell Table Structure with Pure Monochrome CLI Glyphs (No Emojis, 31 chars) -->
+    <!-- Nushell Table Structure (Exact 29-char width: Perfect Alignment) -->
     <!-- Row 0 + Table Header (device_color) -->
-    <device_format value="╭──────────┬──────────────────╮%n│ metric   │ value            │%n├──────────┼──────────────────┤%n│ ◆ host    │ %u@%d            │"/>
+    <device_format value="╭──────────┬────────────────╮%n│ metric   │ value          │%n├──────────┼────────────────┤%n│ ◆ host    │ %u@%d    │"/>
     
     <!-- Row 1: Memory (ram_color) -->
     <ram_format value="│ ≡ memory  │ %avgbG / %totgbG │"/>
     
     <!-- Row 2: Battery (battery_color_*) -->
-    <battery_format value="│ ↯ battery │ %v% %(↯/ )        │"/>
+    <battery_format value="│ ↯ battery │ %v% %(⚡/ )         │"/>
     
     <!-- Row 3: Timestamp (time_color) -->
-    <time_format value="'│ ◷ datetime│ 'd MMM yyyy, HH:mm' │'"/>
+    <time_format value="'│ ◷ time    │ 'd MMM, HH:mm'   │'"/>
     
     <!-- Row 4: Storage (storage_color) -->
-    <storage_format value="│ ▤ storage │ %iavgbG / %itotgbG│"/>
+    <storage_format value="│ ▤ storage │ %iavgbG/%itotgbG │"/>
     
     <!-- Row 5 & 6: WiFi, Mobile Data & Bottom Border (network_info_color) -->
-    <network_info_format value="│ ᯤ wifi    │ %(ON                /OFF               )│%n│ ⇅ data    │ %[ON                /OFF               ]│%n╰──────────┴──────────────────╯"/>
+    <network_info_format value="│ ᯤ wifi    │ %(ON             /OFF            )│%n│ ⇅ data    │ %[ON             /OFF            ]│%n╰──────────┴────────────────╯"/>
     
     <!-- Notes Format -->
-    <notes_format value="│ ▧ note    │ %n               │"/>
+    <notes_format value="│ ▧ note    │ %n           │"/>
     
-    <!-- History / Session Prompt Format -->
-    <session_format value="[%t] ➜ "/>
+    <!-- Session / History Prompt Format (Clean prompt without table bleeding) -->
+    <session_format value="➜ "/>
     <app_launch_format value="Starting %p..."/>
 </behavior>

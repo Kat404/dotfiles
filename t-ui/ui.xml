@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <ui>
+    <!-- User & Device Configuration -->
+    <username value="josel"/>
+    <deviceName value="reno5"/>
+    
     <!-- Display & Font Rendering -->
     <fullscreen value="true"/>
     <system_wallpaper value="true"/>
-    <system_font value="false"/>             <!-- MUST BE FALSE: Monospace / Custom TTF required for table alignment -->
+    <system_font value="false"/>
     
     <!-- Layout & Terminal Behavior -->
     <input_bottom value="true"/>
@@ -22,7 +26,7 @@
     <show_time value="true"/>
     <show_storage value="true"/>
     <show_network_info value="true"/>
-    <show_notes value="false"/>              <!-- Disabled per user request -->
+    <show_notes value="false"/>
     
     <!-- Font Sizing (pt) -->
     <input_output_size value="14"/>
