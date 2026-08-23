@@ -16,8 +16,8 @@
     <show_alias_context value="false"/>
     
     <!-- Nushell Table Structure (Exact 29-char width: Perfect Alignment) -->
-    <!-- Row 0 + Table Header (device_color) -->
-    <device_format value="╭──────────┬────────────────╮%n│ metric   │ value          │%n├──────────┼────────────────┤%n│ ◆ host    │ %u@%d    │"/>
+    <!-- Row 0 + Table Header (device_color) with House Glyph (⌂) -->
+    <device_format value="╭──────────┬────────────────╮%n│ metric   │ value          │%n├──────────┼────────────────┤%n│ ⌂ host    │ %u@%d    │"/>
     
     <!-- Row 1: Memory (ram_color) -->
     <ram_format value="│ ≡ memory  │ %avgbG / %totgbG │"/>
