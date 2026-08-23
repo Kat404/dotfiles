@@ -18,26 +18,26 @@
     <show_session_info value="false"/>
     <session_info_format value=""/>
     
-    <!-- Nushell Table Structure (Exact 28-char width: Pixel-Perfect Alignment) -->
+    <!-- Nushell Table Structure (Normalized Glyphs & Strict Collinear Grid: 28 chars) -->
     <device_format value=""/>
     
     <!-- Row 0, 1 + Table Header (ram_color: #B4BEFE) -->
-    <ram_format value="╭──────────┬───────────────╮%n│ metric   │ value         │%n├──────────┼───────────────┤%n│ ⌂ host    │ josel@reno5   │%n│ ≡ memory  │ %avgbG/%totgbG   │"/>
+    <ram_format value="╭──────────┬───────────────╮%n│ metric   │ value         │%n├──────────┼───────────────┤%n│ • host   │ josel@reno5   │%n│ • memory │ %avgbG / %totgbG │"/>
     
     <!-- Row 2: Battery (battery_color_*: #A6E3A1) -->
-    <battery_format value="│ ↯ battery │ %v%           │"/>
+    <battery_format value="│ • battery│ %v%           │"/>
     
     <!-- Row 3: Timestamp (time_color: #89B4FA) -->
-    <time_format value="'│ ◷ time    │ 'd MMM, HH:mm' │'"/>
+    <time_format value="'│ • time   │ 'd MMM, HH:mm' │'"/>
     
     <!-- Row 4: Storage (storage_color: #CBA6F7) -->
-    <storage_format value="│ ▤ storage │ %iavgbG/%itotgbG│"/>
+    <storage_format value="│ • storage│ %iavgbG/%itotgbG│"/>
     
     <!-- Row 5 & 6: WiFi, Mobile Data & Bottom Border (network_info_color: #EBA0AC) -->
-    <network_info_format value="│ ᯤ wifi    │ %(ON/OFF)            │%n│ ⇅ data    │ %[ON/OFF]            │%n╰──────────┴───────────────╯"/>
+    <network_info_format value="│ • wifi   │ %(ON/OFF)            │%n│ • data   │ %[ON/OFF]            │%n╰──────────┴───────────────╯"/>
     
     <!-- Notes Format -->
-    <notes_format value="│ ▧ note    │ %n           │"/>
+    <notes_format value="│ • note   │ %n           │"/>
     
     <!-- Session / History Prompt Format -->
     <session_format value="➜ "/>
