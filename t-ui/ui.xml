@@ -20,7 +20,7 @@
     <click_commands value="true"/>
     
     <!-- Component Visibility -->
-    <show_device value="true"/>
+    <show_device value="false"/>             <!-- Disabled: Prevents T-UI from rendering centered title -->
     <show_ram value="true"/>
     <show_battery value="true"/>
     <show_time value="true"/>
