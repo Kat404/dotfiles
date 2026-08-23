@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <suggestions>
-    <!-- Suggestion Popup Backgrounds (Catppuccin Base / Crust) -->
-    <default_bg_color value="#11111B"/>      <!-- Catppuccin Crust -->
-    <apps_bg_color value="#1E1E2E"/>         <!-- Catppuccin Base -->
-    <alias_bg_color value="#1E1E2E"/>        <!-- Catppuccin Base -->
-    <cmd_bg_color value="#1E1E2E"/>          <!-- Catppuccin Base -->
-    <contact_bg_color value="#1E1E2E"/>      <!-- Catppuccin Base -->
-    <file_bg_color value="#1E1E2E"/>         <!-- Catppuccin Base -->
+    <!-- Background Colors (from config.txt) -->
+    <default_bg_color value="#11111B"/>
+    <apps_bg_color value="#1E1E2E"/>
+    <alias_bg_color value="#1E1E2E"/>
+    <cmd_bg_color value="#1E1E2E"/>
+    <contact_bg_color value="#1E1E2E"/>
+    <file_bg_color value="#1E1E2E"/>
     
-    <!-- Suggestion Popup Foreground Text (Catppuccin Accents) -->
-    <default_text_color value="#CDD6F4"/>    <!-- Catppuccin Text -->
-    <apps_text_color value="#89B4FA"/>       <!-- Catppuccin Blue -->
-    <alias_text_color value="#B4BEFE"/>      <!-- Catppuccin Lavender -->
-    <cmd_text_color value="#FAB387"/>        <!-- Catppuccin Peach -->
-    <contact_text_color value="#F9E2AF"/>    <!-- Catppuccin Yellow -->
-    <file_text_color value="#94E2D5"/>       <!-- Catppuccin Teal -->
+    <!-- Text Colors (from config.txt) -->
+    <default_text_color value="#CDD6F4"/>
+    <apps_text_color value="#1E66F5"/>
+    <alias_text_color value="#7287FD"/>
+    <cmd_text_color value="#FAB387"/>
+    <contact_text_color value="#F9E2AF"/>
+    <file_text_color value="#94E2D5"/>
     
-    <!-- Behavior -->
     <show_alias_context value="false"/>
 </suggestions>

@@ -30,10 +30,10 @@ def main [
     # 3. Subir archivos XML y alias.txt
     let files_to_sync = [
         "behavior.xml",
+        "behaviors.xml",
         "theme.xml",
         "ui.xml",
         "suggestions.xml",
-        "toolbar.xml",
         "alias.txt",
         "cmd.xml",
         "notifications.xml"
@@ -48,11 +48,11 @@ def main [
     }
     
     print $"\n(ansi green_bold)✔ ¡Sincronización completada con éxito!(ansi reset)"
-    print "Ejecuta '(ansi cyan)restart(ansi reset)' en la terminal de T-UI para aplicar los cambios."
+    print "Aplica los archivos en T-UI con '(ansi cyan)config -apply <archivo>(ansi reset)' y luego '(ansi cyan)restart(ansi reset)'."
     
     if $restart {
         print "Reiniciando T-UI Launcher..."
-        adb shell am force-stop com.andot.fork.tui
-        adb shell monkey -p com.andot.fork.tui -c android.intent.category.LAUNCHER 1
+        adb shell am force-stop ohi.andre.consolelauncher
+        adb shell monkey -p ohi.andre.consolelauncher -c android.intent.category.LAUNCHER 1
     }
 }
