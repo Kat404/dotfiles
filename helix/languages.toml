@@ -17,6 +17,7 @@ auto-format = true
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer"]
+auto-format = true
 
 # Astro
 [[language]]
@@ -76,6 +77,13 @@ name = "markdown"
 language-servers = ["marksman", "oxfmt"]
 auto-format = true
 
+# Zig
+[[language]]
+name = "zig"
+language-servers = ["zls"]
+auto-format = true
+formatter = { command = "zig", args = ["fmt", "--stdin"] }
+
 # - - - - - - - - - - - - - - - - -
 
 # ❯ LSPs
@@ -124,3 +132,6 @@ experimental.autoImport = true
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
+
+[language-server.zls]
+command = "zls"
