@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<theme>
+    <!-- Background & Transparency -->
+    <default_bg_color value="#11111B"/>      <!-- Catppuccin Crust -->
+    <overlay_color value="#00000000"/>         <!-- Transparent for System Wallpaper -->
+    
+    <!-- Core UI & Terminal Text -->
+    <default_text_color value="#CDD6F4"/>    <!-- Catppuccin Text -->
+    <input_color value="#CDD6F4"/>           <!-- Catppuccin Text -->
+    <output_color value="#BAC2DE"/>          <!-- Catppuccin Subtext1 -->
+    <enter_color value="#89B4FA"/>           <!-- Catppuccin Blue -->
+    
+    <!-- System Metrics Colors (Nushell Row Highlights) -->
+    <device_color value="#CBA6F7"/>          <!-- Catppuccin Mauve (Header & Row 0) -->
+    <ram_color value="#B4BEFE"/>             <!-- Catppuccin Lavender (Row 1) -->
+    <battery_color_high value="#A6E3A1"/>    <!-- Catppuccin Green (Row 2 >50%) -->
+    <battery_color_medium value="#F9E2AF"/>  <!-- Catppuccin Yellow (Row 2 20-50%) -->
+    <battery_color_low value="#F38BA8"/>     <!-- Catppuccin Red (Row 2 <20%) -->
+    <time_color value="#89B4FA"/>            <!-- Catppuccin Blue (Row 3) -->
+    <storage_color value="#CBA6F7"/>         <!-- Catppuccin Mauve (Row 4) -->
+    <network_info_color value="#EBA0AC"/>    <!-- Catppuccin Flamingo (Row 5 & Bottom Border) -->
+    <notes_color value="#A6E3A1"/>           <!-- Catppuccin Green -->
+    
+    <!-- Bottom Toolbar Colors -->
+    <toolbar_bg_color value="#181825"/>      <!-- Catppuccin Mantle -->
+    <toolbar_color value="#CDD6F4"/>         <!-- Catppuccin Text -->
+</theme>

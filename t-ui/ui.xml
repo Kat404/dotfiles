@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ui>
+    <!-- Display & Font Rendering -->
+    <fullscreen value="true"/>
+    <system_wallpaper value="true"/>
+    <system_font value="false"/>             <!-- MUST BE FALSE: Monospace / Custom TTF required for table alignment -->
+    
+    <!-- Layout & Terminal Behavior -->
+    <input_bottom value="true"/>
+    <show_toolbar value="true"/>
+    <hide_toolbar_no_input value="false"/>
+    <show_enter_button value="false"/>
+    <auto_show_keyboard value="true"/>
+    <auto_scroll value="true"/>
+    <click_to_launch value="true"/>
+    <click_commands value="true"/>
+    
+    <!-- Component Visibility -->
+    <show_device value="true"/>
+    <show_ram value="true"/>
+    <show_battery value="true"/>
+    <show_time value="true"/>
+    <show_storage value="true"/>
+    <show_network_info value="true"/>
+    <show_notes value="false"/>              <!-- Disabled per user request -->
+    
+    <!-- Font Sizing (pt) -->
+    <input_output_size value="14"/>
+    <ram_size value="14"/>
+    <battery_size value="14"/>
+    <storage_size value="14"/>
+    <time_size value="14"/>
+    <device_size value="14"/>
+    <network_info_size value="14"/>
+    <notes_size value="14"/>
+    <toolbar_size value="14"/>
+</ui>

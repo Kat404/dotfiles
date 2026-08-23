@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<cmd>
+    <!-- Default Search Engines & Parameters -->
+    <search_url value="https://duckduckgo.com/?q="/>
+    <file_manager_format value="%f"/>
+    <open_file_cmd value="open"/>
+    <show_hidden_files value="false"/>
+</cmd>

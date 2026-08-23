@@ -1,0 +1,33 @@
+# ==============================================================================
+# T-UI Launcher Aliases (alias.txt)
+# Format: alias_name command_with_arguments
+# ==============================================================================
+
+# Core & Navigation
+cls clear
+q exit
+status status
+restart restart
+
+# Web Searches & AI
+gemini search -u gemini.google.com
+gh search -u github.com
+duck search -d
+g search -g
+
+# Communication & Social
+wa apps -open com.whatsapp
+mama call mama
+
+# Media & Productivity
+yt apps -open com.google.android.youtube
+ob apps -open dev.imranr.obtainium
+termux apps -open com.termux
+sets apps -open com.android.settings
+
+# Hardware & System Toggles
+wifi wifi
+bt bluetooth
+flash flashlight
+vol volume
+data data

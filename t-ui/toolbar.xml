@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<toolbar>
+    <!-- Priority Apps: WhatsApp (#1), YouTube (#2) -->
+    <item label="WhatsApp" command="apps -open com.whatsapp"/>
+    <item label="YouTube" command="apps -open com.google.android.youtube"/>
+    
+    <!-- Quick Apps & Shortcuts -->
+    <item label="Obtainium" command="apps -open dev.imranr.obtainium"/>
+    <item label="mama" command="call mama"/>
+    <item label="cls" command="clear"/>
+    <item label="gemini" command="search -u gemini.google.com"/>
+    <item label="call" command="call"/>
+    <item label="explain" command="help"/>
+</toolbar>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<behavior>
+    <!-- User & Shell Environment -->
+    <username value="josel"/>
+    <home_path value="/storage/emulated/0"/>
+    <input_prefix value="➜"/>
+    
+    <!-- Battery Thresholds -->
+    <battery_medium value="50"/>
+    <battery_low value="20"/>
+    
+    <!-- General Behavior -->
+    <clear_on_lock value="false"/>
+    <enable_app_launch value="true"/>
+    <show_alias_context value="false"/>
+    
+    <!-- Nushell Table Structure (Variant A: 3-column structured data) -->
+    <!-- Row 0 + Table Header (device_color) -->
+    <device_format value="╭───┬───────────────┬──────────────────────────────╮%n│ # │ component     │ value                        │%n├───┼───────────────┼──────────────────────────────┤%n│ 0 │  host        │ %u@%d                        │"/>
+    
+    <!-- Row 1: Memory (ram_color) -->
+    <ram_format value="│ 1 │ 󰍛 memory      │ %avgb GB / %totgb GB (%av%%) │"/>
+    
+    <!-- Row 2: Battery (battery_color_*) -->
+    <battery_format value="│ 2 │ 󰁹 battery     │ %v%% %(󱐋 Charging/Discharging)│"/>
+    
+    <!-- Row 3: Timestamp (time_color) - Java SimpleDateFormat with quoted literals -->
+    <time_format value="'│ 3 │ 󱑎 datetime    │ 'd 'de' MMMM yyyy, hh:mma' │'"/>
+    
+    <!-- Row 4: Storage (storage_color) -->
+    <storage_format value="│ 4 │ 󰋊 storage     │ %iavgb GB / %itotgb GB (%iav%%)│"/>
+    
+    <!-- Row 5: Network + Table Bottom Border (network_info_color) -->
+    <network_info_format value="│ 5 │ 󰖩 network     │ %(WiFi: %wn/%[Data: %d3/Offline])│%n╰───┴───────────────┴──────────────────────────────╯"/>
+    
+    <!-- Notes Format (Hidden by default in ui.xml) -->
+    <notes_format value="│ * │ 󰎚 note        │ %n                           │"/>
+    
+    <!-- History / Session Prompt Format -->
+    <session_format value="[%t] ➜ "/>
+    <app_launch_format value="Starting %p..."/>
+</behavior>

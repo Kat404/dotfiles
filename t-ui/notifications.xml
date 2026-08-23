@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<notifications>
+    <!-- Notification Display Format -->
+    <notification_format value="[󰂚 %pkg] %title: %text"/>
+    <notification_color value="#F9E2AF"/>
+    <notification_time_color value="#89B4FA"/>
+</notifications>
