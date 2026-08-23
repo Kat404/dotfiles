@@ -19,7 +19,7 @@
     <click_to_launch value="true"/>
     <click_commands value="true"/>
     
-    <!-- Component Visibility & Counters -->
+    <!-- Component Visibility & Session Info -->
     <show_device value="false"/>
     <show_ram value="true"/>
     <show_battery value="true"/>
@@ -28,6 +28,7 @@
     <show_network_info value="true"/>
     <show_notes value="false"/>
     <show_unlock_counter value="false"/>
+    <show_session_info value="false"/>
     
     <!-- Font Sizing (pt) -->
     <input_output_size value="14"/>
