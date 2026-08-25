@@ -4,7 +4,7 @@
     <username value="josel"/>
     <deviceName value="reno5"/>
     <home_path value="/storage/emulated/0"/>
-    <input_prefix value="➜ "/>
+    <input_prefix value="➜"/>
     
     <!-- Battery Thresholds -->
     <battery_medium value="50"/>

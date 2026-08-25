@@ -1,16 +1,9 @@
 # config.nu
 #
 # Installed by:
-# version = "0.114.1"
+# version = "0.115.1"
 #
 # ~/.config/nushell/config.nu
-
-# ❯ Importa Plugins Core {
-const NU_PLUGIN_DIRS = [
-  ($nu.current-exe | path dirname)
-  ...$NU_PLUGIN_DIRS
-]
-# }
 
 # ❯ Inicializa Carapace
 source $"($nu.cache-dir)/carapace.nu"
@@ -80,6 +73,9 @@ $env.config.history = {
 
 # ❯ Sourcea todos los aliases configurados
 source ~/.config/nushell/aliases.nu
+
+# ❯ Carga Módulos del Sistema (Storage, Net, System)
+use ~/.config/nushell/modules *
 
 # ❯ Carga zoxide
 source ~/.zoxide.nu
