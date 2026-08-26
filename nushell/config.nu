@@ -75,7 +75,7 @@ $env.config.history = {
 source ~/.config/nushell/aliases.nu
 
 # ❯ Carga Módulos del Sistema (Storage, Net, System)
-use ~/.config/nushell/modules *
+# use ~/.config/nushell/modules *
 
 # ❯ Carga zoxide
 source ~/.zoxide.nu

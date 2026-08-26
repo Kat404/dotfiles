@@ -77,6 +77,12 @@ name = "markdown"
 language-servers = ["marksman", "oxfmt"]
 auto-format = true
 
+[[language]]
+name = "haskell"
+language-servers = ["haskell-language-server"]
+auto-format = true
+formatter = { command = "fourmolu-0.20.0.0", args = ["--stdin-input-file", "."] }
+
 # Zig
 [[language]]
 name = "zig"
@@ -132,6 +138,10 @@ experimental.autoImport = true
 [language-server.ruff]
 command = "ruff"
 args = ["server"]
+
+[language-server.haskell-language-server]
+command = "haskell-language-server-wrapper"
+args = ["--lsp"]
 
 [language-server.zls]
 command = "zls"
