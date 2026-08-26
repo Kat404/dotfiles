@@ -28,3 +28,10 @@ set autoindent                " Copia la identación de la línea anterior
 set wildmenu                  " Menú visual para autocompletado de comandos
 set path+=**                  " Permite buscar archivos recursivamente con :find
 set clipboard=unnamedplus     " Usa el portapapeles del sistema (requiere xclip o wl-copy)
+
+" --- Plugins ---
+call plug#begin()
+
+Plug 'catppuccin/vim', { 'as': 'catppuccin', 'branch': 'main' }
+
+call plug#end()

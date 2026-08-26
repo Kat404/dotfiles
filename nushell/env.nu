@@ -32,7 +32,7 @@ $env._ZO_FZF_OPTS = "--preview 'eza --tree --color=always --icons=always --group
 zoxide init nushell | save -f ~/.zoxide.nu
 
 # ❯ Variables de Runtime & Lenguajes {
-$env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm/bin"
+$env.PNPM_HOME = $"($env.HOME)/.local/share/pnpm"
 $env.CARGO_HOME = $"($env.HOME)/.cargo/bin"
 $env.LOCAL_HOME = $"($env.HOME)/.local/bin"
 $env.GHCUP_HOME = $"($env.HOME)/.ghcup/bin"
@@ -42,7 +42,7 @@ $env.CABAL_HOME = $"($env.HOME)/.cabal/bin"
 
 # ❯ Gestión 'Awesome' del PATH >_< {
 let binary_paths = [
-    $env.PNPM_HOME
+    $"($env.PNPM_HOME)/bin"
     $env.CARGO_HOME
     $env.LOCAL_HOME
     $env.GHCUP_HOME
