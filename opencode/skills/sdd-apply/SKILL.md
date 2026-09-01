@@ -34,7 +34,7 @@ You are a sub-agent responsible for IMPLEMENTATION. You receive specific tasks f
 From the orchestrator:
 - Change name
 - The specific task(s) to implement (e.g., "Phase 1, tasks 1.1-1.3")
-- Artifact store mode (`engram | openspec | hybrid | none`)
+- Artifact store mode as REPORTED by native status (`engram | openspec | hybrid | none`) — consume it, never re-derive it
 - Structured status from `skills/_shared/sdd-status-contract.md`: `schemaName`, `planningHome`, `changeRoot`, `artifactPaths`, `contextFiles`, `applyState`, task progress, dependency states, and `actionContext`
 - Delivery strategy and resolved workload decision (`ask-on-risk | auto-chain | single-pr | exception-ok`, plus PR slice or `size:exception` when applicable)
 
@@ -42,10 +42,14 @@ From the orchestrator:
 
 > Follow **Section B** (retrieval) and **Section C** (persistence) from `skills/_shared/sdd-phase-common.md`.
 
-- **engram**: Read `sdd/{change-name}/proposal`, `sdd/{change-name}/spec`, `sdd/{change-name}/design`, `sdd/{change-name}/tasks` (all required — keep tasks ID for updates). Mark tasks complete via `mem_update(id: {tasks-observation-id}, content: "...")`. Save progress as `sdd/{change-name}/apply-progress`.
-- **openspec**: Read and follow `skills/_shared/openspec-convention.md`. Update `tasks.md` with `[x]` marks.
-- **hybrid**: Follow BOTH conventions — persist progress to Engram (`mem_update` for tasks) AND update `tasks.md` with `[x]` marks on filesystem.
-- **none**: Return progress only. Do not update project artifacts.
+**Reads are store-blind.** Read `proposal`, `spec`, `design`, and `tasks` (all required) from the locators in `artifactPaths`, and `apply-progress` from its locator whenever that one resolves. Do not detect the store and do not assemble locators yourself.
+
+Writes name a mechanism because writing a file and saving an observation are different operations, but the reported store selects it — you do not:
+
+- **engram**: `mem_update` the `tasks` observation so completed tasks are marked `[x]`; `mem_save` or `mem_update` the `apply-progress` locator.
+- **openspec**: follow `skills/_shared/openspec-convention.md`; mark `[x]` in the file at the `tasks` locator.
+- **hybrid**: both mechanisms, against that artifact's locators.
+- **none**: return progress only. Do not update project artifacts.
 
 ## Status and Workspace Guard
 
@@ -94,6 +98,8 @@ Also check for `Chain strategy` in the tasks artifact. If present and not `pendi
 - `feature-branch-chain`: PR #1 targets the feature/tracker branch; later PRs target the immediate previous PR branch. The tracker PR aggregates the feature branch to `main`; child PR diffs must stay focused on only the current work unit and must never target `main` directly.
 
 If neither delivery decision nor chain strategy is present, STOP before writing code and return `blocked` with: `Workload decision required before apply: estimated work may exceed 400 changed lines. Ask the user which chain strategy to use (stacked-to-main, feature-branch-chain, or size-exception).`
+
+The budget constrains how work is sliced, never the code itself. Never delete comments, blank lines, docs, or tests, and never compress or restyle code, to fit under the review budget (400 by default, or the session `review_budget_lines`). If the assigned slice cannot land within budget as one cohesive work unit, implement it honestly, then report the final authored line count, why it cannot shrink further, and a `size:exception` recommendation — do not iterate trying to reach the number.
 
 #### Step 2b: Read Previous Apply-Progress (if exists)
 
@@ -152,9 +158,9 @@ Every assigned work unit, including standard mode, MUST produce a **Work Unit Ev
 
 If design/tasks contain applicable threat-matrix cases, write and run each mapped RED test before the corresponding production change even in standard mode. Preserve Strict TDD's full RED → GREEN → REFACTOR evidence when active; this table supplements it and never replaces it. Do not mark the work unit complete if focused tests or an applicable runtime harness fail.
 
-When all implementation work units finish, return control to the parent orchestrator. The executor never launches 4R, Judgment Day, a refuter, a correction actor, or a scoped validator. The parent may explicitly start ordinary `review/start(target)` after apply only when no valid content-bound receipt exists.
+After all implementation work units finish, return control to the parent orchestrator for independent SDD verification. Do not launch or recommend review directly after apply. The executor never launches 4R, Judgment Day, a refuter, a correction actor, or a scoped validator. Only after independent SDD verification passes may the parent offer the optional review lifecycle.
 
-Focused remediation is the sole `applyState: all_done` exception. It requires the persisted transaction's exact `lineage_id`, `generation`, mode-specific `fix_batch`, and `failed_evidence_revision`. Record those values in both the `gentle-ai.remediation-result/v1` envelope and its immediately following `gentle-ai.remediation-evidence/v1` JSON. A bare envelope, stale revision, mismatched lineage/generation, or exhausted budget never completes remediation.
+Focused remediation is the sole `applyState: all_done` exception. It follows ordinary SDD failed-evidence accounting for the exact `failed_evidence_revision`; a bare envelope, stale revision, or exhausted attempt budget never completes remediation.
 
 ### Step 4: Implement Tasks (Standard Workflow)
 
@@ -191,7 +197,7 @@ Follow **Section C** from `skills/_shared/sdd-phase-common.md`.
 - artifact: `apply-progress`
 - topic_key: `sdd/{change-name}/apply-progress`
 - type: `architecture`
-- Also update the tasks artifact with `[x]` marks via `mem_update` (engram) or file edit (openspec/hybrid).
+- Also mark completed tasks `[x]` at the `tasks` locator, using the write mechanism the reported store requires.
 
 #### Merge Protocol
 
