@@ -82,7 +82,7 @@ auto-format = true
 name = "haskell"
 language-servers = ["haskell-language-server"]
 auto-format = true
-formatter = { command = "fourmolu-0.20.0.0", args = ["--stdin-input-file", "."] }
+formatter = { command = "fourmolu-0.20.1.0", args = ["--stdin-input-file", "."] }
 
 # Zig
 [[language]]
