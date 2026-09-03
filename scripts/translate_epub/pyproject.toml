@@ -1,0 +1,45 @@
+# =============================================================================
+# pyproject.toml — translate_epub dev (lives in ~/.dotfiles/scripts/translate_epub/)
+# =============================================================================
+# This file is for the DEVELOPER only (you). End users of translate_epub_ai.py
+# need NOTHING from this file: the script carries its runtime deps via PEP 723
+# inline metadata and runs with just `uv run translate_epub_ai.py --input <epub>`.
+#
+# What this file gives you:
+#   - pytest + pytest-asyncio for `make test`
+#   - ruff and ty configs (the tools themselves come from your PATH; no install)
+#   - lint/typecheck rules applied automatically when invoked from PWD
+#
+# To use these dev tools from anywhere:
+#   cd ~/.dotfiles/scripts/translate_epub
+#   uv run --with pytest --with pytest-asyncio -- pytest tests/
+#   ruff check ~/.dotfiles/scripts/translate_epub/tests/
+#   ty check ~/.dotfiles/scripts/translate_epub/scripts/
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "pytest-asyncio>=0.23",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra --tb=short"
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["E501"]
+"tests/*" = ["E501"]
+
+[tool.ty.src]
+include = ["translate_epub_ai.py", "scripts", "tests"]
+
+[tool.uv]
+package = false

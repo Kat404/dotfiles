@@ -1,0 +1,33 @@
+# =============================================================================
+# .pre-commit-config.yaml — libros / rewrite-translate-epub
+# =============================================================================
+# Optional hooks; user opts in with `pre-commit install`.
+# Uses `repo: local` so hooks run via the project's uv-based toolchain
+# (no extra network installs, works offline).
+# Pytest is intentionally NOT included here — run via `make test` (cost).
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --with ruff -- ruff check
+        language: system
+        types_or: [python, pyi]
+        args: []
+        files: '^(translate_epub_ai\.py|scripts/|tests/)'
+
+      - id: ruff-format
+        name: ruff format (check only)
+        entry: uv run --with ruff -- ruff format --check
+        language: system
+        types_or: [python, pyi]
+        files: '^(translate_epub_ai\.py|scripts/|tests/)'
+
+      - id: ty-check
+        name: ty check
+        entry: bash -c 'if [ ! -d .venv-ty ]; then uv venv .venv-ty --python 3.14 && uv pip install --python .venv-ty/bin/python beautifulsoup4 lxml openai blake3 ruff ty; fi && .venv-ty/bin/ty check --python .venv-ty'
+        language: system
+        types_or: [python, pyi]
+        files: '^(translate_epub_ai\.py|scripts/)'
+        pass_filenames: false
