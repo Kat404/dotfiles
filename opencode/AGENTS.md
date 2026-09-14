@@ -99,14 +99,6 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 4. Answer using the fetched docs
 <!-- context7 -->
 
-### 🧠 Engram
-
-<!-- engram -->
-
-Full protocol at session start. Key tools: `mem_save` (after decisions), `mem_search` (recall), `mem_context` (session start), `mem_session_summary` (session close), `mem_judge` (resolve conflicts). No invented memory: if `mem_search` returns nothing, say so.
-
-<!-- engram -->
-
 ---
 
 <!-- gentle-ai:engram-protocol -->
