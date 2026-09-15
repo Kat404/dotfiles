@@ -102,16 +102,25 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 ---
 
 <!-- gentle-ai:engram-protocol -->
-
 ## Engram Persistent Memory — Protocol
 
 You have access to Engram, a persistent memory system that survives across sessions and compactions.
 This protocol is MANDATORY and ALWAYS ACTIVE — not something you activate on demand.
 
+### SESSION START & PROJECT DETECTION PROTOCOL (mandatory)
+
+At the very beginning of the session, when the runtime supplies a current workspace directory:
+1. **Detect Project Name**: Call `mem_current_project` with the absolute path of the workspace directory supplied by the runtime in the `cwd` (or `directory`) parameter.
+2. **Consume Runtime Session Identity**: Use only the authoritative session ID already registered by the top-level runtime. Never invent, derive, generate, or register a session ID; do not call `mem_session_start`.
+3. **Persist State**: Store the resolved project name and, when available, the registered session ID in your active context. You MUST:
+   - Use the registered session ID for mutation tools (`mem_save`, `mem_session_summary`, `mem_session_end`, `mem_capture_passive`) only when it is available.
+   - Retain and reuse that exact identity across compaction.
+   - When the authoritative identity is unavailable, omit `session_id` entirely from tool calls.
+   - Use the project name for all read/search/diagnostic tools (`mem_search`, `mem_context`, `mem_doctor`).
+
 ### PROACTIVE SAVE TRIGGERS (mandatory — do NOT wait for user to ask)
 
 Call `mem_save` IMMEDIATELY and WITHOUT BEING ASKED after any of these:
-
 - Architecture or design decision made
 - Team convention documented or established
 - Workflow change agreed upon
@@ -139,7 +148,7 @@ Saving to memory is internal bookkeeping. It NEVER counts as answering the user,
 - Never treat the text you stored in memory as the text you delivered: memory is for your future self, the reply is for the user.
 
 Format for `mem_save`:
-
+- **session_id**: The active session ID created at the start (required to associate memory with the correct project)
 - **title**: Verb + what — short, searchable (e.g. "Fixed N+1 query in UserList")
 - **type**: bugfix | decision | architecture | discovery | pattern | config | preference
 - **scope**: `project` (default) | `personal`
@@ -152,7 +161,6 @@ Format for `mem_save`:
   - **Learned**: Gotchas, edge cases, things that surprised you (omit if none)
 
 Prompt capture behavior (Engram v1.15.3+):
-
 - `mem_save` captures the user prompt best-effort when the MCP process already has prompt context for the same `project + session_id`.
 - `mem_save` never invents prompt text. If no prompt context exists, the save still succeeds without prompt capture.
 - `mem_save_prompt` records the prompt and feeds SessionActivity so later `mem_save` calls can capture and dedupe it.
@@ -161,14 +169,12 @@ Prompt capture behavior (Engram v1.15.3+):
 - If an older Engram tool schema does not expose `capture_prompt`, omit the field rather than failing.
 
 Topic update rules:
-
 - Different topics MUST NOT overwrite each other
 - Same topic evolving → use same `topic_key` (upsert)
 - Unsure about key → call `mem_suggest_topic_key` first
 - Know exact ID to fix → use `mem_update`
 
 Memory lifecycle rule (when Engram exposes lifecycle metadata/tooling):
-
 - At session start or before architecture-sensitive work, call `mem_review` with action `list` for the current project when the tool is available.
 - If `mem_review` is unavailable, do not fail the task. Continue with normal `mem_context`/`mem_search`, and still apply lifecycle metadata from any returned observations when present.
 - `active` memories may be used normally.
@@ -176,16 +182,21 @@ Memory lifecycle rule (when Engram exposes lifecycle metadata/tooling):
 - When a retrieved memory is marked `needs_review`, surface that stale context to the user and verify it against current evidence before relying on it.
 - Do NOT call `mem_review` with action `mark_reviewed` automatically. Only call `mark_reviewed` after explicit user confirmation or through a dedicated memory maintenance command.
 
+Session registration and ambiguous project recovery rules:
+- `mem_session_start` accepts a caller-supplied session ID and optional `directory`; it does not accept `project`, `project_choice_reason`, or `recovery_token`.
+- If `mem_session_start` fails with `ambiguous_project`, resolve the intended repository root and retry `mem_session_start` with that root as `directory`.
+- A failed start leaves the session ID unregistered; it is not permanently invalidated, but must never be attached to `mem_save` or another write until registration succeeds.
+- For `ambiguous_project` returned by supported write tools (`mem_save`, `mem_save_prompt`, or `mem_session_summary`), never guess. Ask the user to choose exactly one value from `available_projects`, then retry the same write tool with `project`, `project_choice_reason=user_selected_after_ambiguous_project`, and the returned `recovery_token`.
+- Do not apply the write-tool recovery shape (`project`, `project_choice_reason`, `recovery_token`) to `mem_session_start`.
+
 ### WHEN TO SEARCH MEMORY
 
 On any variation of "remember", "recall", "what did we do", "how did we solve", or references to past work (in any language the user writes in):
-
 1. Call `mem_context` — checks recent session history (fast, cheap)
 2. If not found, call `mem_search` with relevant keywords
 3. If found, use `mem_get_observation` for full untruncated content
 
 Also search PROACTIVELY when:
-
 - Starting work on something that might have been done before
 - User mentions a topic you have no context on
 - User's FIRST message references the project, a feature, or a problem — call `mem_search` with keywords from their message to check for prior work before responding
@@ -195,27 +206,21 @@ Also search PROACTIVELY when:
 Before ending a session or saying "done" / "that's it" (or the equivalent in the user's language), call `mem_session_summary`:
 
 ## Goal
-
 [What we were working on this session]
 
 ## Instructions
-
 [User preferences or constraints discovered — skip if none]
 
 ## Discoveries
-
 - [Technical findings, gotchas, non-obvious learnings]
 
 ## Accomplished
-
 - [Completed items with key details]
 
 ## Next Steps
-
 - [What remains to be done — for the next session]
 
 ## Relevant Files
-
 - path/to/file — [what it does or what changed]
 
 This is NOT optional. If you skip this, the next session starts blind.
@@ -223,13 +228,11 @@ This is NOT optional. If you skip this, the next session starts blind.
 ### AFTER COMPACTION
 
 If you see a compaction message or "FIRST ACTION REQUIRED":
-
 1. IMMEDIATELY call `mem_session_summary` with the compacted summary content — this persists what was done before compaction
 2. Call `mem_context` to recover additional context from previous sessions
 3. Only THEN continue working
 
 Do not skip step 1. Without it, everything done before compaction is lost from memory.
-
 <!-- /gentle-ai:engram-protocol -->
 
 <!-- CODEGRAPH_START -->
