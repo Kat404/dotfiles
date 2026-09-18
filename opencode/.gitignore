@@ -8,3 +8,5 @@ secrets/
 .caveman-active
 .ponytail-active
 .gentle-ai-default-agent.json
+# Local Pi runtime state
+.atl/

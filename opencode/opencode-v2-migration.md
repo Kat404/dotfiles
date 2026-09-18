@@ -38,11 +38,28 @@ Third-party plugins:
 - [⏳] T6 — Port each of 8 local plugins to V2 `Plugin.define({id, setup})` (delegated, in progress)
 - [x] T7 — Create Ponytail V2 wrapper at `plugins/ponytail-v2.ts`
 - [x] T7b — Create Graphify V2 wrapper at `plugins/graphify-v2.ts`
-- [ ] T8 — Update `opencode.json` `plugins` array to reference the V2 wrappers and add the wrappers (Ponytail, Graphify)
+- [x] T8 — Promote V2 config: `opencode.json` ← `opencode.json.v2` (sha256 e17612efa35d3009f57b9bf3196e192495b1d97ddc5a52ff71b2d7c4345328f9). Backup of pre-promotion state kept at `opencode.json.broken-v1-mix.20260918T072315Z`. Snapshot of V2 source kept at `opencode.json.v2.canonical.20260918T072315Z`.
 - [ ] T9 — Delete `tui.json` from both trees (V2 uses `cli.json`)
-- [ ] T10 — Fix `~/.opencode/opencode.json` (object form for local plugin, drop broken graphify path)
+- [x] T10 — N/A: `~/.opencode/` does not exist (resolved via `~/.config/opencode/` symlink → `~/.dotfiles/opencode/`)
 - [ ] T11 — Restart opencode service, check log for SchemaError or load failures
 - [ ] T12 — Report results, list any deferred items
+
+## Post-promotion state (2026-09-18T07:23:15Z)
+
+| Artifact | Status |
+| --- | --- |
+| `opencode.json` (runtime-active) | V2 shape validated: `agents` (23), `permissions` (29), `mcp.servers` (4), `experimental.subagent_depth=3`, `plugins` (7), `default_agent=gentle-orchestrator`. No V1 top-level keys (`agent`, `permission`) and no V1 per-agent fields (`prompt`, `permission`). |
+| `opencode.json.v2` | Identical to live `opencode.json` (same sha256). Kept as source-of-truth reference. |
+| `gentle-orchestrator` agent | System prompt preserved byte-identical (88,081 chars). 24 V2-array permissions. `__managed_by: gentle-ai/sdd`. |
+| Symlink propagation | `~/.config/opencode/opencode.json` → `~/.dotfiles/opencode/opencode.json` ✓ |
+
+### Open items NOT covered by this config-port
+
+- All 7 `plugins` entries in V2 point to files that do NOT exist on disk:
+  - `plugins/ponytail-v2.ts` — never created (T7/T7b marked done in doc but absent on disk)
+  - `plugins/caveman/caveman.js`, `plugins/engram.ts`, `plugins/model-variants.ts`, `plugins/opencode-review-transport.ts`, `plugins/sdd-task-result-artifacts.ts`, `plugins/skill-registry.ts` — all present only as `.v1-backup.20260917T202913Z`
+- A runtime restart will log 7 `failed to load plugin` warnings (non-fatal; runtime continues without custom plugins).
+- Plugin port (T6) and V2 wrapper creation remain deferred to a follow-up cycle.
 
 ## V1 → V2 mapping applied
 
