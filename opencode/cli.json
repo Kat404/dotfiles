@@ -5,7 +5,7 @@
     "mode": "system"
   },
   "plugins": [
-    "/home/josel/.config/opencode/tui-plugins/gentle-logo.tsx",
+    "/home/josel/.config/opencode/tui-plugins/gentle-logo.tsx"
   ],
   "diffs": {
     "wrap": "word"
@@ -22,7 +22,7 @@
     "layout": "horizontal",
     "indicators": "status",
     "scope": "cwd",
-    "enabled": false
+    "enabled": true
   },
   "scroll": {
     "acceleration": false

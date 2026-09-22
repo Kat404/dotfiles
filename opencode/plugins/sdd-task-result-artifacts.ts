@@ -1,10 +1,8 @@
-import type { Plugin } from "@opencode-ai/plugin"
+// gentle-ai:managed sdd-task-result-artifacts/v2
+import { Plugin } from "@opencode/plugin"
 
-const TASK_RESULT = /^<task id="[^"\r\n]+" state="completed">\n(?:<summary>[^<>\r\n]+<\/summary>\n)?<task_result>\n([\s\S]*?)\n<\/task_result>\n<\/task>$/
-const TASK_TAG = /<\/?(?:task|task_result|summary)(?:\s|>)/
 const SDD_PHASES = ["sdd-init", "sdd-explore", "sdd-research", "sdd-propose", "sdd-spec", "sdd-design", "sdd-tasks", "sdd-apply", "sdd-verify", "sdd-archive", "sdd-onboard"]
 const SDD_TASK_FAILURE_PREFIX = "GENTLE_AI_SDD_FAILURE "
-const SDD_TASK_ROUTE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:@-]{0,127}$/
 const SDD_PREFLIGHT_QUESTION_PREFIX = "Gentle AI SDD preflight "
 const SDD_PREFLIGHT_HEADING = "## SDD Session Preflight"
 // #2855: host cwd does not identify the coordinator's selected change/store.
@@ -98,25 +96,20 @@ function canonicalizeSDDPreflightQuestions(args: unknown): void {
   })
 }
 
-// Normalizes a user-facing answer or option label for tolerant matching:
-// trims, collapses internal whitespace, lowercases, then strips diacritics
-// via NFD decomposition so a typed or localized answer still binds.
+// Match exactly one offered label, permitting only trim and case folding.
+// V2 always permits custom text; that text never creates authority by itself.
 function normalizeSDDPreflightAnswer(value: string): string {
-  return value.trim().replace(/\s+/g, " ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  return value.trim().toLowerCase()
 }
 
 function isSDDPhase(agent: string): boolean {
   return SDD_PHASES.some((phase) => agent === phase || agent.startsWith(phase + "-"))
 }
 
-function isBackgroundTask(args: unknown): boolean {
-  return !!args && typeof args === "object" && !Array.isArray(args) && (args as Record<string, unknown>).background === true
-}
-
 async function isRootSession(client: any, sessionID: string): Promise<boolean> {
   try {
-    const result = await client.session.get({ path: { id: sessionID } })
-    const info = result?.data ?? result
+    const result = await client.session.get({ sessionID })
+    const info = result
     return !!info && info.id === sessionID && (info.parentID === undefined || info.parentID === null)
   } catch {
     return false
@@ -128,7 +121,7 @@ async function isRootSession(client: any, sessionID: string): Promise<boolean> {
 // a recognized preflight, so these structural checks are a safety net for a
 // host that skipped it or a caller that bypassed it; only answer matching
 // against the offered option labels is intentionally tolerant (trim,
-// whitespace collapse, case, diacritics) so a typed or slightly-off answer
+// case) so an exact offered answer
 // still binds to the option the user meant.
 function sddPreflightBlock(args: unknown, metadata: unknown): string | undefined {
   if (!args || typeof args !== "object" || Array.isArray(args)) return undefined
@@ -174,31 +167,11 @@ function taskResult(output: unknown): void {
   if (typeof output !== "string" || output.trim() === "") {
     throw Object.assign(new Error("SDD phase output must not be empty"), { sddClass: "empty_result" })
   }
-  const trimmed = output.trim()
-  const envelope = TASK_RESULT.exec(trimmed)
-  if (!envelope) {
-    if (TASK_TAG.test(trimmed)) throw Object.assign(new Error("SDD phase output contains a malformed task result envelope"), { sddClass: "malformed_result" })
-    return
-  }
-  if (envelope[1].trim() === "") throw Object.assign(new Error("SDD phase task result is empty"), { sddClass: "empty_result" })
-  if (TASK_TAG.test(envelope[1])) throw Object.assign(new Error("SDD phase task result contains a nested task envelope"), { sddClass: "malformed_result" })
 }
 
-function taskRouteModel(metadata: unknown): string | undefined {
-  if (!metadata || typeof metadata !== "object" || Array.isArray(metadata)) return undefined
-  const model = (metadata as Record<string, unknown>).model
-  if (!model || typeof model !== "object" || Array.isArray(model)) return undefined
-  const providerID = (model as Record<string, unknown>).providerID
-  const modelID = (model as Record<string, unknown>).modelID
-  if (typeof providerID !== "string" || typeof modelID !== "string") return undefined
-  if (!SDD_TASK_ROUTE_TOKEN.test(providerID) || !SDD_TASK_ROUTE_TOKEN.test(modelID)) return undefined
-  return `${providerID}/${modelID}`
-}
-
-function sddTaskFailure(phase: string, cause: unknown, metadata?: unknown): SDDTaskFailureError {
+function sddTaskFailure(phase: string, cause: unknown): SDDTaskFailureError {
   const empty = (cause as Record<string, unknown> | null)?.sddClass === "empty_result"
   const code = empty ? "sdd_task_result_empty" : "sdd_task_result_malformed"
-  const taskModel = taskRouteModel(metadata)
   const guidance = "Do not retry or advance SDD; inspect the existing artifact state and surface the terminal failure to the user."
   const summary = empty
     ? `${phase} produced no task output at all. The child task returned nothing, which most often means the provider rejected the request before generation (authentication, region, or model access), the task was interrupted, or the phase genuinely wrote nothing. ${guidance}`
@@ -211,7 +184,6 @@ function sddTaskFailure(phase: string, cause: unknown, metadata?: unknown): SDDT
       status: "blocked",
       code,
       phase,
-      ...(taskModel === undefined ? {} : { taskModel }),
       summary,
       continuation: SDD_TASK_CONTINUATION_GUIDANCE,
     }),
@@ -233,62 +205,82 @@ function sddDispatchLatched(requested: string, failure: SDDTaskFailure): Error {
   }))
 }
 
-const SDDTaskResultArtifactsPlugin: Plugin = async ({ client }) => {
-  const failedSDDSessions = new Map<string, SDDTaskFailure>()
-  const confirmedPreflights = new Map<string, string>()
-  return {
-    dispose: async () => { failedSDDSessions.clear(); confirmedPreflights.clear() },
-    event: async ({ event }) => {
-      if (event.type === "session.deleted") {
-        failedSDDSessions.delete(event.properties.info.id)
-        confirmedPreflights.delete(event.properties.info.id)
-      }
-    },
-    "tool.execute.before": async (input, output) => {
-      if (input.tool === "question") {
-        canonicalizeSDDPreflightQuestions(output.args)
-        return
-      }
-      if (input.tool !== "task" || typeof output.args?.subagent_type !== "string") return
-      const subagent = output.args.subagent_type
-      if (!isSDDPhase(subagent)) return
-      if (!(await isRootSession(client, input.sessionID))) throw new Error("SDD child dispatch refused: only the interactive root session may carry parent-confirmed SDD preflight authority")
-      const failure = failedSDDSessions.get(input.sessionID)
-      if (failure) throw sddDispatchLatched(subagent, failure)
-      if (typeof output.args.prompt !== "string") throw new Error("SDD child dispatch refused: task prompt is unavailable")
-      if (output.args.prompt.includes(SDD_PREFLIGHT_HEADING)) throw new Error("SDD child dispatch refused: model-authored preflight text cannot create parent-confirmed authority")
-      const preflight = confirmedPreflights.get(input.sessionID)
-      if (!preflight) throw new Error("SDD child dispatch refused: parent-confirmed SDD preflight is missing; ask the canonical grouped preflight with the question tool; typed chat answers cannot create preflight authority")
-      output.args.prompt = `${preflight}\n\n${output.args.prompt}`
-    },
-    "tool.execute.after": async (input, output) => {
-      if (input.tool === "question") {
-        if (!(await isRootSession(client, input.sessionID))) return
-        try {
-          const block = sddPreflightBlock(input.args, output.metadata)
-          if (block !== undefined) confirmedPreflights.set(input.sessionID, block)
-        } catch (cause) {
-          confirmedPreflights.delete(input.sessionID)
-          throw cause
-        }
-        return
-      }
-      if (input.tool !== "task" || typeof input.args?.subagent_type !== "string") return
-      const subagent = input.args.subagent_type
-      if (!isSDDPhase(subagent)) return
-      // OpenCode invokes this hook for the background launch acknowledgement while
-      // the child is still running. That signal has no terminal task result to
-      // validate; artifact/status ownership observes eventual completion.
-      if (isBackgroundTask(input.args)) return
-      try {
-        taskResult(output.output)
-      } catch (cause) {
-        const failure = sddTaskFailure(subagent, cause, output.metadata)
-        failedSDDSessions.set(input.sessionID, failure.sddFailure)
-        throw failure
-      }
-    },
-  }
+function record(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {}
 }
 
-export default SDDTaskResultArtifactsPlugin
+export default Plugin.define({
+  id: "gentle-ai.sdd-task-result-artifacts",
+  async setup(ctx) {
+    const failures = new Map<string, SDDTaskFailure>()
+    const preflights = new Map<string, string>()
+    const registrations: Array<{ dispose(): Promise<void> }> = []
+    const abort = new AbortController()
+    let disposed = false
+    try {
+      registrations.push(await ctx.tool.hook("execute.before", async (call) => {
+        if (disposed) throw new Error("SDD adapter disposed")
+        const args = record(call.input)
+        if (call.tool === "question") { canonicalizeSDDPreflightQuestions(args); return }
+        if (call.tool !== "subagent" || typeof args.agent !== "string" || !isSDDPhase(args.agent)) return
+        if (!(await isRootSession(ctx, call.sessionID))) throw new Error("SDD child dispatch refused: only the interactive root session may carry parent-confirmed SDD preflight authority")
+        const failure = failures.get(call.sessionID)
+        if (failure) throw sddDispatchLatched(args.agent, failure)
+        if (typeof args.prompt !== "string" || args.prompt.includes(SDD_PREFLIGHT_HEADING)) throw new Error("SDD dispatch refused: missing prompt or model-authored preflight")
+        const preflight = preflights.get(call.sessionID)
+        if (!preflight) throw new Error("SDD dispatch refused: parent-confirmed grouped preflight is missing")
+        args.prompt = `${preflight}\n\n${args.prompt}`
+      }))
+      registrations.push(await ctx.tool.hook("execute.after", async (call) => {
+        if (disposed) return
+        const args = record(call.input)
+        if (call.tool === "question") {
+          if (!(await isRootSession(ctx, call.sessionID))) return
+          if (call.status !== "completed") {
+            if (Array.isArray(args.questions) && args.questions.some(isSDDPreflightQuestion)) preflights.delete(call.sessionID)
+            return
+          }
+          try {
+            const block = sddPreflightBlock(args, call.result.output)
+            if (block !== undefined) preflights.set(call.sessionID, block)
+          } catch (cause) { preflights.delete(call.sessionID); throw cause }
+          return
+        }
+        if (call.tool !== "subagent" || typeof args.agent !== "string" || !isSDDPhase(args.agent)) return
+        try {
+          if (call.status !== "completed") throw new Error("SDD child tool failed")
+          const result = record(call.result.output)
+          if (typeof result.sessionID !== "string" || result.sessionID === "") throw new Error("SDD child identity is unavailable")
+          // A completed TOOL can merely acknowledge a RUNNING child. Never
+          // parse formatted content or manufacture terminal task evidence.
+          if (result.status === "running") return
+          if (result.status !== "completed") throw new Error("SDD child completion is unavailable")
+          taskResult(result.output)
+        } catch (cause) {
+          const failure = sddTaskFailure(args.agent, cause)
+          failures.set(call.sessionID, failure.sddFailure)
+          throw failure
+        }
+      }))
+    } catch (cause) {
+      await Promise.all(registrations.map(registration => registration.dispose()))
+      throw cause
+    }
+    const running = (async () => {
+      try {
+        for await (const event of ctx.event.subscribe({ signal: abort.signal })) {
+          if (abort.signal.aborted) break
+          if (event.type === "session.deleted" && event.location?.directory === ctx.location.directory
+            && event.location?.workspaceID === ctx.location.workspaceID) {
+            failures.delete(event.data.sessionID); preflights.delete(event.data.sessionID)
+          }
+        }
+      } catch { preflights.clear() }
+    })()
+    return async () => {
+      disposed = true; abort.abort(); failures.clear(); preflights.clear()
+      await Promise.all(registrations.map(registration => registration.dispose()))
+      await running
+    }
+  },
+})
