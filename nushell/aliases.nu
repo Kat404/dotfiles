@@ -18,9 +18,9 @@ alias fsh = fastfetch                                        # <-- Yo Angelo
 alias salir = exit                                           # <-- Sácame de aquí
 alias cls = clear                                            # <-- Limpia, limpia
 alias bankai = rm -r                                         # <-- Yokoso
-alias Bankai = sudo-rs rm -r                                 # <-- Root Yokoso
-alias sudo = sudo-rs                                         # <-- Ferris Sudo
-alias sudoedit = sudo-rs -e                                  # <-- Ferris editando...
+alias Bankai = sudo rm -r                                    # <-- Root Yokoso
+# alias sudo = sudo-rs                                       # <-- Ferris Sudo
+# alias sudoedit = sudo-rs -e                                # <-- Ferris editando...
 
 # =============================================
 # 2.        NAVEGACIÓN DE DIRECTORIOS
