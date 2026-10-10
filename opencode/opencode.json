@@ -166,19 +166,19 @@
   },
   "lsp": true,
   "mcp": {
-    "codegraph": {
-      "command": [
-        "codegraph",
-        "serve",
-        "--mcp"
-      ],
-      "enabled": true,
-      "type": "local"
-    },
     "context7": {
       "enabled": true,
       "type": "remote",
       "url": "https://mcp.context7.com/mcp"
+    },
+    "e2e": {
+      "command": [
+        "npx",
+        "e2e",
+        "mcp"
+      ],
+      "enabled": true,
+      "type": "local"
     },
     "engram": {
       "command": [
@@ -187,6 +187,18 @@
         "--tools=agent"
       ],
       "type": "local"
+    },
+    "servers": {
+      "codegraph": {
+        "codemode": false,
+        "command": [
+          "codegraph",
+          "serve",
+          "--mcp"
+        ],
+        "disabled": false,
+        "type": "local"
+      }
     }
   },
   "plugins": [

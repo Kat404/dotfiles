@@ -111,7 +111,6 @@ command = "clippy"
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
-config = { typescript = { tsdk = "/home/josel/.local/share/pnpm/global/5/node_modules/typescript/lib" }, environment = "node" }
 
 [language-server.typescript-language-server]
 command = "typescript-language-server"

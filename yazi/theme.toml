@@ -151,6 +151,7 @@ dirs = [
   { name = "Libros", text = "", fg = "#cba6f7" },
   { name = "Trabajo", text = "", fg = "#cba6f7" },
   { name = "Juegos", text = "󱤙", fg = "#cba6f7" },
+  { name = "Torrents", text = "", fg = "#cba6f7" },
   { name = "Documentos", text = "󱔗", fg = "#cba6f7" },
   { name = "Descargas", text = "", fg = "#cba6f7" },
   { name = "Universidad", text = "", fg = "#cba6f7" },

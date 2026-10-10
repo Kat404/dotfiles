@@ -81,12 +81,12 @@ def --env fzd [] {        # <-- 'cd' inteligente: fzf + fd + eza
         cd $folder
     }
 }
-alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL
-alias postgrestop = sudo systemctl stop postgresql   # <-- Detener PostgreSQL
-alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
-alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
-alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
-alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
+# alias postgrestart = sudo systemctl start postgresql # <-- Inicializar PostgreSQL
+# alias postgrestop = sudo systemctl stop postgresql   # <-- Detener PostgreSQL
+# alias mariastart = sudo systemctl start mariadb      # <-- Inicializar MariaDB
+# alias mariastop = sudo systemctl stop mariadb        # <-- Detener MariaDB
+# alias mariaenter = mariadb -u root -p                # <-- Entrar a MariaDB como root
+# alias mariadeventer = mariadb -u dev -p              # <-- Entrar a MariaDB como dev
 
 # =============================================
 # 5.                 PODMAN
@@ -245,27 +245,27 @@ def g-dual [user: string, repo: string] {   # <-- Configuración Dual Push para 
 # Aliases/shortcuts para un workflow más fluido usando Rust & Cargo
 
 # --- Creación y Comprobación ---
-alias cn = cargo new        # <-- Crear un nuevo proyecto (binario)
-alias ci = cargo init       # <-- Crear un Cargo.toml de un src/ ya existente
-alias cnl = cargo new --lib # <-- Crear un nuevo proyecto (biblioteca)
-alias cc = cargo check      # <-- Compilar el código sin producir un ejecutable (muy rápido) 
+# alias cn = cargo new        # <-- Crear un nuevo proyecto (binario)
+# alias ci = cargo init       # <-- Crear un Cargo.toml de un src/ ya existente
+# alias cnl = cargo new --lib # <-- Crear un nuevo proyecto (biblioteca)
+# alias cc = cargo check      # <-- Compilar el código sin producir un ejecutable (muy rápido) 
 
 # --- Gestión de Dependencias ---
-alias cad = cargo add     # <-- Añadir un nuevo paquete o dependencia al proyecto dentro del Cargo.toml 
-alias crm = cargo remove  # <-- Eliminar un paquete o dependencia del proyecto dentro del Cargo.toml
-alias ctree = cargo tree  # <-- Visualizar en forma de tree todos los paquetes, dependencias y subdependencias
+# alias cad = cargo add     # <-- Añadir un nuevo paquete o dependencia al proyecto dentro del Cargo.toml 
+# alias crm = cargo remove  # <-- Eliminar un paquete o dependencia del proyecto dentro del Cargo.toml
+# alias ctree = cargo tree  # <-- Visualizar en forma de tree todos los paquetes, dependencias y subdependencias
 
 # --- Compilación (Build) ---
-alias cb = cargo build            # <-- Compilar el proyecto (modo debug, más lento que 'check')
-alias cbr = cargo build --release # <-- Compilar el proyecto (modo release, optimizado)
+# alias cb = cargo build            # <-- Compilar el proyecto (modo debug, más lento que 'check')
+# alias cbr = cargo build --release # <-- Compilar el proyecto (modo release, optimizado)
 
 # --- Ejecución (Run) ---
 alias cr = cargo run            # <-- Compilar y ejecutar (modo debug)
 alias crr = cargo run --release # <-- Compilar y ejecutar (modo release)
 
 # --- Pruebas (Test) ---
-alias ct = cargo test            # <-- Ejecutar los tests (modo debug)
-alias ctr = cargo test --release # <-- Ejecutar los tests (modo release)
+# alias ct = cargo test            # <-- Ejecutar los tests (modo debug)
+# alias ctr = cargo test --release # <-- Ejecutar los tests (modo release)
 
 # --- Calidad y Formato ---
 # alias cf = cargo fmt                # <-- Formatear el código
