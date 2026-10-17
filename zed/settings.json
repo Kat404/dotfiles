@@ -1,0 +1,273 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "buffer_font_size": 22.0,
+  "restore_on_startup": "launchpad",
+  "centered_layout": {
+    "right_padding": 0.1,
+    "left_padding": 0.1
+  },
+  "tabs": {
+    "file_icons": true
+  },
+  "title_bar": {
+    "show_sign_in": false,
+    "show_branch_status_icon": true
+  },
+  "close_on_file_delete": true,
+  "relative_line_numbers": "enabled",
+  "disable_ai": true,
+  "accessible_mode": false,
+  "proxy": "",
+  "terminal": {
+    "scroll_multiplier": 2.0,
+    "copy_on_select": true,
+    "font_size": 20.0
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "semantic_tokens": "combined",
+  "code_lens": "on",
+  "inlay_hints": {
+    "enabled": true
+  },
+  "show_whitespaces": "all",
+  "format_on_save": "on",
+  "indent_guides": {
+    "background_coloring": "indent_aware",
+    "coloring": "indent_aware"
+  },
+  "preferred_line_length": 40,
+  "soft_wrap": "editor_width",
+  "vim": {
+    "use_smartcase_find": true,
+    "cursor_shape": {
+      "replace": "block",
+      "insert": "underline"
+    },
+    "toggle_relative_line_numbers": true
+  },
+  "scrollbar": {
+    "axes": {
+      "vertical": false,
+      "horizontal": false
+    },
+    "show": "never"
+  },
+  "fast_scroll_sensitivity": 5.0,
+  "scroll_sensitivity": 3.0,
+  "helix_mode": true,
+  "cursor_shape": "underline",
+  "cursor_animation": {
+    "enabled": true
+  },
+  "markdown_preview": {
+    "font_size": 22.0,
+    "font_family": "Google Sans",
+    "code_font_family": "Maple Mono NF"
+  },
+  "agent_buffer_font_size": 20.0,
+  "ui_font_family": "Google Sans",
+  "buffer_font_family": "Maple Mono NF",
+  "auto_update": false,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Flow Deep",
+    "dark": "Flow Deep"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "ui_font_size": 22.0,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha",
+  },
+  // ! LSPs
+  // ! "..." conserva los servidores default y futuros de cada lenguaje.
+  // ! OJO: escribir "language_servers" REEMPLAZA la lista default completa, nunca la suma.
+  // ! Un bloque aqui pisa cualquier .zed/settings.json del proyecto para ese lenguaje.
+  "languages": {
+    "Astro": {
+      "language_servers": [
+        "oxlint",
+        "!tailwindcss-language-server",
+        "..."
+      ],
+    },
+    "CSS": {
+      "language_servers": [
+        "!tailwindcss-language-server",
+        "!tailwindcss-intellisense-css",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "HTML": {
+      "language_servers": [
+        "!tailwindcss-language-server",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "JavaScript": {
+      "language_servers": [
+        "oxlint",
+        "!eslint",
+        "!tailwindcss-language-server",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "JSON": {
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "JSONC": {
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "JSX": {
+      "language_servers": [
+        "oxlint",
+        "!eslint",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "Markdown": {
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    // ! Sin "..." a proposito: los docs de Zed se contradicen sobre si el wildcard
+    // ! reintroduce los opt-in (pylsp/pyright), asi que se enumeran y se matan.
+    "Python": {
+      "language_servers": [
+        "ruff",
+        "!basedpyright",
+        "!pyright",
+        "!pylsp"
+      ],
+    },
+    "Svelte": {
+      "language_servers": [
+        "oxlint",
+        "!tailwindcss-language-server",
+        "..."
+      ],
+    },
+    "TOML": {
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "TSX": {
+      "language_servers": [
+        "oxlint",
+        "!eslint",
+        "!tailwindcss-language-server",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "language_servers": [
+        "oxlint",
+        "!eslint",
+        "!tailwindcss-language-server",
+        "..."
+      ],
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+    "YAML": {
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt"
+          }
+        }
+      ],
+      "format_on_save": "on",
+    },
+  },
+}
