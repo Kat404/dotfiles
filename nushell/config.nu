@@ -1,12 +1,12 @@
 # config.nu
 #
 # Installed by:
-# version = "0.115.1"
+# version = "0.116.1"
 #
 # ~/.config/nushell/config.nu
 
 # ❯ Inicializa Carapace
-# source $"($nu.cache-dir)/carapace.nu"
+source $"($nu.cache-dir)/carapace.nu"
 
 # ❯ Configuración de Entorno {
 # => Define a Helix como editor de texto predeterminado

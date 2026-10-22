@@ -200,13 +200,6 @@
           "--tools=agent"
         ],
         "type": "local"
-      },
-      "rea": {
-        "command": [
-          "/home/josel/.cache/pnpm/dlx/673263d5a459d28cc00d4687c7fc4338/mv97jd6y-kc5/node_modules/.pnpm/rea-agents@6.4.0/node_modules/rea-agents/scripts/rea.mjs",
-          "mcp"
-        ],
-        "type": "local"
       }
     }
   },

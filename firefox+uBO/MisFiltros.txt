@@ -1,7 +1,3 @@
-! Permite Google reCAPTCHA
-@@||google.com/recaptcha^$frame
-@@||gstatic.com/recaptcha^$frame
-
 ! Tubi
 tubitv.com#@#+js(set, blockAdBlock, noopFunc)
 .mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com
@@ -9,34 +5,22 @@ tubitv.com#@#+js(set, blockAdBlock, noopFunc)
 ! Anuncio de Cookies
 www.megacable.com.mx###d-cookies
 
-! Barra innecesaria y molesta de publicidad/anuncio
+! Molestias de Canva
 www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
 
-! Anuncios molestos en Souceforge
+! Molestias de SourceForge
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-m-b16*.png$image
 
-! Limpiar annoyances dentro de Kimi (IA)
-www.kimi.com##.temp-gallery-list
-www.kimi.com##.show-case
-www.kimi.com##.header-center > .membership-upgrade
-
-! Anuncio del nuevo agente de IA de DeepL
+! Molestias de DeepL
 www.deepl.com##.max-w-\[1440px\].mx-auto.w-full.px-\[2rem\]
-
-! Eliminar sección de "minijuegos" dentro de YouTube
-www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(1)
-www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(2)
 
 ! Anuncio de Cookies
 www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.fixed.w-100.mxmoto-motorola-components-ytSdHkainCgOc3yKpfRbQ
 
-! Permitir tracker en midu.dev para poder tener registro de avance de los cursos
+! Tracker necesario en Midu.dev
 @@||analytics.ahrefs.com^$xhr,domain=midu.dev
 @@||analytics.ahrefs.com^$script,domain=midu.dev
-
-! Borrar aviso de Upgrade a Claude Pro
-claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-center.pr-2\.5.pl-2.h-8.rounded-lg.gap-1\.5.items-center.inline-flex.ml-0\.5
 
 ! Molestias de Amazon Prime
 ||m.media-amazon.com/images/I/41KBk4VXOvL.jpg$image
@@ -50,12 +34,33 @@ claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-ce
 ||m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T1/images/I/51JFs8vESbL.jpg$image
 ||m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T1/images/I/41AbJrHJ38L.jpg$image
 ||m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T4/images/I/51q-YC98gKL.jpg$image
+||m.media-amazon.com/images/W/BW_MEDIAX_AVIF_MEASUREMENT_1306696-T4/images/I/51q-YC98gKL.jpg$image
 
-! Aviso de Cookies en Minimax
-www.minimax.io##.md\:px-8.py-6.px-6.max-w-\[1440px\].mx-auto
+! Molestias de YouTube
+www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(1)
+www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(2)
+www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(4)
+www.youtube.com##.ytd-rich-section-renderer.style-scope > .ytd-rich-shelf-renderer.style-scope
 
-! Aviso de Inicio de Sesión en X/Twitter
+! Molestias de X/Twitter
 x.com##.r-yz1j6i.r-qo02w8.r-l5o3uw.css-175oi2r
+
+! Molestias de Claude
+claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-center.pr-2\.5.pl-2.h-8.rounded-lg.gap-1\.5.items-center.inline-flex.ml-0\.5
+claude.ai##.bg-neutral-30.pointer-events-auto.duration-150.transition-opacity.select-none.text-muted.sm\:font-base.font-small.text-center.pe-2\.5.ps-2.h-control.rounded-lg.gap-1\.5.items-center.inline-flex.ms-0\.5
+claude.ai##.bg-neutral-30.pointer-events-auto.duration-150.transition-opacity.select-none.text-muted-as-secondary.sm\:font-base.font-small.text-center.pe-2\.5.ps-2.h-control.rounded-lg.gap-1\.5.items-center.inline-flex.ms-0\.5
 
 ! Molestias de Gemini
 gemini.google.com##.reverse-trial-offer-card
+gemini.google.com##.ng-star-inserted.ng-tns-c1474486728-7
+gemini.google.com##.ng-star-inserted.ng-tns-c3694597278-6
+
+! Molestias de Minimax Agent
+agent.minimax.io##.\[-webkit-app-region\:no-drag\].pr-1.bg-bg_status_blue.rounded-full.items-center.flex.pointer-events-auto
+agent.minimax.io##.\[--shadow-s1-offset-y\:0px\].shadow-s1.text-text_default_primary.p-2.bg-bg_grouped_secondary_elevated.border-border_default.border-\[0\.5px\].rounded-2xl.w-\[204px\].group.z-40.right-6.bottom-6.fixed
+www.minimax.io##.md\:px-8.py-6.px-6.max-w-\[1440px\].mx-auto
+
+! Molestias de Kimi
+www.kimi.com##.temp-gallery-list
+www.kimi.com##.show-case
+www.kimi.com##.header-center > .membership-upgrade

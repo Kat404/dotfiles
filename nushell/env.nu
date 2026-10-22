@@ -1,7 +1,7 @@
 # env.nu
 #
 # Installed by:
-# version = "0.115.1"
+# version = "0.116.1"
 #
 # ~/.config/nushell/env.nu
 
@@ -14,7 +14,7 @@ $env.OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS = "true"
 
 # ❯ Integración de Herramientas Externas (FZF & Caparace) {
 # Inicialización de Carapace
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+$env.CARAPACE_BRIDGES = 'zsh,fish,inshellisense'
 mkdir $"($nu.cache-dir)"
 carapace _carapace nushell | save --force $"($nu.cache-dir)/carapace.nu"
 
@@ -54,4 +54,8 @@ $env.PATH = (
     | prepend $binary_paths 
     | uniq
 )
+
+# ❯ Vite+ (https://viteplus.dev) 
+source ~/.config/vite-plus/env.nu
+
 # }

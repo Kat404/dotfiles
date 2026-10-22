@@ -19,9 +19,3 @@ Aloxaf/fzf-tab
 zdharma-continuum/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search kind:defer
-
-# ---> Oh My Zsh (OMZ) Plugins <---
-getantidote/use-omz
-ohmyzsh/ohmyzsh path:lib
-ohmyzsh/ohmyzsh path:plugins/sudo
-ohmyzsh/ohmyzsh path:plugins/wd
