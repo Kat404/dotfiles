@@ -5,7 +5,7 @@
 # 1.          COMANDOS DEL SISTEMA
 # =============================================
 # Actualización del sistema y utilidades básicas
-def sysupdate [] {                                           # <-- Actualizar todo el sistema y Flatpaks
+def update [] {                                           # <-- Actualizar todo el sistema y Flatpaks
   yay; flatpak update
 }
 def cleanup [] {                                             # <-- Limpia paquetes huérfanos

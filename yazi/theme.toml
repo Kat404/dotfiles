@@ -160,6 +160,7 @@ dirs = [
   { name = "Público", text = "", fg = "#cba6f7" },
   { name = "Yo", text = "", fg = "#cba6f7" },
   { name = "Vídeos", text = "", fg = "#cba6f7" },
+  { name = "pt", text = "", fg = "#cba6f7" },
 ]
 files = [
   { name = "kritadisplayrc", text = "", fg = "#cba6f7" },
