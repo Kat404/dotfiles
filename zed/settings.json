@@ -72,7 +72,7 @@
   },
   "close_on_file_delete": true,
   "relative_line_numbers": "enabled",
-  "disable_ai": false,
+  "disable_ai": true,
   "accessible_mode": false,
   "proxy": "",
   "terminal": {

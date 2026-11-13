@@ -7,6 +7,7 @@ www.megacable.com.mx###d-cookies
 
 ! Molestias de Canva
 www.canva.com##section > .LuBWVA.EC2pjw.BMOCzQ
+www.canva.com##.YrV_sQ.qYF6bg._DbGxw._5lYgfw.xxtwuct.xkfufqb.xv4o8wm.xtg30km.x1rr98o8.x1gcb6z7.x1frudsz.x1xeoa36.xdb5qux.x9f4r22.x14gwkfl.x1t137rt.x1xb64t2.x17ewvzc.xdhdacu.x1riweet.xvb79w2.x1bsd2ls.xaaagfd.x1ajfcz2.xk3hrty.xt970qd.xl56j7k.x1wfmkp7.x1j731v2.xxby36a.xi9wb9w.xcoeub6.x1vvkbs.xxrskpm.x1mzt3pk.x8d2oow.x12oo3zp.x1egkzza.xli2zx2.x7gbg69.x1sk33t8.x1n2zxk4.x1wtentn.x1ghz6dp.xvmahel.xlh3980.x1u9bxl0.x1oi6v9h.x193iq5w.xxymvpz.x3nfvp2.x1ypdohk.x9f619.x14fvlzd.x6s0dn4.xc342km.xng3xce.x1lfrg59
 
 ! Molestias de SourceForge
 ||a.fsdn.com/con/assets/maxnav/sourceforge/sf*00-43b*.png$image
@@ -23,6 +24,8 @@ www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.f
 @@||analytics.ahrefs.com^$script,domain=midu.dev
 
 ! Molestias de Amazon Prime
+www.amazon.com.mx##.a-text-center.a-padding-medium.a-section
+www.amazon.com.mx###CardInstance6bxDuSh2od3zh9mQUDZRQg > ._cHJpb_lumix-outer-spacing_2Hs4s._cHJpb_spc-stripe-wrapper_3KQO1.a-section
 ||m.media-amazon.com/images/I/41KBk4VXOvL.jpg$image
 ||m.media-amazon.com/images/I/21dUHQstNdL.jpg$image
 ||m.media-amazon.com/images/I/41OLye+xmpL.jpg$image
@@ -49,6 +52,7 @@ x.com##.r-yz1j6i.r-qo02w8.r-l5o3uw.css-175oi2r
 claude.ai##.select-none.text-text-500.bg-bg-300.sm\:font-base.font-small.text-center.pr-2\.5.pl-2.h-8.rounded-lg.gap-1\.5.items-center.inline-flex.ml-0\.5
 claude.ai##.bg-neutral-30.pointer-events-auto.duration-150.transition-opacity.select-none.text-muted.sm\:font-base.font-small.text-center.pe-2\.5.ps-2.h-control.rounded-lg.gap-1\.5.items-center.inline-flex.ms-0\.5
 claude.ai##.bg-neutral-30.pointer-events-auto.duration-150.transition-opacity.select-none.text-muted-as-secondary.sm\:font-base.font-small.text-center.pe-2\.5.ps-2.h-control.rounded-lg.gap-1\.5.items-center.inline-flex.ms-0\.5
+claude.ai##.bg-neutral-30.pointer-events-auto.duration-150.transition-opacity.select-none.text-muted-as-secondary.sm\:text-body-regular.text-caption-regular.text-center.pe-2\.5.ps-2.h-control.rounded-lg.gap-1\.5.items-center.inline-flex.ms-0\.5
 
 ! Molestias de Gemini
 gemini.google.com##.reverse-trial-offer-card
@@ -59,6 +63,7 @@ gemini.google.com##.ng-star-inserted.ng-tns-c3694597278-6
 agent.minimax.io##.\[-webkit-app-region\:no-drag\].pr-1.bg-bg_status_blue.rounded-full.items-center.flex.pointer-events-auto
 agent.minimax.io##.\[--shadow-s1-offset-y\:0px\].shadow-s1.text-text_default_primary.p-2.bg-bg_grouped_secondary_elevated.border-border_default.border-\[0\.5px\].rounded-2xl.w-\[204px\].group.z-40.right-6.bottom-6.fixed
 www.minimax.io##.md\:px-8.py-6.px-6.max-w-\[1440px\].mx-auto
+agent.minimax.io##.mavis-popover.hover\:bg-bg_interaction_tertiary_hover.text-text_default_primary.leading-5.text-sm.pr-\[14px\].pl-\[10px\].py-\[6px\].bg-bg_grouped_secondary.border-border_default.border.rounded-\[8px\].gap-\[2px\].justify-center.items-center.h-8.flex
 
 ! Molestias de Kimi
 www.kimi.com##.temp-gallery-list
