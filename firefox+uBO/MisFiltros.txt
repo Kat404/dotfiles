@@ -1,7 +1,3 @@
-! Tubi
-tubitv.com#@#+js(set, blockAdBlock, noopFunc)
-.mp4$media,redirect=noopmp3-0.1s,domain=tubitv.com
-
 ! Anuncio de Cookies
 www.megacable.com.mx###d-cookies
 
@@ -23,9 +19,11 @@ www.motorola.com.mx##.flex.pv3.flex-wrap.justify-center.z-9999.left-0.bottom-0.f
 @@||analytics.ahrefs.com^$xhr,domain=midu.dev
 @@||analytics.ahrefs.com^$script,domain=midu.dev
 
-! Molestias de Amazon Prime
+! Molestias de Amazon
 www.amazon.com.mx##.a-text-center.a-padding-medium.a-section
 www.amazon.com.mx###CardInstance6bxDuSh2od3zh9mQUDZRQg > ._cHJpb_lumix-outer-spacing_2Hs4s._cHJpb_spc-stripe-wrapper_3KQO1.a-section
+www.amazon.com.mx##.nav-rufus-disco
+www.amazon.com.mx##._cHJpb_card-stripe-lumix_d_R05._cHJpb_spc-stripe-desktop-lumix-card_c5Rup
 ||m.media-amazon.com/images/I/41KBk4VXOvL.jpg$image
 ||m.media-amazon.com/images/I/21dUHQstNdL.jpg$image
 ||m.media-amazon.com/images/I/41OLye+xmpL.jpg$image
@@ -69,3 +67,22 @@ agent.minimax.io##.mavis-popover.hover\:bg-bg_interaction_tertiary_hover.text-te
 www.kimi.com##.temp-gallery-list
 www.kimi.com##.show-case
 www.kimi.com##.header-center > .membership-upgrade
+
+! Molestias de Proton
+! > Mail
+mail.proton.me##.rounded.button-promotion--black-friday-2026.items-center.flex.max-w-full.button-solid-norm.button-medium.button-pill.button
+mail.proton.me##.justify-center.items-center.gap-x-4.flex.p-1.flex-1
+mail.proton.me##.bg-info.no-print.text-bold.relative.text-center.flex-nowrap.shrink-0.flex
+mail.proton.me##.p-0-5.lg\:text-center.text-left.bg-promotion-gradient-horizontal.relative.bg-promotion.shrink-0.flex-nowrap.flex
+
+! > Cuenta
+account.proton.me##.rounded.button-promotion--black-friday-2026.items-center.flex.max-w-full.button-solid-norm.button-medium.button-pill.button
+account.proton.me##.justify-center.items-center.gap-x-4.flex.p-1.flex-1
+account.proton.me##.bg-info.no-print.text-bold.relative.text-center.flex-nowrap.shrink-0.flex
+account.proton.me##.rounded-lg.bg-promotion-gradient-vertical.relative.bg-promotion.shrink-0.flex-nowrap.flex
+
+! > Drive
+drive.proton.me##.rounded.button-promotion--black-friday-2026.items-center.flex.max-w-full.button-solid-norm.button-medium.button-pill.button
+drive.proton.me##.justify-center.items-center.gap-x-4.flex.p-1.flex-1
+drive.proton.me##.bg-info.no-print.text-bold.relative.text-center.flex-nowrap.shrink-0.flex
+drive.proton.me##.justify-center.items-center.gap-2.flex.w-full.my-2.text-center.inline-block.button-outline-norm.button-medium.button
